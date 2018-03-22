@@ -11,7 +11,7 @@ const entries = (state = [], action) => {
                     completed: false,
                     created: new Date(),
                     m_type: action.m_type,
-                    privacy: 'public'
+                    privacy: action.privacy
                 }
             ];
         case TOGGLE_ENTRY:

@@ -6,8 +6,8 @@ import AddEntry from '../containers/AddEntry';
 const App = () => (
     <div>
         <AddEntry />
-        <VisibleEntryList />
         <Footer />
+        <VisibleEntryList />
     </div>
 );
 
