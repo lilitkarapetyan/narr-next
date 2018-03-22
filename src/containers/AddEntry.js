@@ -13,7 +13,7 @@ let AddEntry = ({ dispatch }) => {
                     if (!input.value.trim()) {
                         return
                     }
-                    dispatch(addEntry(input.value, 'type-a', 'public'));
+                    dispatch(addEntry(input.value, 'OOW Comment', 'public'));
                     input.value = ''
                 }}
             >
@@ -27,20 +27,20 @@ let AddEntry = ({ dispatch }) => {
                 </button>
                 <button onClick={e => {
                     e.preventDefault();
-                    dispatch(addEntry('lorem ipsum', 'type-b', 'sensitive'));
+                    dispatch(addEntry('lorem ipsum', 'CO Comment', 'sensitive'));
                 }}>
                     Add Entry B
                 </button>
                 <button onClick={e => {
                     e.preventDefault();
-                    dispatch(addEntry('lorem ipsum', 'type-c', 'private'));
+                    dispatch(addEntry('lorem ipsum', 'Weather', 'private'));
                 }}>
                     Add Entry C
                 </button>
                 <button onClick={e => {
                     e.preventDefault();
                     for(var i=0;i<100;i++) {
-                        dispatch(addEntry('lorem ipsum ' + i, 'type-d', 'public'));
+                        dispatch(addEntry('lorem ipsum ' + i, 'New  contact', 'public'));
                     }
                 }}>
                     Add Bulk D
