@@ -1,23 +1,46 @@
 import { connect } from 'react-redux'
 import { toggleEntry } from '../actions'
 import EntryList from '../components/EntryList'
+import {VisibilityFilters, PrivacyFilters} from "../actions";
 
-const getVisibleEntries = (entries, filter) => {
-    switch (filter) {
-        case 'SHOW_ALL':
-            return entries;
-        case 'SHOW_COMPLETED':
-            return entries.filter(t => t.completed);
-        case 'SHOW_ACTIVE':
-            return entries.filter(t => !t.completed);
-        default:
-            return entries;
+const getVisibleEntries = (entries, visibilityFilter, privacyFilter) => {
+
+    if(visibilityFilter !== VisibilityFilters.SHOW_ALL) {
+        switch (visibilityFilter) {
+            case VisibilityFilters.SHOW_ALL:
+                return entries;
+            case VisibilityFilters.SHOW_COMPLETED:
+                return entries.filter(t => t.completed);
+            case VisibilityFilters.SHOW_ACTIVE:
+                return entries.filter(t => !t.completed);
+            default:
+                return entries;
+        }
+    }
+    else if(privacyFilter !== PrivacyFilters.SHOW_ALL)
+    {
+        switch (privacyFilter) {
+            case PrivacyFilters.SHOW_ALL:
+                return entries;
+            case PrivacyFilters.SHOW_PUBLIC:
+                return entries.filter(t => t.privacy === 'public');
+            case PrivacyFilters.SHOW_SENSITIVE:
+                return entries.filter(t => t.privacy === 'sensitive');
+            case PrivacyFilters.SHOW_PRIVATE:
+                return entries.filter(t => t.privacy === 'private');
+            default:
+                return entries;
+        }
+    }
+    else
+    {
+        return entries;
     }
 };
 
 const mapStateToProps = state => {
     return {
-        entries: getVisibleEntries(state.entries, state.visibilityFilter)
+        entries: getVisibleEntries(state.entries, state.visibilityFilter, state.privacyFilter)
     }
 };
 
