@@ -1,3 +1,2 @@
-# narr-next
-
-Next generation narrative.  Second line
+# Narrative-Next
+Browser-based logging app
