@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import { toggleTodo } from '../actions'
+import { toggleEntry } from '../actions'
 import EntryList from '../components/EntryList'
 
-const getVisibleTodos = (entries, filter) => {
+const getVisibleEntries = (entries, filter) => {
     switch (filter) {
         case 'SHOW_ALL':
             return entries;
@@ -17,21 +17,21 @@ const getVisibleTodos = (entries, filter) => {
 
 const mapStateToProps = state => {
     return {
-        entries: getVisibleTodos(state.entries, state.visibilityFilter)
+        entries: getVisibleEntries(state.entries, state.visibilityFilter)
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onTodoClick: id => {
-            dispatch(toggleTodo(id))
+        onEntryClick: id => {
+            dispatch(toggleEntry(id))
         }
     }
 };
 
-const VisibleTodoList = connect(
+const VisibleEntryList = connect(
     mapStateToProps,
     mapDispatchToProps
 )(EntryList)
 
-export default VisibleTodoList
+export default VisibleEntryList
