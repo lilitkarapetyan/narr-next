@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Todo = ({ onClick, completed, text, id, created, type, privacy}) => (
+const Entry = ({ onClick, completed, text, id, created, type, privacy}) => (
     <li
         onClick={onClick}
         style={ {
@@ -12,7 +12,7 @@ const Todo = ({ onClick, completed, text, id, created, type, privacy}) => (
     </li>
 );
 
-Todo.propTypes = {
+Entry.propTypes = {
     onClick: PropTypes.func.isRequired,
     completed: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired,
@@ -22,4 +22,4 @@ Todo.propTypes = {
     privacy: PropTypes.string.isRequired
 };
 
-export default Todo
+export default Entry

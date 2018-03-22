@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Todo from './Todo'
+import Entry from './Entry'
 
-const TodoList = ({ todos, onTodoClick }) => (
+const EntryList = ({ entries, onTodoClick }) => (
     <ul>
-        {todos.map((todo, index) => (
-            <Todo key={index} {...todo} onClick={() => onTodoClick(index)} />
+        {entries.map((entry, index) => (
+            <Entry key={index} {...entry} onClick={() => onTodoClick(index)} />
         ))}
     </ul>
-)
+);
 
-TodoList.propTypes = {
-    todos: PropTypes.arrayOf(
+EntryList.propTypes = {
+    entries: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
             completed: PropTypes.bool.isRequired,
@@ -22,6 +22,6 @@ TodoList.propTypes = {
         }).isRequired
     ).isRequired,
     onTodoClick: PropTypes.func.isRequired
-}
+};
 
-export default TodoList
+export default EntryList

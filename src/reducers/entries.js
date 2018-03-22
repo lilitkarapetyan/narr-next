@@ -1,8 +1,8 @@
-import {ADD_TODO, TOGGLE_TODO} from "../actions";
+import {ADD_ENTRY, TOGGLE_ENTRY} from "../actions";
 
-const todos = (state = [], action) => {
+const entries = (state = [], action) => {
     switch (action.type) {
-        case ADD_TODO:
+        case ADD_ENTRY:
             return [
                 ...state,
                 {
@@ -14,15 +14,15 @@ const todos = (state = [], action) => {
                     privacy: 'public'
                 }
             ];
-        case TOGGLE_TODO:
-            return state.map(todo =>
-                (todo.id === action.id)
-                    ? {...todo, completed: !todo.completed}
-                    : todo
+        case TOGGLE_ENTRY:
+            return state.map(entry =>
+                (entry.id === action.id)
+                    ? {...entry, completed: !entry.completed}
+                    : entry
             );
         default:
             return state
     }
 };
 
-export default todos
+export default entries
