@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addEntry } from '../actions';
+import {ButtonToolbar, Button} from 'react-bootstrap'
 
 let AddEntry = ({ dispatch }) => {
     let input;
@@ -22,29 +23,31 @@ let AddEntry = ({ dispatch }) => {
                         input = node
                     }}
                 />
-                <button type="submit">
+                <ButtonToolbar>
+                <Button type="submit">
                     Add Entry A
-                </button>
-                <button onClick={e => {
+                </Button>
+                <Button onClick={e => {
                     e.preventDefault();
                     dispatch(addEntry('lorem ipsum', 'CO Comment', 'sensitive'));
                 }}>
                     Add Entry B
-                </button>
-                <button onClick={e => {
+                </Button>
+                <Button onClick={e => {
                     e.preventDefault();
                     dispatch(addEntry('lorem ipsum', 'Weather', 'private'));
                 }}>
                     Add Entry C
-                </button>
-                <button onClick={e => {
+                </Button>
+                <Button onClick={e => {
                     e.preventDefault();
                     for(var i=0;i<100;i++) {
                         dispatch(addEntry('lorem ipsum ' + i, 'New  contact', 'public'));
                     }
                 }}>
                     Add Bulk D
-                </button>
+                </Button>
+                </ButtonToolbar>
             </form>
         </div>
     )

@@ -1,14 +1,15 @@
 import React from 'react';
-import Footer from './Footer';
+import Footer from './Filters';
 import VisibleEntryList from '../containers/VisibleEntryList';
 import AddEntry from '../containers/AddEntry';
+import {Well} from 'react-bootstrap'
 
 const App = () => (
-    <div>
+    <Well>
         <AddEntry />
         <Footer />
         <VisibleEntryList />
-    </div>
+    </Well>
 );
 
 export default App

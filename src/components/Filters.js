@@ -2,10 +2,11 @@ import React from 'react'
 import FilterLink from '../containers/FilterLink'
 import PrivacyLink from '../containers/PrivacyLink'
 import {VisibilityFilters, PrivacyFilters} from '../actions'
+import {Well} from 'react-bootstrap'
 
 const Footer = () => (
-    <div>
-        <span>
+    <Well>
+        <Well>
             Show:
             {' '}
             <FilterLink filter={VisibilityFilters.SHOW_ALL}>
@@ -19,9 +20,9 @@ const Footer = () => (
             <FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>
                 Completed
             </FilterLink>
-        </span>
+        </Well>
         {' '}
-        <span>
+        <Well>
             Show:
             {' '}
             <PrivacyLink filter={PrivacyFilters.SHOW_ALL}>
@@ -39,8 +40,8 @@ const Footer = () => (
             <PrivacyLink filter={PrivacyFilters.SHOW_PRIVATE}>
                 Private
             </PrivacyLink>
-        </span>
-    </div>
+        </Well>
+    </Well>
 );
 
 export default Footer

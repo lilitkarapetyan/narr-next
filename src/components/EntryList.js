@@ -1,13 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Entry from './Entry'
+import {Well} from 'react-bootstrap'
 
 const EntryList = ({ entries, onEntryClick }) => (
+    <Well>
     <ul>
         {entries.map((entry, index) => (
             <Entry key={index} {...entry} onClick={() => onEntryClick(index)} />
         ))}
     </ul>
+    </Well>
 );
 
 EntryList.propTypes = {
