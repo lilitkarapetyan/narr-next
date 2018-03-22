@@ -17,7 +17,7 @@ EntryList.propTypes = {
             completed: PropTypes.bool.isRequired,
             text: PropTypes.string.isRequired,
             created: PropTypes.object.isRequired,
-            type: PropTypes.string.isRequired,
+            m_type: PropTypes.string.isRequired,
             privacy: PropTypes.string.isRequired
         }).isRequired
     ).isRequired,

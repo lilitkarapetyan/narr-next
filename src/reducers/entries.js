@@ -10,7 +10,7 @@ const entries = (state = [], action) => {
                     text: action.text,
                     completed: false,
                     created: new Date(),
-                    type: 'comment',
+                    m_type: action.m_type,
                     privacy: 'public'
                 }
             ];

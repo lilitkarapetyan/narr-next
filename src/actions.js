@@ -22,8 +22,8 @@ export const VisibilityFilters = {
 
 let nextEntryId = 0
 
-export function addEntry(text) {
-    return { type: ADD_ENTRY, id: nextEntryId++, text }
+export function addEntry(text, mType) {
+    return { type: ADD_ENTRY, id: nextEntryId++, m_type: mType, text }
 }
 
 export function toggleEntry(id) {
