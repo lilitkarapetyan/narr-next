@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { toggleEntry } from '../actions'
 import EntryList from '../components/EntryList'
-import {VisibilityFilters, PrivacyFilters} from "../actions";
+import {VisibilityFilters, PrivacyFilters, TimeFilters} from "../actions";
 
-const getVisibleEntries = (entries, visibilityFilter, privacyFilter) => {
+const getVisibleEntries = (entries, visibilityFilter, privacyFilter, timeFilter) => {
 
     if(visibilityFilter !== VisibilityFilters.SHOW_ALL) {
         switch (visibilityFilter) {
@@ -32,6 +32,19 @@ const getVisibleEntries = (entries, visibilityFilter, privacyFilter) => {
                 return entries;
         }
     }
+    else if(timeFilter !== TimeFilters.SHOW_ALL)
+    {
+        switch (timeFilter) {
+            case TimeFilters.SHOW_ALL:
+                return entries;
+            case TimeFilters.SHOW_LAST_MIN:
+                return entries.filter(t => (new Date() -  t.created) < 60 * 1000);
+            case TimeFilters.SHOW_LAST_5_MIN:
+                return entries.filter(t => (new Date() -  t.created) < 5 * 60 * 1000);
+            default:
+                return entries;
+        }
+    }
     else
     {
         return entries;
@@ -40,7 +53,7 @@ const getVisibleEntries = (entries, visibilityFilter, privacyFilter) => {
 
 const mapStateToProps = state => {
     return {
-        entries: getVisibleEntries(state.entries, state.visibilityFilter, state.privacyFilter)
+        entries: getVisibleEntries(state.entries, state.visibilityFilter, state.privacyFilter, state.timeFilter)
     }
 };
 
