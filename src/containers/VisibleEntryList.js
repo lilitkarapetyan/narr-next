@@ -9,10 +9,10 @@ const getVisibleEntries = (entries, visibilityFilter, privacyFilter) => {
         switch (visibilityFilter) {
             case VisibilityFilters.SHOW_ALL:
                 return entries;
-            case VisibilityFilters.SHOW_COMPLETED:
-                return entries.filter(t => t.completed);
+            case VisibilityFilters.SHOW_SELECTED:
+                return entries.filter(t => t.selected);
             case VisibilityFilters.SHOW_ACTIVE:
-                return entries.filter(t => !t.completed);
+                return entries.filter(t => !t.selected);
             default:
                 return entries;
         }

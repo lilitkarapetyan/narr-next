@@ -1,4 +1,4 @@
-import {ADD_ENTRY, TOGGLE_ENTRY} from "../actions";
+import {ADD_ENTRY, TOGGLE_SELECTED} from "../actions";
 
 const entries = (state = [], action) => {
     switch (action.type) {
@@ -8,16 +8,16 @@ const entries = (state = [], action) => {
                 {
                     id: action.id,
                     text: action.text,
-                    completed: false,
+                    selected: false,
                     created: new Date(),
                     m_type: action.m_type,
                     privacy: action.privacy
                 }
             ];
-        case TOGGLE_ENTRY:
+        case TOGGLE_SELECTED:
             return state.map(entry =>
                 (entry.id === action.id)
-                    ? {...entry, completed: !entry.completed}
+                    ? {...entry, selected: !entry.selected}
                     : entry
             );
         default:

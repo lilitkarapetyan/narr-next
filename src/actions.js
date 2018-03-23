@@ -3,7 +3,7 @@
  */
 
 export const ADD_ENTRY = 'ADD_ENTRY'
-export const TOGGLE_ENTRY = 'TOGGLE_ENTRY'
+export const TOGGLE_SELECTED = 'TOGGLE_SELECTED'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 export const SET_PRIVACY_FILTER = 'SET_PRIVACY_FILTER'
 
@@ -13,7 +13,7 @@ export const SET_PRIVACY_FILTER = 'SET_PRIVACY_FILTER'
 
 export const VisibilityFilters = {
     SHOW_ALL: 'SHOW_ALL',
-    SHOW_COMPLETED: 'SHOW_COMPLETED',
+    SHOW_SELECTED: 'SHOW_SELECTED',
     SHOW_ACTIVE: 'SHOW_ACTIVE'
 };
 
@@ -36,7 +36,7 @@ export function addEntry(text, mType, privacy) {
 }
 
 export function toggleEntry(id) {
-    return { type: TOGGLE_ENTRY, id }
+    return { type: TOGGLE_SELECTED, id }
 }
 
 export function setVisibilityFilter(filter) {

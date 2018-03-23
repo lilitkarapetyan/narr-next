@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Entry = ({ onClick, completed, text, id, created, m_type, privacy}) => (
+const Entry = ({ onClick, selected, text, id, created, m_type, privacy}) => (
     <li
         onClick={onClick}
         style={ {
-            textDecoration: completed ? 'line-through' : 'none'
+            textDecoration: selected ? 'line-through' : 'none'
         }}
     >
         {text} {id} {created.getSeconds()} {m_type} {privacy}
@@ -14,7 +14,7 @@ const Entry = ({ onClick, completed, text, id, created, m_type, privacy}) => (
 
 Entry.propTypes = {
     onClick: PropTypes.func.isRequired,
-    completed: PropTypes.bool.isRequired,
+    selected: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     created: PropTypes.object.isRequired,

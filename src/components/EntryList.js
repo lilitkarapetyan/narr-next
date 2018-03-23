@@ -17,7 +17,7 @@ EntryList.propTypes = {
     entries: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
-            completed: PropTypes.bool.isRequired,
+            selected: PropTypes.bool.isRequired,
             text: PropTypes.string.isRequired,
             created: PropTypes.object.isRequired,
             m_type: PropTypes.string.isRequired,
