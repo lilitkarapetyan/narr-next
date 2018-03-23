@@ -14,7 +14,7 @@ const Footer = () => (
             </FilterLink>
             {', '}
             <FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>
-                Active
+                Unselected
             </FilterLink>
             {', '}
             <FilterLink filter={VisibilityFilters.SHOW_SELECTED}>

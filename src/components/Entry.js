@@ -4,11 +4,14 @@ import PropTypes from 'prop-types'
 const Entry = ({ onClick, selected, text, id, created, m_type, privacy}) => (
     <li
         onClick={onClick}
-        style={ {
-            textDecoration: selected ? 'line-through' : 'none'
-        }}
     >
-        {text} {id} {created.getSeconds()} {m_type} {privacy}
+        <div
+            style={ {
+                backgroundColor: selected ? '#FFFFFF' : 'transparent'
+            }}
+        >
+            {text} {id} {created.getSeconds()} {m_type} {privacy}
+        </div>
     </li>
 );
 
