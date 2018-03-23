@@ -1,7 +1,8 @@
 import React from 'react'
 import FilterLink from '../containers/FilterLink'
 import PrivacyLink from '../containers/PrivacyLink'
-import {VisibilityFilters, PrivacyFilters} from '../actions'
+import TimeLink from '../containers/TimeLink'
+import {VisibilityFilters, PrivacyFilters, TimeFilters} from '../actions'
 import {Well} from 'react-bootstrap'
 
 const Footer = () => (
@@ -40,6 +41,21 @@ const Footer = () => (
             <PrivacyLink filter={PrivacyFilters.SHOW_PRIVATE}>
                 Private
             </PrivacyLink>
+        </Well>
+        <Well>
+            Show:
+            {' '}
+            <TimeLink filter={TimeFilters.SHOW_ALL}>
+                All
+            </TimeLink>
+            {', '}
+            <TimeLink filter={TimeFilters.SHOW_LAST_MIN}>
+                last minute
+            </TimeLink>
+            {', '}
+            <TimeLink filter={TimeFilters.SHOW_LAST_5_MIN}>
+                last 5 mins
+            </TimeLink>
         </Well>
     </Well>
 );

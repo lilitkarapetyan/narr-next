@@ -10,7 +10,7 @@ const Entry = ({ onClick, selected, text, id, created, m_type, privacy}) => (
                 backgroundColor: selected ? '#FFFFFF' : 'transparent'
             }}
         >
-            {text} {id} {created.getSeconds()} {m_type} {privacy}
+            {text} {id} {created.toLocaleTimeString()} {m_type} {privacy}
         </div>
     </li>
 );
