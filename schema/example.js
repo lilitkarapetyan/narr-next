@@ -242,7 +242,38 @@
     {
         "name": "Engineering",
         "priority": "High",
-        "entries": []
+        "entries": [
+            {
+                "id": "eng-failure",
+                "name": "Failure",
+                "priority": "High",
+                "fields": [
+                    {
+                        "name": "System",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Comment",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "id": "change-lineup",
+                "name": "Change in line-up",
+                "priority": "High",
+                "fields": [
+                    {
+                        "name": "System",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Change",
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
     }
 ]
 }
