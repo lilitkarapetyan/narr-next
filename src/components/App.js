@@ -4,14 +4,12 @@ import RightPanel from "./RightPanel";
 import { Row, Col } from "reactstrap";
 import { withState, compose, mapProps } from "recompose";
 
-
-
 const App = ({ expanded, toggleExpand }) => (
   <Row style={{ width: "100%", minHeight: "100%" }}>
-    <Col lg={(expanded ?  10 : 3)}>
+    <Col lg={expanded ? 10 : 3}>
       <LeftPanel toggleExpand={toggleExpand} expanded={expanded} />
     </Col>
-    <Col lg={(expanded ?  2 : 9)}>
+    <Col lg={expanded ? 2 : 9}>
       <RightPanel
         collapse={expanded}
         categories={["Common", "Cat 1", "Cat 2"]}
@@ -19,15 +17,6 @@ const App = ({ expanded, toggleExpand }) => (
     </Col>
   </Row>
 );
-{
-  /* <Card>
-    <CardBody>
-      <AddEntry />
-      <Footer />
-      <VisibleEntryList />
-    </CardBody>
-  </Card> */
-}
 const enhancer = compose(
   withState("expanded", "setExpand", false),
   mapProps(props => ({
