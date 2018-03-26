@@ -5,14 +5,18 @@ import CategoryRender from "./CategoryRender";
 import PropTypes from "prop-types";
 import React from "react";
 
-const LeftPanel = ({ categories, collapse }) => (
+const RightPanel = ({ categories, collapse }) => (
   <div className="category-container">
     <Row
       className="justify-content-md-center"
       style={{ padding: "10px", width: "100%" }}
     >
       {categories.map(category => (
-        <CategoryRender collapse={collapse} category={category} />
+        <CategoryRender
+          key={category}
+          collapse={collapse}
+          category={category}
+        />
       ))}
     </Row>
     <div className="category-count text-center">
@@ -21,20 +25,20 @@ const LeftPanel = ({ categories, collapse }) => (
   </div>
 );
 
-LeftPanel.propTypes = {
+RightPanel.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.string),
   collapse: PropTypes.bool.isRequired
 };
 
-LeftPanel.defaultProps = {
+RightPanel.defaultProps = {
   categories: []
 };
 const EmptyCategories = () => <div> No categories </div>;
 
 const enhancer = branch(
   ({ categories }) => categories && categories.length > 0,
-  renderComponent(LeftPanel),
+  renderComponent(RightPanel),
   renderComponent(EmptyCategories)
 );
 
-export default enhancer(LeftPanel);
+export default enhancer(RightPanel);

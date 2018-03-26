@@ -12,13 +12,12 @@ const CategoryRender = ({ category, collapse }) => (
 );
 
 CategoryRender.propTypes = {
-  category: PropTypes.arrayOf(PropTypes.string),
+  category: PropTypes.string.isRequired,
   collapse: PropTypes.bool
 };
 
 CategoryRender.defaultProps = {
-  collapse: false,
-  category: []
+  collapse: false
 };
 
 export default CategoryRender;
