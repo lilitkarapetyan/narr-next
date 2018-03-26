@@ -28,7 +28,7 @@ const ExpandStyle = styled.div`
 
 const ExpandButton = ({ onClick, expanded }) => (
   <ExpandStyle onClick={onClick}>
-    <Icon size="1x" name={expanded ? "chevron-left" : "chevron-right"} />{" "}
+    <Icon name={expanded ? "chevron-left" : "chevron-right"} />{" "}
   </ExpandStyle>
 );
 
