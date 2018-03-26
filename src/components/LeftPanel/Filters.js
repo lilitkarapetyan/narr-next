@@ -1,7 +1,6 @@
-import React from "react";
-import { Button, ButtonGroup } from "reactstrap";
 import { Bordered } from "../StyledComponents";
-
+import { Button, ButtonGroup } from "reactstrap";
+import React from "react";
 
 const Filters = () => (
   <Bordered className="text-center" style={{ height: "100px" }}>
