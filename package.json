@@ -6,7 +6,9 @@
     "ajv": "^6.3.0",
     "bootstrap": "4.0.0",
     "font-awesome": "4.7.0",
+    "jquery": "^3.3.1",
     "npm": "^5.7.1",
+    "prop-types": "15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-fontawesome": "1.6.1",
@@ -15,8 +17,7 @@
     "reactstrap": "^5.0.0-beta.3",
     "recompose": "0.26.0",
     "redux": "^3.7.2",
-    "styled-components": "3.2.3",
-    "prop-types": "15.6.1"
+    "styled-components": "3.2.3"
   },
   "devDependencies": {
     "husky": "^0.14.3",
@@ -30,9 +31,12 @@
     "eslint-plugin-react": "7.7.0",
     "eslint-plugin-sort-imports-es6-autofix": "0.3.0"
   },
-
   "lint-staged": {
-    "*.{js,.jsx}": ["prettier --write", "eslint --fix", "git add"]
+    "*.{js,.jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "scripts": {
     "precommit": "lint-staged",
