@@ -1,8 +1,9 @@
-import React from "react";
+import { Col, Row } from "reactstrap";
+import { compose, mapProps, withState } from "recompose";
 import LeftPanel from "./LeftPanel";
+import PropTypes from "prop-types";
+import React from "react";
 import RightPanel from "./RightPanel";
-import { Row, Col } from "reactstrap";
-import { withState, compose, mapProps } from "recompose";
 
 const App = ({ expanded, toggleExpand }) => (
   <Row style={{ width: "100%", minHeight: "100%" }}>
@@ -17,6 +18,12 @@ const App = ({ expanded, toggleExpand }) => (
     </Col>
   </Row>
 );
+
+App.propTypes = {
+  expanded: PropTypes.bool.isRequired,
+  toggleExpand: PropTypes.func.isRequired
+};
+
 const enhancer = compose(
   withState("expanded", "setExpand", false),
   mapProps(props => ({

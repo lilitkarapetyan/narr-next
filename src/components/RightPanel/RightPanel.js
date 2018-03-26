@@ -1,8 +1,9 @@
-import React from "react";
-import { Row, Col } from "reactstrap";
+import "./RightPanel.css";
+import { Row } from "reactstrap";
 import { branch, renderComponent } from "recompose";
 import CategoryRender from "./CategoryRender";
-import "./RightPanel.css";
+import PropTypes from "prop-types";
+import React from "react";
 
 const LeftPanel = ({ categories, collapse }) => (
   <div className="category-container">
@@ -20,6 +21,14 @@ const LeftPanel = ({ categories, collapse }) => (
   </div>
 );
 
+LeftPanel.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string),
+  collapse: PropTypes.bool.isRequired
+};
+
+LeftPanel.defaultProps = {
+  categories: []
+};
 const EmptyCategories = () => <div> No categories </div>;
 
 const enhancer = branch(

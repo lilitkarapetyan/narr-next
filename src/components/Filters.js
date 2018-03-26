@@ -1,9 +1,9 @@
-import React from "react";
+import { CardBody } from "reactstrap";
+import { PrivacyFilters, TimeFilters, VisibilityFilters } from "../actions";
 import FilterLink from "../containers/FilterLink";
 import PrivacyLink from "../containers/PrivacyLink";
+import React from "react";
 import TimeLink from "../containers/TimeLink";
-import { VisibilityFilters, PrivacyFilters, TimeFilters } from "../actions";
-import { CardBody } from "reactstrap";
 
 const Footer = () => (
   <CardBody>

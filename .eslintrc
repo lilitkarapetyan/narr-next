@@ -1,7 +1,27 @@
 {
   "extends": ["airbnb", "prettier"],
+  "plugins": ["sort-imports-es6-autofix"],
   "rules": {
     "react/jsx-filename-extension": 0,
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "import/first": 0,
+    "jsx-a11y/click-events-have-key-events": "0",
+    "jsx-a11y/no-noninteractive-element-to-interactive-role": 0,
+    "react/no-array-index-key": 1,
+    "import/prefer-default-export" : 1,
+    "sort-imports-es6-autofix/sort-imports-es6": [
+      2,
+      {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+      }
+    ],
+    "no-plusplus": 0,
+    "no-minusminus": 0
+  },
+  "env": {
+    "jest": true,
+    "browser": true
   }
 }

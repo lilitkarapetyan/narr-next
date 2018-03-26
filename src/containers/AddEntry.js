@@ -1,9 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
+import { Button, ButtonGroup } from "reactstrap";
 import { addEntry } from "../actions";
-import { ButtonGroup, Button } from "reactstrap";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import React from "react";
 
-let AddEntry = ({ dispatch }) => {
+const AddEntry = ({ dispatch }) => {
   let input;
 
   return (
@@ -44,9 +45,9 @@ let AddEntry = ({ dispatch }) => {
           <Button
             onClick={e => {
               e.preventDefault();
-              for (var i = 0; i < 100; i++) {
+              for (let i = 0; i < 100; i++) {
                 dispatch(
-                  addEntry("lorem ipsum " + i, "New  contact", "public")
+                  addEntry(`lorem ipsum ${i}`, "New  contact", "public")
                 );
               }
             }}
@@ -58,6 +59,9 @@ let AddEntry = ({ dispatch }) => {
     </div>
   );
 };
-AddEntry = connect()(AddEntry);
 
-export default AddEntry;
+AddEntry.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
+
+export default connect()(AddEntry);

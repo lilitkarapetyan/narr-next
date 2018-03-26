@@ -1,1 +1,1 @@
-export { default as Bordered} from "./BorderedStyle";
+export { default as Bordered } from "./BorderedStyle";
