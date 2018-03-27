@@ -7,6 +7,7 @@ export const TOGGLE_SELECTED = "TOGGLE_SELECTED";
 export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 export const SET_PRIVACY_FILTER = "SET_PRIVACY_FILTER";
 export const SET_TIME_FILTER = "SET_TIME_FILTER";
+export const SET_TYPE_FILTER = "SET_TYPE_FILTER";
 
 /*
  * other constants
@@ -31,6 +32,11 @@ export const TimeFilters = {
   SHOW_LAST_5_MIN: "SHOW_LAST_5_MIN"
 };
 
+export const TypeFilters = {
+  SHOW_ALL: "SHOW_ALL",
+  SHOW_WEATHER: "SHOW_WEATHER"
+};
+
 /*
  * action creators
  */
@@ -38,7 +44,7 @@ export const TimeFilters = {
 let nextEntryId = 0;
 
 export function addEntry(text, mType, privacy) {
-  return { type: ADD_ENTRY, id: nextEntryId++, mType: mType, privacy, text };
+  return { type: ADD_ENTRY, id: nextEntryId++, mType, privacy, text };
 }
 
 export function toggleEntry(id) {
@@ -51,6 +57,10 @@ export function setVisibilityFilter(filter) {
 
 export function setPrivacyFilter(filter) {
   return { type: SET_PRIVACY_FILTER, filter };
+}
+
+export function setTypeFilter(filter) {
+  return { type: SET_TYPE_FILTER, filter };
 }
 
 export function setTimeFilter(filter) {

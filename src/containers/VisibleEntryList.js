@@ -1,6 +1,7 @@
 import {
   PrivacyFilters,
   TimeFilters,
+  TypeFilters,
   VisibilityFilters,
   toggleEntry
 } from "../actions";
@@ -11,46 +12,65 @@ const getVisibleEntries = (
   entries,
   visibilityFilter,
   privacyFilter,
-  timeFilter
+  timeFilter,
+  typeFilters
 ) => {
+  let entriesE = entries;
   if (visibilityFilter !== VisibilityFilters.SHOW_ALL) {
     switch (visibilityFilter) {
       case VisibilityFilters.SHOW_ALL:
-        return entries;
+        return entriesE;
       case VisibilityFilters.SHOW_SELECTED:
-        return entries.filter(t => t.selected);
+        return entriesE.filter(t => t.selected);
       case VisibilityFilters.SHOW_ACTIVE:
-        return entries.filter(t => !t.selected);
+        return entriesE.filter(t => !t.selected);
       default:
-        return entries;
+        return entriesE;
     }
-  } else if (privacyFilter !== PrivacyFilters.SHOW_ALL) {
+  }
+  if (privacyFilter !== PrivacyFilters.SHOW_ALL) {
     switch (privacyFilter) {
       case PrivacyFilters.SHOW_ALL:
-        return entries;
+        break;
       case PrivacyFilters.SHOW_PUBLIC:
-        return entries.filter(t => t.privacy === "public");
+        entriesE = entriesE.filter(t => t.privacy === "public");
+        break;
       case PrivacyFilters.SHOW_SENSITIVE:
-        return entries.filter(t => t.privacy === "sensitive");
+        entriesE = entriesE.filter(t => t.privacy === "sensitive");
+        break;
       case PrivacyFilters.SHOW_PRIVATE:
-        return entries.filter(t => t.privacy === "private");
+        entriesE = entriesE.filter(t => t.privacy === "private");
+        break;
       default:
-        return entries;
+        break;
     }
-  } else if (timeFilter !== TimeFilters.SHOW_ALL) {
+  }
+  if (timeFilter !== TimeFilters.SHOW_ALL) {
     switch (timeFilter) {
       case TimeFilters.SHOW_ALL:
-        return entries;
+        break;
       case TimeFilters.SHOW_LAST_MIN:
-        return entries.filter(t => new Date() - t.created < 60 * 1000);
+        entriesE = entriesE.filter(t => new Date() - t.created < 60 * 1000);
+        break;
       case TimeFilters.SHOW_LAST_5_MIN:
-        return entries.filter(t => new Date() - t.created < 5 * 60 * 1000);
+        entriesE = entriesE.filter(t => new Date() - t.created < 5 * 60 * 1000);
+        break;
       default:
-        return entries;
+        break;
     }
-  } else {
-    return entries;
   }
+  if (typeFilters !== TypeFilters.SHOW_ALL) {
+    switch (typeFilters) {
+      case TypeFilters.SHOW_ALL:
+        break;
+      case TypeFilters.SHOW_WEATHER:
+        entriesE = entriesE.filter(t => t.mType === "weather");
+        break;
+      default:
+        break;
+    }
+  }
+  return entriesE;
 };
 
 const mapStateToProps = state => ({
@@ -58,7 +78,8 @@ const mapStateToProps = state => ({
     state.entries,
     state.visibilityFilter,
     state.privacyFilter,
-    state.timeFilter
+    state.timeFilter,
+    state.typeFilter
   )
 });
 
