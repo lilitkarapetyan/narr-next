@@ -6,7 +6,7 @@ cache:
   - node_modules
 script:
   - ls
-  - npm install
+  - npm run linter
   - npm test
   - npm run build
 deploy:
