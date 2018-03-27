@@ -6,7 +6,7 @@ import React from "react";
 
 const CategoryRender = ({ category, collapse }) => (
   <Col lg={collapse ? 12 : 6} style={{ padding: "5px" }}>
-    <Card>
+    <Card style={{ height: "100%" }}>
       <CardHeader
         className="bg-primary text-center text-white"
         style={{
