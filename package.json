@@ -42,7 +42,6 @@
   },
   "lint-staged": {
     "*.{js,.jsx}": [
-      "rm  -rf ./build/*",
       "prettier --write",
       "eslint --fix",
       "jest --bail",
