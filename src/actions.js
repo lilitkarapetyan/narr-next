@@ -44,7 +44,7 @@ export const TypeFilters={
 let nextEntryId = 0;
 
 export function addEntry(text, mType, privacy) {
-  return { type: ADD_ENTRY, id: nextEntryId++, m_type: mType, privacy, text };
+  return { type: ADD_ENTRY, id: nextEntryId++, mType: mType, privacy, text };
 }
 
 export function toggleEntry(id) {

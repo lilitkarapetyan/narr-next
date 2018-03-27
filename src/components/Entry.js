@@ -22,7 +22,7 @@ const Entry = ({
   setOpen,
   onClick,
   selected,
-  entry: { text, id, created, m_type, privacy }
+  entry: { text, id, created, mType, privacy }
 }) => (
   <div
     role="button"
@@ -39,7 +39,7 @@ const Entry = ({
       <Row className="justify-content-md-center  text-center align-middle">
         <Col lg={1}>{id}</Col>
         <Col lg={8}>
-          <div style={{ fontSize: "18px", fontWeight: "bolder" }}>{m_type}</div>
+          <div style={{ fontSize: "18px", fontWeight: "bolder" }}>{mType}</div>
         </Col>
         <Col lg={3} style={{ textTransform: "uppercase" }}>
           {privacy}

@@ -63,7 +63,7 @@ const getVisibleEntries = (
       case TypeFilters.SHOW_ALL:
         break;
       case TypeFilters.SHOW_WEATHER:
-        entries= entries.filter(t=>t.m_type==='weather');
+        entries= entries.filter(t=>t.mType==='weather');
         break;
       default:
         break;
