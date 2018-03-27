@@ -1,4 +1,4 @@
-import { Card, CardBody, Col, Badge, Collapse, Row } from "reactstrap";
+import { Card, CardBody, Badge, Collapse } from "reactstrap";
 import { EntryType } from "./Schemas";
 import { withState } from "recompose";
 import PropTypes from "prop-types";
