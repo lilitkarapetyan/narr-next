@@ -1,13 +1,17 @@
 import React from 'react'
+import { Card, CardBody } from 'reactstrap';
+import { StyleSheet, css } from 'aphrodite/no-important';
+
 import FilterLink from '../containers/FilterLink'
 import PrivacyLink from '../containers/PrivacyLink'
 import TimeLink from '../containers/TimeLink'
-import {VisibilityFilters, PrivacyFilters, TimeFilters} from '../actions'
-import {Well} from 'react-bootstrap'
+import { VisibilityFilters, PrivacyFilters, TimeFilters } from '../actions'
 
-const Footer = () => (
-    <Well>
-        <Well>
+const Filters = () => (
+    <Card>
+      <CardBody>
+        <Card className={css(styles.mb2)}>
+          <CardBody>
             Show:
             {' '}
             <FilterLink filter={VisibilityFilters.SHOW_ALL}>
@@ -21,9 +25,11 @@ const Footer = () => (
             <FilterLink filter={VisibilityFilters.SHOW_SELECTED}>
                 Selected
             </FilterLink>
-        </Well>
+          </CardBody>
+        </Card>
         {' '}
-        <Well>
+        <Card className={css(styles.mb2)}>
+          <CardBody>
             Show:
             {' '}
             <PrivacyLink filter={PrivacyFilters.SHOW_ALL}>
@@ -41,8 +47,10 @@ const Footer = () => (
             <PrivacyLink filter={PrivacyFilters.SHOW_PRIVATE}>
                 Private
             </PrivacyLink>
-        </Well>
-        <Well>
+          </CardBody>
+        </Card>
+        <Card>
+          <CardBody>
             Show:
             {' '}
             <TimeLink filter={TimeFilters.SHOW_ALL}>
@@ -56,8 +64,16 @@ const Footer = () => (
             <TimeLink filter={TimeFilters.SHOW_LAST_5_MIN}>
                 last 5 mins
             </TimeLink>
-        </Well>
-    </Well>
+          </CardBody>
+        </Card>
+      </CardBody>
+    </Card>
 );
 
-export default Footer
+const styles = StyleSheet.create({
+  mb2: {
+    marginBottom: '20px'
+  }
+});
+
+export default Filters;

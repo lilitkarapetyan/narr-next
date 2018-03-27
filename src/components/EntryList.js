@@ -1,16 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Card, CardBody, ListGroup, Alert } from 'reactstrap';
+import { StyleSheet, css } from 'aphrodite/no-important';
+
 import Entry from './Entry'
-import {Well} from 'react-bootstrap'
 
 const EntryList = ({ entries, onEntryClick }) => (
-    <Well>
-    <ul>
+  <Card className={css(styles.main)}>
+    <CardBody>
+      <ListGroup className={css(styles.entries)}>
         {entries.map((entry, index) => (
-            <Entry key={index} {...entry} onClick={() => onEntryClick(index)} />
+          <Entry key={index} {...entry} onClick={() => onEntryClick(index)} />
         ))}
-    </ul>
-    </Well>
+        {!entries.length && <Alert color="secondary">No entries</Alert>}
+      </ListGroup>
+    </CardBody>
+  </Card>
 );
 
 EntryList.propTypes = {
@@ -26,5 +31,16 @@ EntryList.propTypes = {
     ).isRequired,
     onEntryClick: PropTypes.func.isRequired
 };
+
+const styles = StyleSheet.create({
+  main: {
+    height: '100%',
+    overflowY: 'auto',
+    backgroundColor: '#fafafa'
+  },
+  entries: {
+    cursor: 'pointer'
+  }
+});
 
 export default EntryList

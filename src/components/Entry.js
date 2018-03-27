@@ -1,18 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { ListGroupItem, Badge } from 'reactstrap';
+
+const colors = {
+  public: 'success',
+  sensitive: 'info',
+}
 
 const Entry = ({ onClick, selected, text, id, created, m_type, privacy}) => (
-    <li
-        onClick={onClick}
-    >
-        <div
-            style={ {
-                backgroundColor: selected ? '#FFFFFF' : 'transparent'
-            }}
-        >
-            {text} {id} {created.toLocaleTimeString()} {m_type} {privacy}
-        </div>
-    </li>
+    <ListGroupItem onClick={onClick} color={selected ? 'success' : null}>
+      {text} {id} {created.toLocaleTimeString()} {m_type} <Badge color={colors[privacy]}>{privacy}</Badge>
+    </ListGroupItem>
 );
 
 Entry.propTypes = {
@@ -25,4 +23,4 @@ Entry.propTypes = {
     privacy: PropTypes.string.isRequired
 };
 
-export default Entry
+export default Entry;
