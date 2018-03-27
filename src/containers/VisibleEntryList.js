@@ -19,13 +19,13 @@ const getVisibleEntries = (
   if (visibilityFilter !== VisibilityFilters.SHOW_ALL) {
     switch (visibilityFilter) {
       case VisibilityFilters.SHOW_ALL:
-        return entries;
+        return entriesE;
       case VisibilityFilters.SHOW_SELECTED:
-        return entries.filter(t => t.selected);
+        return entriesE.filter(t => t.selected);
       case VisibilityFilters.SHOW_ACTIVE:
-        return entries.filter(t => !t.selected);
+        return entriesE.filter(t => !t.selected);
       default:
-        return entries;
+        return entriesE;
     }
   }
   if (privacyFilter !== PrivacyFilters.SHOW_ALL) {
@@ -33,13 +33,13 @@ const getVisibleEntries = (
       case PrivacyFilters.SHOW_ALL:
         break;
       case PrivacyFilters.SHOW_PUBLIC:
-        entriesE = entries.filter(t => t.privacy === "public");
+        entriesE = entriesE.filter(t => t.privacy === "public");
         break;
       case PrivacyFilters.SHOW_SENSITIVE:
-        entriesE = entries.filter(t => t.privacy === "sensitive");
+        entriesE = entriesE.filter(t => t.privacy === "sensitive");
         break;
       case PrivacyFilters.SHOW_PRIVATE:
-        entriesE = entries.filter(t => t.privacy === "private");
+        entriesE = entriesE.filter(t => t.privacy === "private");
         break;
       default:
         break;
@@ -50,10 +50,10 @@ const getVisibleEntries = (
       case TimeFilters.SHOW_ALL:
         break;
       case TimeFilters.SHOW_LAST_MIN:
-        entriesE = entries.filter(t => new Date() - t.created < 60 * 1000);
+        entriesE = entriesE.filter(t => new Date() - t.created < 60 * 1000);
         break;
       case TimeFilters.SHOW_LAST_5_MIN:
-        entriesE = entries.filter(t => new Date() - t.created < 5 * 60 * 1000);
+        entriesE = entriesE.filter(t => new Date() - t.created < 5 * 60 * 1000);
         break;
       default:
         break;
@@ -64,7 +64,7 @@ const getVisibleEntries = (
       case TypeFilters.SHOW_ALL:
         break;
       case TypeFilters.SHOW_WEATHER:
-        entriesE = entries.filter(t => t.mType === "weather");
+        entriesE = entriesE.filter(t => t.mType === "weather");
         break;
       default:
         break;
