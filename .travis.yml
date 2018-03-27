@@ -1,13 +1,12 @@
 language: node_js
 node_js:
-  - "iojs"
   - "7"
 cache:
   directories:
   - node_modules
 script:
-  - cd narr-next
-  - npm install
+  - ls
+  - npm run linter
   - npm test
   - npm run build
 deploy:
