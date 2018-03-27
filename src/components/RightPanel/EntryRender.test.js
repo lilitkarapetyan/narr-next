@@ -61,7 +61,7 @@ describe("EntryRender", () => {
       .find("EntryRender")
       .props()
       .onSubmit();
-    expect(mockEntry.mock.calls[0][0]).toBe("hello:one two:two");
+    expect(mockEntry.mock.calls[0][0]).toBe(props.values);
     expect(mockEntry.mock.calls[0][1]).toBe("myEntry");
     expect(mockEntry.mock.calls[0][2]).toBe("public");
   });
