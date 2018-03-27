@@ -29,6 +29,7 @@ class Filters extends React.Component {
         Type: false
       }
     };
+    // Bind the methods to the correct "this" context. SO when we access this in the functions we actually acess the class instance.
     this.toggle = this.toggle.bind(this);
     this.addEntries = this.addEntries.bind(this);
   }
@@ -133,5 +134,6 @@ Filters.propTypes = {
   addEntry: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => state;
-export default connect(mapStateToProps, { addEntry })(Filters);
+// we can directly bind dispatch to a action by using the second parameters
+
+export default connect(null, { addEntry })(Filters);
