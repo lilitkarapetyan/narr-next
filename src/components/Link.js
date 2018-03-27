@@ -3,12 +3,12 @@ import React from "react";
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
-    return <span>{children}</span>;
+    return <button className="btn btn-main">{children}</button>;
   }
 
   return (
     <button
-      href=""
+      className="btn btn-secondary"
       onClick={e => {
         e.preventDefault();
         onClick();
