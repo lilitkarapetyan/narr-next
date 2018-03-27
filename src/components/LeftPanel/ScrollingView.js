@@ -1,9 +1,18 @@
-import { Bordered } from "../StyledComponents";
 import React from "react";
 
 const ScrollingView = () => (
-  <Bordered radius="0" style={{ height: "calc(100% - 100px)" }}>
-    Scrolling View
-  </Bordered>
+  <div
+    style={{
+      position: "absolute",
+      top: 10,
+      left: 10,
+      right: 10,
+      bottom: 10,
+      overflowX: "hidden",
+      overflowY: "auto"
+    }}
+  >
+    <div>Scrolling View</div>
+  </div>
 );
 export default ScrollingView;
