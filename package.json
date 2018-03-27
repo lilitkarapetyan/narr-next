@@ -42,8 +42,6 @@
   },
   "lint-staged": {
     "*.{js,.jsx}": [
-      "pwd",
-      "rm  -rf ./build/*",
       "prettier --write",
       "eslint --fix",
       "jest --bail",
@@ -55,7 +53,7 @@
     "precommit": "lint-staged",
     "format": "prettier --write src/**/*.{js,jsx,css}",
     "linter": "eslint --fix src/**/*.{js,jsx}",
-    "lint": " format && linter",
+    "lint": " npm run format && npm run linter",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

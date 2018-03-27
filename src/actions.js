@@ -32,9 +32,9 @@ export const TimeFilters = {
   SHOW_LAST_5_MIN: "SHOW_LAST_5_MIN"
 };
 
-export const TypeFilters={
-  SHOW_ALL:"SHOW_ALL",
-  SHOW_WEATHER:"SHOW_WEATHER"
+export const TypeFilters = {
+  SHOW_ALL: "SHOW_ALL",
+  SHOW_WEATHER: "SHOW_WEATHER"
 };
 
 /*
@@ -44,7 +44,7 @@ export const TypeFilters={
 let nextEntryId = 0;
 
 export function addEntry(text, mType, privacy) {
-  return { type: ADD_ENTRY, id: nextEntryId++, mType: mType, privacy, text };
+  return { type: ADD_ENTRY, id: nextEntryId++, mType, privacy, text };
 }
 
 export function toggleEntry(id) {
@@ -59,7 +59,7 @@ export function setPrivacyFilter(filter) {
   return { type: SET_PRIVACY_FILTER, filter };
 }
 
-export function setTypeFilter(filter){
+export function setTypeFilter(filter) {
   return { type: SET_TYPE_FILTER, filter };
 }
 

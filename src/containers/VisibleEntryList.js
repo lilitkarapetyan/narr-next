@@ -2,7 +2,8 @@ import {
   PrivacyFilters,
   TimeFilters,
   TypeFilters,
-  VisibilityFilters,toggleEntry
+  VisibilityFilters,
+  toggleEntry
 } from "../actions";
 import { connect } from "react-redux";
 import EntryList from "../components/EntryList";
@@ -14,7 +15,7 @@ const getVisibleEntries = (
   timeFilter,
   typeFilters
 ) => {
-  
+  let entriesE = entries;
   if (visibilityFilter !== VisibilityFilters.SHOW_ALL) {
     switch (visibilityFilter) {
       case VisibilityFilters.SHOW_ALL:
@@ -32,16 +33,16 @@ const getVisibleEntries = (
       case PrivacyFilters.SHOW_ALL:
         break;
       case PrivacyFilters.SHOW_PUBLIC:
-        entries=entries.filter(t => t.privacy === "public");
+        entriesE = entries.filter(t => t.privacy === "public");
         break;
       case PrivacyFilters.SHOW_SENSITIVE:
-        entries= entries.filter(t => t.privacy === "sensitive");
+        entriesE = entries.filter(t => t.privacy === "sensitive");
         break;
       case PrivacyFilters.SHOW_PRIVATE:
-        entries= entries.filter(t => t.privacy === "private");
+        entriesE = entries.filter(t => t.privacy === "private");
         break;
       default:
-       break;
+        break;
     }
   }
   if (timeFilter !== TimeFilters.SHOW_ALL) {
@@ -49,27 +50,27 @@ const getVisibleEntries = (
       case TimeFilters.SHOW_ALL:
         break;
       case TimeFilters.SHOW_LAST_MIN:
-        entries= entries.filter(t => new Date() - t.created < 60 * 1000);
+        entriesE = entries.filter(t => new Date() - t.created < 60 * 1000);
         break;
       case TimeFilters.SHOW_LAST_5_MIN:
-        entries= entries.filter(t => new Date() - t.created < 5 * 60 * 1000);
+        entriesE = entries.filter(t => new Date() - t.created < 5 * 60 * 1000);
         break;
       default:
         break;
     }
   }
-  if(typeFilters !== TypeFilters.SHOW_ALL){
-    switch (typeFilters){
+  if (typeFilters !== TypeFilters.SHOW_ALL) {
+    switch (typeFilters) {
       case TypeFilters.SHOW_ALL:
         break;
       case TypeFilters.SHOW_WEATHER:
-        entries= entries.filter(t=>t.mType==='weather');
+        entriesE = entries.filter(t => t.mType === "weather");
         break;
       default:
         break;
     }
   }
-  return entries;
+  return entriesE;
 };
 
 const mapStateToProps = state => ({
