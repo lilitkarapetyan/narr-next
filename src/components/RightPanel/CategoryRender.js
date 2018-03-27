@@ -4,7 +4,7 @@ import EntryRender from "./EntryRender";
 import PropTypes from "prop-types";
 import React from "react";
 
-const CategoryRender = ({ category, collapse }) => (
+const CategoryRender = ({ category, collapse, addEntry }) => (
   <Col lg={collapse ? 12 : 6} style={{ padding: "5px" }}>
     <Card style={{ height: "100%" }}>
       <CardHeader
@@ -23,7 +23,7 @@ const CategoryRender = ({ category, collapse }) => (
         >
           {category.entries.map(entry => (
             <Col key={entry.id} lg={collapse ? 12 : 6}>
-              <EntryRender entry={entry} />{" "}
+              <EntryRender entry={entry} onSubmit={addEntry} />
             </Col>
           ))}
         </Row>
@@ -34,7 +34,8 @@ const CategoryRender = ({ category, collapse }) => (
 
 CategoryRender.propTypes = {
   category: CategoryType.isRequired,
-  collapse: PropTypes.bool
+  collapse: PropTypes.bool,
+  addEntry: PropTypes.func.isRequired
 };
 
 CategoryRender.defaultProps = {

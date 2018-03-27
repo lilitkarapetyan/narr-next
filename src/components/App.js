@@ -4,7 +4,7 @@ import { compose, mapProps, withState } from "recompose";
 import LeftPanel from "./LeftPanel";
 import PropTypes from "prop-types";
 import React from "react";
-import RightPanel from "./RightPanel";
+import RightPanel from "../containers/RightPanel";
 
 const App = ({ expanded, toggleExpand, config }) => (
   <Row style={{ width: "100%", minHeight: "100%" }}>

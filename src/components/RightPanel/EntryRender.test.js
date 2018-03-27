@@ -21,8 +21,11 @@ describe("EntryRender", () => {
         priority: "High",
         fields: []
       },
+      onSubmit: () => null,
       toggleModal: () => false,
-      modalVisible: false
+      modalVisible: false,
+      setValues: () => false,
+      values: {}
     };
     mountedEntryModal = undefined;
   });
@@ -30,6 +33,37 @@ describe("EntryRender", () => {
   it("renders ONE button", () => {
     const rendered = render();
     expect(rendered.find(Button)).toHaveLength(1);
+  });
+
+  it("adds Entry on Submit", () => {
+    const mockEntry = jest.fn();
+    props.onSubmit = mockEntry;
+    props.values = {
+      one: "one"
+    };
+    const rendered = render();
+    rendered
+      .find("EntryRender")
+      .props()
+      .onSubmit();
+    expect(mockEntry.mock.calls).toHaveLength(1);
+  });
+
+  it("adds correct entry format on Submit", () => {
+    const mockEntry = jest.fn();
+    props.onSubmit = mockEntry;
+    props.values = {
+      hello: "one",
+      two: "two"
+    };
+    const rendered = render();
+    rendered
+      .find("EntryRender")
+      .props()
+      .onSubmit();
+    expect(mockEntry.mock.calls[0][0]).toBe("hello:one two:two");
+    expect(mockEntry.mock.calls[0][1]).toBe("myEntry");
+    expect(mockEntry.mock.calls[0][2]).toBe("public");
   });
 
   it("renders Entry Name on Button", () => {
@@ -40,8 +74,9 @@ describe("EntryRender", () => {
   it("to call Toggle Dialog on Click", () => {
     const modalToggleMock = jest.fn();
     props.toggleModal = modalToggleMock;
+    props.setModalVisible = jest.fn();
     const rendered = render();
     rendered.find(Button).prop("onClick")();
-    expect(modalToggleMock.mock.calls.length).toBe(1);
+    expect(props.setModalVisible.mock.calls.length).toBe(1);
   });
 });

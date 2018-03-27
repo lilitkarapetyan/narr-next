@@ -6,7 +6,7 @@ import CategoryRender from "./CategoryRender";
 import PropTypes from "prop-types";
 import React from "react";
 
-const RightPanel = ({ categories, collapse }) => (
+const RightPanel = ({ categories, collapse, addEntry }) => (
   <div className="category-container">
     <Row
       className="justify-content-md-center "
@@ -14,6 +14,7 @@ const RightPanel = ({ categories, collapse }) => (
     >
       {categories.map(category => (
         <CategoryRender
+          addEntry={addEntry}
           key={category}
           collapse={collapse}
           category={category}
@@ -28,7 +29,8 @@ const RightPanel = ({ categories, collapse }) => (
 
 RightPanel.propTypes = {
   categories: PropTypes.arrayOf(CategoryType),
-  collapse: PropTypes.bool.isRequired
+  collapse: PropTypes.bool.isRequired,
+  addEntry: PropTypes.func.isRequired
 };
 
 RightPanel.defaultProps = {
