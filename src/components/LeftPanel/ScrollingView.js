@@ -1,5 +1,6 @@
+import { connect } from "react-redux";
 import React from "react";
-import VisibleEntryList from "../../containers/VisibleEntryList";
+import VisibleEntryList from './../../containers/VisibleEntryList';
 
 const ScrollingView = () => (
   <div
@@ -13,9 +14,11 @@ const ScrollingView = () => (
       overflowY: "auto"
     }}
   >
-    <div>
+    <div>Scrolling View</div>
+    <ul>
       <VisibleEntryList />
-    </div>
-  </div>
-);
-export default ScrollingView;
+    </ul>
+  </div>);
+
+const mapStateToProps = (state) => state;
+export default connect(mapStateToProps, null)(ScrollingView);

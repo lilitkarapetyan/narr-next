@@ -15,3 +15,17 @@ html {
   right: 0;
   bottom: 0;
 }
+
+/*  */
+.btn-main, .btn-main:hover {
+  background-color: #027bff;
+  border-color: #027bff;
+  color: #ffffff;
+}
+.btn-main:focus {
+  box-shadow: 0 0 0 0.2rem rgba(2, 123, 255, 0.5);
+}
+.card-header .dropdown-item.active, .card-header .dropdown-item:active {
+  background-color: transparent;
+  outline: 0 none;
+}
