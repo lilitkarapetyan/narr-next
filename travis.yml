@@ -16,4 +16,4 @@ deploy:
   github_token: $gitToken
   local_dir: build
   on:
-    branch: master
+    branch: gh-pages
