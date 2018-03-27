@@ -22,7 +22,7 @@ const Entry = ({
   setOpen,
   onClick,
   selected,
-  entry: { text, id, created, m_type, privacy }
+  entry: { text, id, created, mType, privacy }
 }) => (
   <div
     role="button"
@@ -38,7 +38,7 @@ const Entry = ({
     >
       <span>
         {created.toLocaleTimeString()}  {id}
-        <Badge style={{ margin:"2px",width: "100px" }}>{m_type}</Badge>
+        <Badge style={{ margin:"2px",width: "100px" }}>{mType}</Badge>
         <Badge>
           {privacy}
         </Badge>
