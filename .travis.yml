@@ -5,8 +5,6 @@ cache:
   directories:
   - node_modules
 script:
-  - pwd
-  - cd narr-next
   - npm install
   - npm test
   - npm run build
