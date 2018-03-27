@@ -3,6 +3,7 @@ import { EntryType } from "./Schemas";
 import { withState } from "recompose";
 import PropTypes from "prop-types";
 import React from "react";
+import moment from "moment";
 
 const Entry = ({ selected, entry: { text, id, created, mType, privacy } }) => (
   <div
@@ -11,7 +12,7 @@ const Entry = ({ selected, entry: { text, id, created, mType, privacy } }) => (
     }}
   >
     <span>
-      {created.toLocaleTimeString()} {id}
+      {moment.utc(created).format("hh:mm:ss")} {id}
       <Badge style={{ margin: "2px", width: "100px" }}>{mType}</Badge>
       <Badge>{privacy}</Badge>
     </span>

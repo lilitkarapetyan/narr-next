@@ -1,4 +1,5 @@
 import { PrivacyFilters, SET_PRIVACY_FILTER } from "../actions";
+import persist from "./PersistentUtils";
 
 function privacyFilter(state = PrivacyFilters.SHOW_ALL, action) {
   switch (action.type) {
@@ -9,4 +10,4 @@ function privacyFilter(state = PrivacyFilters.SHOW_ALL, action) {
   }
 }
 
-export default privacyFilter;
+export default persist(privacyFilter);

@@ -24,7 +24,10 @@
     "redux": "^3.7.2",
     "styled-components": "3.2.3",
     "lodash": "4.17.5",
-    "rc-queue-anim": "1.4.1"
+    "rc-queue-anim": "1.4.1",
+    "redux-pouchdb-plus": "0.10.0",
+    "pouchdb": "6.4.3",
+    "moment": "2.21.0"
   },
   "devDependencies": {
     "eslint": "4.19.1",
