@@ -1,4 +1,4 @@
-import { Card, CardBody, Col, Collapse, Row } from "reactstrap";
+import { Card, CardBody, Col, Badge, Collapse, Row } from "reactstrap";
 import { EntryType } from "./Schemas";
 import { withState } from "recompose";
 import PropTypes from "prop-types";
@@ -36,30 +36,21 @@ const Entry = ({
         backgroundColor: selected ? "#FFFFFF" : "transparent"
       }}
     >
-      <Row className="justify-content-md-center  text-center align-middle">
-        <Col lg={1}>{id}</Col>
-        <Col lg={8}>
-          <div style={{ fontSize: "18px", fontWeight: "bolder" }}>{m_type}</div>
-        </Col>
-        <Col lg={3} style={{ textTransform: "uppercase" }}>
+      <span>
+        {created.toLocaleTimeString()}  {id}
+        <Badge style={{ margin:"2px",width: "100px" }}>{m_type}</Badge>
+        <Badge>
           {privacy}
-        </Col>
-      </Row>
+        </Badge>
+      </span>
 
-      <Collapser open={open}>
+      <span style={{ paddingLeft: "10px" }}>
         {Object.keys(text).map(key => (
-          <div>
-            {key} : {text[key]}
-          </div>
+          <span style={{ paddingLeft: "5px" }}>
+            <b>{key}</b> : {text[key]}
+          </span>
         ))}
-      </Collapser>
-      <Row style={{ textAlign: "right" }}>
-        <div
-          style={{ color: "rgba(0,0,0,0.6)", fontSize: "13px", width: "100%" }}
-        >
-          created : {created.toLocaleTimeString()}
-        </div>
-      </Row>
+      </span>
       <div />
     </div>
   </div>
