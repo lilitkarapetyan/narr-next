@@ -43,11 +43,8 @@ const enhancer = compose(
     },
     onSubmit: () => {
       // join to string
-      const keys = Object.keys(props.values);
-      const formattedValues = keys
-        .map(key => `${key}:${props.values[key]}`)
-        .join(" ");
-      props.onSubmit(formattedValues, props.entry.name, "public");
+
+      props.onSubmit(props.values, props.entry.name, "public");
     },
     entry: props.entry,
     modalVisible: props.modalVisible,
