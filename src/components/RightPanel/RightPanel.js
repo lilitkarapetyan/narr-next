@@ -1,4 +1,5 @@
 import "./RightPanel.css";
+import { CategoryType } from "../Schemas";
 import { Row } from "reactstrap";
 import { branch, renderComponent } from "recompose";
 import CategoryRender from "./CategoryRender";
@@ -8,7 +9,7 @@ import React from "react";
 const RightPanel = ({ categories, collapse }) => (
   <div className="category-container">
     <Row
-      className="justify-content-md-center"
+      className="justify-content-md-center "
       style={{ padding: "10px", width: "100%" }}
     >
       {categories.map(category => (
@@ -26,13 +27,14 @@ const RightPanel = ({ categories, collapse }) => (
 );
 
 RightPanel.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.string),
+  categories: PropTypes.arrayOf(CategoryType),
   collapse: PropTypes.bool.isRequired
 };
 
 RightPanel.defaultProps = {
   categories: []
 };
+
 const EmptyCategories = () => <div> No categories </div>;
 
 const enhancer = branch(
