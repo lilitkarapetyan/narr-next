@@ -14,8 +14,6 @@ deploy:
   skip_cleanup: true
   github_token: $gitToken
   local_dir: build
-  on:
-    branch: master
 notifications:
   email:
     recipients:
