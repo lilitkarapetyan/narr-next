@@ -20,7 +20,9 @@ describe("EntryFormRender", () => {
           name: "myFirstField",
           type: "text"
         }
-      ]
+      ],
+      values: {},
+      saveValue: () => null
     };
     mounted = undefined;
   });

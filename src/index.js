@@ -10,8 +10,12 @@ import App from "./components/App";
 import entryApp from "./reducers/reducers";
 import registerServiceWorker from "./registerServiceWorker";
 
-const store = createStore(entryApp);
-
+/* eslint-disable no-underscore-dangle */
+const store = createStore(
+  entryApp,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+/* eslint-enable */
 render(
   <Provider store={store}>
     <App />

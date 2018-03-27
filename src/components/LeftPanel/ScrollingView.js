@@ -1,4 +1,5 @@
 import React from "react";
+import VisibleEntryList from "../../containers/VisibleEntryList";
 
 const ScrollingView = () => (
   <div
@@ -12,7 +13,9 @@ const ScrollingView = () => (
       overflowY: "auto"
     }}
   >
-    <div>Scrolling View</div>
+    <div>
+      <VisibleEntryList />
+    </div>
   </div>
 );
 export default ScrollingView;

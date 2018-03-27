@@ -22,7 +22,8 @@
     "reactstrap": "^5.0.0-beta.3",
     "recompose": "0.26.0",
     "redux": "^3.7.2",
-    "styled-components": "3.2.3"
+    "styled-components": "3.2.3",
+    "lodash": "4.17.5"
   },
   "devDependencies": {
     "eslint": "4.19.1",
@@ -44,7 +45,7 @@
       "rm  -rf ./build/*",
       "prettier --write",
       "eslint --fix",
-      "jest --bail --findRelatedTests",
+      "jest --bail",
       "git add"
     ]
   },

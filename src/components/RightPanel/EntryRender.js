@@ -1,14 +1,18 @@
 import { Button } from "reactstrap";
 import { EntryType } from "../Schemas";
 import { compose, mapProps, withState } from "recompose";
+import { set } from "lodash";
 import EntryModal from "./EntryModal";
 import PropTypes from "prop-types";
 import React from "react";
 
-export const EntryRenderUnControlled = ({
+const EntryRender = ({
   entry,
   toggleModal,
-  modalVisible
+  modalVisible,
+  onSubmit,
+  values,
+  setValues
 }) => (
   <div>
     <Button
@@ -19,19 +23,29 @@ export const EntryRenderUnControlled = ({
     >
       {entry.name}
     </Button>
-    <EntryModal visible={modalVisible} entry={entry} toggle={toggleModal} />
+    <EntryModal
+      values={values}
+      setValue={setValues}
+      visible={modalVisible}
+      entry={entry}
+      toggle={toggleModal}
+      onSubmit={onSubmit}
+    />
   </div>
 );
 
-EntryRenderUnControlled.propTypes = {
-  entry: EntryType.isRequired,
-  toggleModal: PropTypes.func.isRequired,
-  modalVisible: PropTypes.bool.isRequired
-};
-
 const enhancer = compose(
-  withState("modalVisible", "setModalVisible", false),
   mapProps(props => ({
+    values: props.values,
+    setValues: (label, val) => {
+      const nValues = { ...props.values };
+      props.setValues(set(nValues, label, val));
+    },
+    onSubmit: () => {
+      // join to string
+
+      props.onSubmit(props.values, props.entry.name, "public");
+    },
     entry: props.entry,
     modalVisible: props.modalVisible,
     toggleModal: () => props.setModalVisible(!props.modalVisible),
@@ -39,4 +53,21 @@ const enhancer = compose(
   }))
 );
 
-export default enhancer(EntryRenderUnControlled);
+export const EntryRenderUnControlled = enhancer(EntryRender);
+
+EntryRender.propTypes = {
+  entry: EntryType.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  modalVisible: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  values: PropTypes.object,
+  setValues: PropTypes.func.isRequired
+};
+
+const enhancer2 = compose(
+  withState("values", "setValues", {}),
+  withState("modalVisible", "setModalVisible", false),
+  enhancer
+);
+
+export default enhancer2(EntryRender);

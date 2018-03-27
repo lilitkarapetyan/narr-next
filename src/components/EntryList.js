@@ -5,11 +5,9 @@ import React from "react";
 
 const EntryList = ({ entries, onEntryClick }) => (
   <CardBody>
-    <ul>
-      {entries.map((entry, index) => (
-        <Entry key={entry.id} {...entry} onClick={() => onEntryClick(index)} />
-      ))}
-    </ul>
+    {entries.map((entry, index) => (
+      <Entry key={entry.id} entry={entry} onClick={() => onEntryClick(index)} />
+    ))}
   </CardBody>
 );
 
