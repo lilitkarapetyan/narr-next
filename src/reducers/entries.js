@@ -1,29 +1,37 @@
-import { ADD_ENTRY, TOGGLE_SELECTED } from "../actions";
+import { ADD_ENTRY, TOGGLE_SELECTED, UpdateEntry } from "../actions";
+import { handleActions } from "redux-actions";
+import EntryStatus from "../components/Schemas/EntryStatus";
+import moment from "moment";
 
-const entries = (state = [], action) => {
-  switch (action.type) {
-    case ADD_ENTRY:
-      return [
-        ...state,
-        {
-          id: action.id,
-          text: action.text,
-          selected: false,
-          created: new Date(),
-          mType: action.mType,
-          privacy: action.privacy
-        }
-      ];
-    case TOGGLE_SELECTED:
-      return state.map(
+let nextEntryId = 0;
+
+const initialState = [];
+const reducer = handleActions(
+  {
+    [UpdateEntry]: (state, { payload }) => {
+      const n = state.filter(ent => payload.id !== ent.id);
+      return [...n, { ...payload, status: EntryStatus.Complete }];
+    },
+    [ADD_ENTRY]: (state, { payload }) => [
+      ...state,
+      {
+        ...payload,
+        id: nextEntryId++,
+        status: payload.status || EntryStatus.Empty,
+        created: moment()
+          .utc()
+          .format()
+      }
+    ],
+    [TOGGLE_SELECTED]: (state, action) =>
+      state.map(
         entry =>
           entry.id === action.id
             ? { ...entry, selected: !entry.selected }
             : entry
-      );
-    default:
-      return state;
-  }
-};
+      )
+  },
+  initialState
+);
 
-export default entries;
+export default reducer;

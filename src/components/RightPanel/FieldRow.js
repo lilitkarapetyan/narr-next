@@ -5,11 +5,12 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const FieldRow = ({ field, value, onChange, validator, autoFocus }) => {
-  const message = validator.message(
-    field.name,
-    value,
-    `required|${field.type}`
-  );
+  let message = "";
+  try {
+    message = validator.message(field.name, value, `required|${field.type}`);
+  } catch (ex) {
+    message = "Invalid type";
+  }
   const isValid = validator.fieldValid(field.name);
 
   return (
@@ -23,7 +24,10 @@ const FieldRow = ({ field, value, onChange, validator, autoFocus }) => {
           invalid={!isValid}
           valid={isValid}
           value={value}
-          onChange={onChange}
+          onChange={val => {
+            onChange(val);
+            validator.message(field.name, val, `required|${field.type}`);
+          }}
           type={field.type}
           placeholder={field.placeholder || ""}
         />
@@ -34,7 +38,7 @@ const FieldRow = ({ field, value, onChange, validator, autoFocus }) => {
 };
 
 FieldRow.propTypes = {
-  autoFocus: FieldType.bool,
+  autoFocus: PropTypes.bool,
   field: FieldType.isRequired,
   value: PropTypes.object,
   onChange: PropTypes.func.isRequired,

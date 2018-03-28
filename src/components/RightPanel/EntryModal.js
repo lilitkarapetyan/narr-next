@@ -1,4 +1,11 @@
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import {
+  Alert,
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
+} from "reactstrap";
 import { EntryType } from "../Schemas";
 import EntryFormRender from "./EntriesForm";
 import FormValidator from "../../Validator";
@@ -9,20 +16,29 @@ class EntryModal extends React.PureComponent {
   constructor(s) {
     super(s);
     this.validator = FormValidator();
+    this.validator.showMessages();
   }
 
-  componentDidMount() {
-    this.validator.showMessages();
-    this.validator.allValid();
-  }
+  componentDidMount() {}
   render() {
-    const { entry, visible, toggle, setValue, values, onSubmit } = this.props;
-    return (
-      <Modal isOpen={visible} toggle={toggle}>
-        <ModalHeader toggle={toggle}>{entry.name}</ModalHeader>
+    const {
+      entry,
+      visible,
+      toggle,
+      setValue,
+      values,
+      onSubmit,
+      inline
+    } = this.props;
+
+    const valid =
+      this.validator.allValid() && (values && Object.keys(values).length > 0);
+    const Body = entry ? (
+      <React.Fragment>
         <ModalBody>
           <EntryFormRender
             fields={entry.fields}
+            entry={entry}
             saveValue={setValue}
             values={values}
             validator={this.validator}
@@ -30,16 +46,13 @@ class EntryModal extends React.PureComponent {
         </ModalBody>
         <ModalFooter>
           <Button
-            disabled={
-              !this.validator.allValid() || Object.keys(values).length === 0
-            }
+            disabled={!valid}
             color="primary"
             onClick={() => {
-              if (this.validator.allValid()) {
+              if (valid) {
                 onSubmit();
                 toggle();
               } else {
-                this.validator.showMessages();
                 this.forceUpdate();
               }
             }}
@@ -50,6 +63,16 @@ class EntryModal extends React.PureComponent {
             Cancel
           </Button>
         </ModalFooter>
+      </React.Fragment>
+    ) : (
+      <Alert color="warning"> No Entry Avaiable</Alert>
+    );
+    if (!visible) return null;
+    if (inline && visible) return <div>{Body}</div>;
+    return (
+      <Modal isOpen={visible} toggle={toggle}>
+        <ModalHeader toggle={toggle}>{entry.name}</ModalHeader>
+        {Body}
       </Modal>
     );
   }
@@ -61,7 +84,8 @@ EntryModal.propTypes = {
   toggle: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  inline: PropTypes.bool
 };
 
 export default EntryModal;

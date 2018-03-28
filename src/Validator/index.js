@@ -13,8 +13,8 @@ import SimpleReactValidator from "simple-react-validator";
 
 const text = {
   message: "This text is not valid",
-  rule() {
-    return true;
+  rule(val) {
+    return val && val.length > 0;
   }
 };
 
