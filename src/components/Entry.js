@@ -1,75 +1,40 @@
-import { Card, CardBody, Col, Collapse, Row } from "reactstrap";
+import { Badge, Card, CardBody } from "reactstrap";
 import { EntryType } from "./Schemas";
 import { withState } from "recompose";
 import PropTypes from "prop-types";
 import React from "react";
 
-const Collapser = ({ open, children }) => (
-  <Collapse isOpen={open}>
-    <Card>
-      <CardBody>{children}</CardBody>
-    </Card>
-  </Collapse>
-);
-
-Collapser.propTypes = {
-  open: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired
-};
-
-const Entry = ({
-  open,
-  setOpen,
-  onClick,
-  selected,
-  entry: { text, id, created, mType, privacy }
-}) => (
-  <div
-    role="button"
-    onClick={() => {
-      onClick();
-      setOpen(!open);
+const Entry = ({ selected, entry: { text, id, created, mType, privacy } }) => (
+  <Card
+    className="inner-filter"
+    style={{
+      borderWidth: "2px",
+      backgroundColor: selected ? "#FFFFFF" : "transparent",
+      padding: "0px",
+      margin: "5px"
     }}
   >
-    <div
-      style={{
-        backgroundColor: selected ? "#FFFFFF" : "transparent"
-      }}
-    >
-      <Row className="justify-content-md-center  text-center align-middle">
-        <Col lg={1}>{id}</Col>
-        <Col lg={8}>
-          <div style={{ fontSize: "18px", fontWeight: "bolder" }}>{mType}</div>
-        </Col>
-        <Col lg={3} style={{ textTransform: "uppercase" }}>
-          {privacy}
-        </Col>
-      </Row>
+    <CardBody style={{ padding: "0rem", fontSize: "12px" }}>
+      <div>
+        {created.toLocaleTimeString()}
+        <Badge style={{ margin: "2px", width: "90px" }}>{mType}</Badge>
+        <Badge>{privacy}</Badge>
+      </div>
 
-      <Collapser open={open}>
+      <div style={{ paddingLeft: "10px" }}>
         {Object.keys(text).map(key => (
-          <div>
-            {key} : {text[key]}
-          </div>
-        ))}
-      </Collapser>
-      <Row style={{ textAlign: "right" }}>
-        <div
-          style={{ color: "rgba(0,0,0,0.6)", fontSize: "13px", width: "100%" }}
-        >
-          created : {created.toLocaleTimeString()}
-        </div>
-      </Row>
-      <div />
-    </div>
-  </div>
+          <span style={{ paddingLeft: "5px" }}>
+            <b>{key}</b>: {text[key]}
+          </span>
+        ))}{" "}
+        ({id})
+      </div>
+    </CardBody>
+  </Card>
 );
 
 Entry.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
   entry: EntryType.isRequired,
-  onClick: PropTypes.func.isRequired,
   selected: PropTypes.bool.isRequired
 };
 

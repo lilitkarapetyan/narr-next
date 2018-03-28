@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const EntryList = ({ entries, onEntryClick }) => (
-  <CardBody>
+  <CardBody style={{ padding: "5px" }}>
     {entries.map((entry, index) => (
       <Entry key={entry.id} entry={entry} onClick={() => onEntryClick(index)} />
     ))}

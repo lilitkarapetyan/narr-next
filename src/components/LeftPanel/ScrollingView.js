@@ -6,18 +6,12 @@ const ScrollingView = () => (
   <div
     style={{
       position: "absolute",
-      top: 10,
-      left: 10,
-      right: 10,
-      bottom: 10,
       overflowX: "hidden",
-      overflowY: "auto"
+      overflowY: "auto",
+      padding: "0rem"
     }}
   >
-    <div>Scrolling View</div>
-    <ul>
-      <VisibleEntryList />
-    </ul>
+    <VisibleEntryList />
   </div>
 );
 
