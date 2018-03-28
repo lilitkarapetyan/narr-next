@@ -40,7 +40,7 @@ const FieldRow = ({ field, value, onChange, validator, autoFocus }) => {
 FieldRow.propTypes = {
   autoFocus: PropTypes.bool,
   field: FieldType.isRequired,
-  value: PropTypes.object,
+  value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   validator: PropTypes.object.isRequired
 };

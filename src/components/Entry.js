@@ -1,4 +1,4 @@
-import { Card, CardBody, Col, Collapse, Row } from "reactstrap";
+import { Badge, Card, CardBody } from "reactstrap";
 import { EntryType } from "./Schemas";
 import { UpdateEntry } from "../actions";
 import { compose, withState } from "recompose";
@@ -6,88 +6,67 @@ import { connect } from "react-redux";
 import EntryEditor from "./EntryEditor";
 import PropTypes from "prop-types";
 import React from "react";
-
-const Collapser = ({ open, children }) => (
-  <Collapse isOpen={open}>
-    <Card>
-      <CardBody>{children}</CardBody>
-    </Card>
-  </Collapse>
-);
-
-Collapser.propTypes = {
-  open: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired
-};
+import moment from "moment";
 
 const Entry = ({
-  open,
-  setOpen,
-  onClick,
   selected,
+  entry,
+  useModalEdit,
+  expandedView,
   editMode,
   setEditMode,
-  expandedView,
-  useModalEdit,
-  entry,
   updateEntry
 }) => {
-  const { id, created, mType, privacy } = entry;
+  const { id, created, mType, privacy, fields } = entry;
+
   return (
-    <div
-      role="button"
-      onClick={() => {
-        onClick();
-        setOpen(!open);
-      }}
-    >
-      <div
-        onDoubleClick={() => setEditMode(true)}
+    <div>
+      <Card
+        className="inner-filter"
         style={{
-          backgroundColor: selected ? "#FFFFFF" : "transparent"
+          borderWidth: "2px",
+          backgroundColor: selected ? "#FFFFFF" : "transparent",
+          padding: "0px",
+          margin: "5px"
         }}
+        onDoubleClick={() => setEditMode(true)}
       >
-        <Row className="justify-content-md-center  text-center align-middle">
-          <Col lg={1}>{id}</Col>
-          <Col lg={8}>
-            <div style={{ fontSize: "18px", fontWeight: "bolder" }}>
-              {mType}
-            </div>
-          </Col>
-          <Col lg={3} style={{ textTransform: "uppercase" }}>
-            {privacy}
-          </Col>
-        </Row>
-        <EntryEditor
-          inline={!useModalEdit}
-          expanded={expandedView}
-          entry={entry}
-          active={editMode}
-          setActive={setEditMode}
-          onSubmit={updateEntry}
-        />
-        <Row style={{ textAlign: "right" }}>
-          <div
-            style={{
-              color: "rgba(0,0,0,0.6)",
-              fontSize: "13px",
-              width: "100%"
-            }}
-          >
-            created : {created}
+        <CardBody style={{ padding: "0rem", fontSize: "12px" }}>
+          <div>
+            {moment.utc(created).format()}
+            <Badge style={{ margin: "2px", width: "90px" }}>{mType}</Badge>
+            <Badge>{privacy}</Badge>
           </div>
-        </Row>
-        <div />
-      </div>
+
+          <div style={{ paddingLeft: "10px" }}>
+            {Object.keys(fields).map(key => (
+              <span key={key} style={{ paddingLeft: "5px" }}>
+                <b>{key}</b>: {fields[key]}
+              </span>
+            ))}{" "}
+            ({id})
+          </div>
+          <EntryEditor
+            inline={!useModalEdit}
+            expanded={expandedView}
+            entry={entry}
+            active={editMode}
+            setActive={setEditMode}
+            onSubmit={updateEntry}
+          />
+        </CardBody>
+      </Card>
     </div>
   );
 };
 
 Entry.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
   entry: EntryType.isRequired,
-  onClick: PropTypes.func.isRequired,
+  selected: PropTypes.bool.isRequired
+};
+
+Entry.propTypes = {
+  entry: EntryType.isRequired,
   selected: PropTypes.bool,
   editMode: PropTypes.bool.isRequired,
   setEditMode: PropTypes.func.isRequired,
