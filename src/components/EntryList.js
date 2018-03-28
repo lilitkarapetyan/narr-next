@@ -13,7 +13,7 @@ class EntryList extends React.Component {
     super(s);
     this.cache = new CellMeasurerCache({
       fixedWidth: true,
-      minHeight: 20
+      minHeight: 5
     });
   }
   render() {

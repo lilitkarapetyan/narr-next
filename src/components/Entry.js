@@ -20,7 +20,7 @@ const Entry = ({
   const { id, created, mType, privacy, fields } = entry;
 
   return (
-    <div>
+    <div style={{ height: "100%", width: "100%" }}>
       <Card
         className="inner-filter"
         style={{
@@ -38,14 +38,16 @@ const Entry = ({
             <Badge>{privacy}</Badge>
           </div>
 
-          <div style={{ paddingLeft: "10px" }}>
-            {Object.keys(fields).map(key => (
-              <span key={key} style={{ paddingLeft: "5px" }}>
-                <b>{key}</b>: {fields[key]}
-              </span>
-            ))}{" "}
-            ({id})
-          </div>
+          {!editMode && (
+            <div style={{ paddingLeft: "10px" }}>
+              {Object.keys(fields).map(key => (
+                <span key={key} style={{ paddingLeft: "5px" }}>
+                  <b>{key}</b>: {fields[key]}
+                </span>
+              ))}{" "}
+              ({id})
+            </div>
+          )}
           <EntryEditor
             inline={!useModalEdit}
             expanded={expandedView}
