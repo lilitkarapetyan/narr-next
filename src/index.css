@@ -96,6 +96,7 @@ html {
 }
 .inner-filter .data-comment-text {
   display: flex;
+  padding-left: 5px;
 }
 .inner-filter .data-comment-text p {
 display: inline-block;
