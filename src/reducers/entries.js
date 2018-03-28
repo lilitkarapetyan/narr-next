@@ -4,7 +4,6 @@ const entries = (state = [], action) => {
   switch (action.type) {
     case ADD_ENTRY:
       return [
-        ...state,
         {
           id: action.id,
           text: action.text,
@@ -12,7 +11,8 @@ const entries = (state = [], action) => {
           created: new Date(),
           mType: action.mType,
           privacy: action.privacy
-        }
+        },
+        ...state
       ];
     case TOGGLE_SELECTED:
       return state.map(
