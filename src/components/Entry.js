@@ -14,7 +14,7 @@ const Entry = ({ selected, entry: { text, id, created, mType, privacy } }) => (
       margin: "5px"
     }}
   >
-    <CardBody style={{ padding: "0rem" }}>
+    <CardBody style={{ padding: "0rem", fontSize: "12px" }}>
       <div>
         {created.toLocaleTimeString()}
         <Badge style={{ margin: "2px", width: "90px" }}>{mType}</Badge>
