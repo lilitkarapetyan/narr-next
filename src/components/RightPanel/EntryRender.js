@@ -48,7 +48,10 @@ const enhancer = compose(
     },
     entry: props.entry,
     modalVisible: props.modalVisible,
-    toggleModal: () => props.setModalVisible(!props.modalVisible),
+    toggleModal: (clear = true) => {
+      props.setModalVisible(!props.modalVisible);
+      if (clear) props.setValues({});
+    },
     setModalVisible: props.setModalVisible
   }))
 );
