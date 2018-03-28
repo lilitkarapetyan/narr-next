@@ -2,6 +2,7 @@ import { mount } from "enzyme";
 import EntryFormRender from "./EntriesForm";
 import FieldRow from "./FieldRow";
 import React from "react";
+import Validator from "../../Validator";
 
 describe("EntryFormRender", () => {
   let props;
@@ -22,7 +23,8 @@ describe("EntryFormRender", () => {
         }
       ],
       values: {},
-      saveValue: () => null
+      saveValue: () => null,
+      validator: Validator()
     };
     mounted = undefined;
   });

@@ -14,8 +14,8 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
     >
       {categories.map(category => (
         <CategoryRender
+          key={category.name}
           addEntry={addEntry}
-          key={category}
           collapse={collapse}
           category={category}
         />

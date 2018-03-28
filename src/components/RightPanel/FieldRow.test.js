@@ -2,6 +2,7 @@ import { Input, Label } from "reactstrap";
 import { mount } from "enzyme";
 import FieldRow from "./FieldRow";
 import React from "react";
+import Validator from "../../Validator";
 
 describe("FieldRender", () => {
   let props;
@@ -19,8 +20,9 @@ describe("FieldRender", () => {
         name: "MyField",
         type: "text"
       },
-      value: "",
-      onChange: () => null
+      value: {},
+      onChange: () => null,
+      validator: Validator()
     };
     mounted = undefined;
   });
