@@ -1,5 +1,6 @@
-import { Col, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import { Col, FormFeedback, FormGroup, Label } from "reactstrap";
 import { FieldType } from "../Schemas";
+import Input from "./Inputs";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -19,7 +20,7 @@ const FieldRow = ({ field, value, onChange, validator }) => {
           invalid={!isValid}
           valid={isValid}
           value={value}
-          onChange={evt => onChange(evt.target.value)}
+          onChange={onChange}
           type={field.type}
           placeholder={field.placeholder || ""}
         />

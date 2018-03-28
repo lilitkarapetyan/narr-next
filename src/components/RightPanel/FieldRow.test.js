@@ -1,6 +1,7 @@
-import { Input, Label } from "reactstrap";
+import { Label } from "reactstrap";
 import { mount } from "enzyme";
 import FieldRow from "./FieldRow";
+import Input from "./Inputs";
 import React from "react";
 import Validator from "../../Validator";
 
@@ -44,7 +45,7 @@ describe("FieldRender", () => {
     rendered
       .find(Input)
       .first()
-      .prop("onChange")({ target: { value: "hello" } });
+      .prop("onChange")("hello");
     expect(onChange.mock.calls.length).toBe(1);
     expect(onChange.mock.calls[0][0]).toBe("hello");
   });
