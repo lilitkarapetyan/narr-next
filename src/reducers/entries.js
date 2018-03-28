@@ -2,6 +2,7 @@ import { ADD_ENTRY, TOGGLE_SELECTED, UpdateEntry } from "../actions";
 import { handleActions } from "redux-actions";
 import EntryStatus from "../components/Schemas/EntryStatus";
 import moment from "moment";
+import persist from "./PersistentUtils";
 
 let nextEntryId = 0;
 
@@ -34,4 +35,4 @@ const reducer = handleActions(
   initialState
 );
 
-export default reducer;
+export default persist(reducer);
