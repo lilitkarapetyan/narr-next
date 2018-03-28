@@ -8,7 +8,7 @@ import RightPanel from "../containers/RightPanel";
 
 const App = ({ expanded, toggleExpand, config }) => (
   <Row style={{ width: "100%", minHeight: "100%" }}>
-    <Col lg={expanded ? 10 : 3}>
+    <Col lg={expanded ? 10 : 3} className={expanded ? "filter-full" : ""}>
       <LeftPanel toggleExpand={toggleExpand} expanded={expanded} />
     </Col>
     <Col lg={expanded ? 2 : 9}>
