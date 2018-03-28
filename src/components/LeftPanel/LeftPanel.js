@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader } from "reactstrap";
+import { Card, CardHeader } from "reactstrap";
 import Icon from "react-fontawesome";
 import PropTypes from "prop-types";
 import React from "react";
@@ -53,9 +53,9 @@ const LeftPanel = ({ toggleExpand, expanded }) => (
       <ExpandButton expanded={expanded} onClick={toggleExpand} />
       <Filters />
     </CardHeader>
-    <CardBody style={{ position: "relative" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
       <ScrollingView />
-    </CardBody>
+    </div>
   </Card>
 );
 

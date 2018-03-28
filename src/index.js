@@ -1,6 +1,7 @@
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
+import "react-virtualized/styles.css";
 import React from "react";
 
 import { Provider } from "react-redux";
