@@ -1,5 +1,4 @@
 import { SET_TIME_FILTER, TimeFilters } from "../actions";
-import persist from "./PersistentUtils";
 
 function timeFilter(state = TimeFilters.SHOW_ALL, action) {
   switch (action.type) {
@@ -10,4 +9,4 @@ function timeFilter(state = TimeFilters.SHOW_ALL, action) {
   }
 }
 
-export default persist(timeFilter);
+export default timeFilter;

@@ -1,6 +1,4 @@
 import { ADD_ENTRY, TOGGLE_SELECTED } from "../actions";
-import moment from "moment";
-import persist from "./PersistentUtils";
 
 const entries = (state = [], action) => {
   switch (action.type) {
@@ -11,9 +9,7 @@ const entries = (state = [], action) => {
           id: action.id,
           text: action.text,
           selected: false,
-          created: moment()
-            .utc()
-            .format(),
+          created: new Date(),
           mType: action.mType,
           privacy: action.privacy
         }
@@ -30,4 +26,4 @@ const entries = (state = [], action) => {
   }
 };
 
-export default persist(entries);
+export default entries;

@@ -14,7 +14,10 @@ const ScrollingView = () => (
       overflowY: "auto"
     }}
   >
-    <VisibleEntryList />
+    <div>Scrolling View</div>
+    <ul>
+      <VisibleEntryList />
+    </ul>
   </div>
 );
 

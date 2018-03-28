@@ -1,5 +1,4 @@
 import { SET_TYPE_FILTER, TypeFilters } from "../actions";
-import persist from "./PersistentUtils";
 
 function typeFilter(state = TypeFilters.SHOW_ALL, action) {
   switch (action.type) {
@@ -10,4 +9,4 @@ function typeFilter(state = TypeFilters.SHOW_ALL, action) {
   }
 }
 
-export default persist(typeFilter);
+export default typeFilter;

@@ -1,14 +1,14 @@
-import Animation from "rc-queue-anim";
+import { CardBody } from "reactstrap";
 import Entry from "./Entry";
 import PropTypes from "prop-types";
 import React from "react";
 
 const EntryList = ({ entries, onEntryClick }) => (
-  <Animation type={["left", "right"]}>
+  <CardBody>
     {entries.map((entry, index) => (
       <Entry key={entry.id} entry={entry} onClick={() => onEntryClick(index)} />
     ))}
-  </Animation>
+  </CardBody>
 );
 
 EntryList.propTypes = {

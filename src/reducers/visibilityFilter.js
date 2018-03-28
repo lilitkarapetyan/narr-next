@@ -1,5 +1,4 @@
 import { SET_VISIBILITY_FILTER, VisibilityFilters } from "../actions";
-import persist from "./PersistentUtils";
 
 function visibilityFilter(state = VisibilityFilters.SHOW_ALL, action) {
   switch (action.type) {
@@ -10,4 +9,4 @@ function visibilityFilter(state = VisibilityFilters.SHOW_ALL, action) {
   }
 }
 
-export default persist(visibilityFilter);
+export default visibilityFilter;
