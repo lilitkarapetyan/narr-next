@@ -53,7 +53,7 @@ const LeftPanel = ({ toggleExpand, expanded }) => (
       <ExpandButton expanded={expanded} onClick={toggleExpand} />
       <Filters />
     </CardHeader>
-    <CardBody style={{ position: "relative" }}>
+    <CardBody style={{ position: "relative", padding: "0rem" }}>
       <ScrollingView />
     </CardBody>
   </Card>
