@@ -18,6 +18,7 @@ export const CategoryType = PropTypes.shape({
   name: PropTypes.string.isRequired,
   priority: CategoryPriorityType,
   entries: PropTypes.arrayOf(EntryType).isRequired,
-  created: PropTypes.string,
-  privacy: PropTypes.string
+  created: PropTypes.object.isRequired,
+  mType: PropTypes.string.isRequired,
+  privacy: PropTypes.string.isRequired
 });
