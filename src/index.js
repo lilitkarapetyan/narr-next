@@ -18,8 +18,12 @@ const db = new PouchDB("naar-next");
 /* eslint-disable no-underscore-dangle */
 
 const middleware = compose(
-  persistentStore({ db }),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  persistentStore(
+    { db },
+    window.__REDUX_DEVTOOLS_EXTENSION__
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : s => s
+  )
 );
 
 /* eslint-enable */
