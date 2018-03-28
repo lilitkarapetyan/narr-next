@@ -13,6 +13,7 @@ class EntryModal extends React.PureComponent {
 
   componentDidMount() {
     this.validator.showMessages();
+    this.validator.allValid();
   }
   render() {
     const { entry, visible, toggle, setValue, values, onSubmit } = this.props;
@@ -29,7 +30,9 @@ class EntryModal extends React.PureComponent {
         </ModalBody>
         <ModalFooter>
           <Button
-            disabled={this.validator.allValid()}
+            disabled={
+              !this.validator.allValid() || Object.keys(values).length === 0
+            }
             color="primary"
             onClick={() => {
               if (this.validator.allValid()) {

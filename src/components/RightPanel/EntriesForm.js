@@ -6,8 +6,9 @@ import React from "react";
 
 const EntriesForm = ({ fields, saveValue, values, validator }) => (
   <Form>
-    {fields.map(field => (
+    {fields.map((field, idx) => (
       <FieldRow
+        autoFocus={idx === 0 && Object.keys(values).length === 0}
         key={field.name}
         field={field}
         value={values[field.name]}

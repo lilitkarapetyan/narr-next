@@ -2,6 +2,7 @@ import { Input } from "reactstrap";
 import React from "react";
 
 const InputSelector = ({ onChange, type, ...rest }) => {
+  console.warn(rest);
   switch (type) {
     case "text":
       return (

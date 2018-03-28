@@ -4,7 +4,7 @@ import Input from "./Inputs";
 import PropTypes from "prop-types";
 import React from "react";
 
-const FieldRow = ({ field, value, onChange, validator }) => {
+const FieldRow = ({ field, value, onChange, validator, autoFocus }) => {
   const message = validator.message(
     field.name,
     value,
@@ -17,6 +17,9 @@ const FieldRow = ({ field, value, onChange, validator }) => {
       <Label sm={4}>{field.name}</Label>
       <Col sm={8}>
         <Input
+          innerRef={c => {
+            if (c && autoFocus) c.focus();
+          }}
           invalid={!isValid}
           valid={isValid}
           value={value}
@@ -31,13 +34,15 @@ const FieldRow = ({ field, value, onChange, validator }) => {
 };
 
 FieldRow.propTypes = {
+  autoFocus: FieldType.bool,
   field: FieldType.isRequired,
   value: PropTypes.object,
   onChange: PropTypes.func.isRequired,
   validator: PropTypes.object.isRequired
 };
 
-FieldRow.defaultValues = {
+FieldRow.defaultProps = {
+  autoFocus: false,
   value: ""
 };
 
