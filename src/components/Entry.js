@@ -1,33 +1,67 @@
-import { Badge } from "reactstrap";
+import { Card, CardBody, Collapse } from "reactstrap";
 import { EntryType } from "./Schemas";
 import { withState } from "recompose";
 import PropTypes from "prop-types";
 import React from "react";
 
-const Entry = ({ selected, entry: { text, id, created, mType, privacy } }) => (
+const Collapser = ({ open, children }) => (
+  <Collapse isOpen={open}>
+    <Card>
+      <CardBody>{children}</CardBody>
+    </Card>
+  </Collapse>
+);
+
+Collapser.propTypes = {
+  open: PropTypes.bool.isRequired,
+  children: PropTypes.element.isRequired
+};
+
+const Entry = ({
+  open,
+  setOpen,
+  onClick,
+  selected,
+  entry: { text, id, created, mType, privacy }
+}) => (
   <div
-    style={{
-      backgroundColor: selected ? "#FFFFFF" : "transparent"
+    className="card-filter-data"
+    role="button"
+    onClick={() => {
+      onClick();
+      setOpen(!open);
     }}
   >
-    <span>
-      {created.toLocaleTimeString()} {id}
-      <Badge style={{ margin: "2px", width: "100px" }}>{mType}</Badge>
-      <Badge>{privacy}</Badge>
-    </span>
-
-    <span style={{ paddingLeft: "10px" }}>
-      {Object.keys(text).map(key => (
-        <span style={{ paddingLeft: "5px" }}>
-          <b>{key}</b>: {text[key]}
-        </span>
-      ))}
-    </span>
+    <div
+      className="inner-filter"
+      style={{
+        backgroundColor: selected ? "#FFFFFF" : "transparent"
+      }}
+    >
+      <div className="justify-content-md-center  text-center align-middle">
+        <div className="data-field">{created.toLocaleTimeString()}</div>
+        <div className="data-field">{id}</div>
+        <div className="data-field">
+          <div className="filter-type">{mType}</div>
+        </div>
+        <div className="data-field">
+          <div className="filter-type">{privacy}</div>
+        </div>
+      </div>
+      <div className="data-comment-text">
+        <b>Comment: </b>
+        <p>{text}</p>
+      </div>
+      <div />
+    </div>
   </div>
 );
 
 Entry.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
   entry: EntryType.isRequired,
+  onClick: PropTypes.func.isRequired,
   selected: PropTypes.bool.isRequired
 };
 
