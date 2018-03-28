@@ -13,7 +13,7 @@ class EntryList extends React.Component {
     super(s);
     this.cache = new CellMeasurerCache({
       fixedWidth: true,
-      minHeight: 5
+      minHeight: 50
     });
   }
   render() {
@@ -36,9 +36,18 @@ class EntryList extends React.Component {
           rowIndex={index}
           parent={parent}
         >
-          <div style={style}>
-            <Entry entry={entry} onClick={() => onEntryClick(index)} />
-          </div>
+          {({ measure }) => (
+            <div style={style}>
+              <Entry
+                entry={entry}
+                onClick={() => onEntryClick(index)}
+                measure={() => {
+                  measure();
+                  this.cache.clear(index);
+                }}
+              />
+            </div>
+          )}
         </CellMeasurer>
       );
     };
