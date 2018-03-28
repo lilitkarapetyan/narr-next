@@ -3,6 +3,7 @@ import entries from "./entries";
 import privacyFilter from "./privacyFilter";
 import timeFilter from "./timeFilter";
 import typeFilter from "./typeFilter";
+import uniqueTypes from "./uniqueTypes";
 import visibilityFilter from "./visibilityFilter";
 
 const entryApp = combineReducers({
@@ -10,7 +11,8 @@ const entryApp = combineReducers({
   privacyFilter,
   timeFilter,
   typeFilter,
-  entries
+  entries,
+  uniqueTypes
 });
 
 export default entryApp;

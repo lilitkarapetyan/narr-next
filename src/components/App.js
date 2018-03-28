@@ -305,6 +305,7 @@ const UiConfiguration = {
     }
   ]
 };
+
 const enhancer = compose(
   withState("expanded", "setExpand", false),
   mapProps(props => ({
