@@ -88,7 +88,7 @@ Entry.propTypes = {
   setOpen: PropTypes.func.isRequired,
   entry: EntryType.isRequired,
   onClick: PropTypes.func.isRequired,
-  selected: PropTypes.bool.isRequired,
+  selected: PropTypes.bool,
   editMode: PropTypes.bool.isRequired,
   setEditMode: PropTypes.func.isRequired,
   expandedView: PropTypes.bool.isRequired,

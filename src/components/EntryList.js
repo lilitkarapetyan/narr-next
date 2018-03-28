@@ -1,4 +1,5 @@
 import { CardBody } from "reactstrap";
+import { EntryType } from "./Schemas";
 import Entry from "./Entry";
 import PropTypes from "prop-types";
 import React from "react";
@@ -12,16 +13,7 @@ const EntryList = ({ entries, onEntryClick }) => (
 );
 
 EntryList.propTypes = {
-  entries: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      selected: PropTypes.bool.isRequired,
-      text: PropTypes.string.isRequired,
-      created: PropTypes.object.isRequired,
-      mType: PropTypes.string.isRequired,
-      privacy: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired,
+  entries: PropTypes.arrayOf(EntryType).isRequired,
   onEntryClick: PropTypes.func.isRequired
 };
 
