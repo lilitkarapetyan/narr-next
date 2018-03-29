@@ -3,6 +3,7 @@ import { CategoryType } from "../Schemas";
 import { Row } from "reactstrap";
 import { branch, renderComponent } from "recompose";
 import CategoryRender from "./CategoryRender";
+import NavigationPanel from "./NavigationPanel";
 import PropTypes from "prop-types";
 import React from "react";
 import SettingsCategory from "./SettingsCategory";
@@ -22,6 +23,7 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
         />
       ))}
       <SettingsCategory />
+      <NavigationPanel speed={100} angle={80} />
     </Row>
     <div className="category-count text-center">
       Categories Count {categories.length}
