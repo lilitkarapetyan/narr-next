@@ -11,6 +11,7 @@ script:
   - npm test
   - npm run build
   - sh build.sh
+  - more build/static/assets/Last_build
 deploy:
   provider: pages
   skip_cleanup: true
