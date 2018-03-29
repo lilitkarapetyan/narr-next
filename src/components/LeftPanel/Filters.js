@@ -35,7 +35,7 @@ class Filters extends React.Component {
           ).innerHTML = this.responseText;
         }
       };
-      xhttp.open("GET", "/build/static/assets/Last_build", true);
+      xhttp.open("GET", "/static/assets/Last_build", true);
       xhttp.send();
     };
   }
