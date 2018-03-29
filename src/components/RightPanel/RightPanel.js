@@ -25,6 +25,7 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
     </Row>
     <div className="category-count text-center">
       Categories Count {categories.length}
+      <p id="txtBuildDateTime" />
     </div>
   </div>
 );

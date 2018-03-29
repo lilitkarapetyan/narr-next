@@ -25,6 +25,21 @@ class Filters extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
 
+  componentDidMount() {
+    window.onload = function() {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById(
+            "txtBuildDateTime"
+          ).innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "/build/static/assets/Last_build", true);
+      xhttp.send();
+    };
+  }
+
   toggle(e) {
     const { isExpanded } = this.state;
     Object.keys(isExpanded).forEach(x => {
