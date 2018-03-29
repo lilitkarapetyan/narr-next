@@ -3,11 +3,12 @@ import React from "react";
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
-    return <button className="btn btn-main">{children}</button>;
+    return <div className="btn btn-main">{children}</div>;
   }
 
   return (
-    <button
+    <div
+      role="button"
       className="btn btn-secondary"
       onClick={e => {
         e.preventDefault();
@@ -15,7 +16,7 @@ const Link = ({ active, children, onClick }) => {
       }}
     >
       {children}
-    </button>
+    </div>
   );
 };
 

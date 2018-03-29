@@ -1,19 +1,22 @@
 import {
   PrivacyFilters,
   TimeFilters,
-  TypeFilters,
   VisibilityFilters,
   toggleEntry
 } from "../actions";
 import { connect } from "react-redux";
 import EntryList from "../components/EntryList";
+import _ from "lodash";
+
+let searchResult = [];
 
 const getVisibleEntries = (
   entries,
   visibilityFilter,
   privacyFilter,
   timeFilter,
-  typeFilters
+  typeFilters,
+  searchKeyword
 ) => {
   let entriesE = entries;
   if (visibilityFilter !== VisibilityFilters.SHOW_ALL) {
@@ -59,17 +62,37 @@ const getVisibleEntries = (
         break;
     }
   }
-  if (typeFilters !== TypeFilters.SHOW_ALL) {
-    switch (typeFilters) {
-      case TypeFilters.SHOW_ALL:
-        break;
-      case TypeFilters.SHOW_WEATHER:
-        entriesE = entriesE.filter(t => t.mType === "weather");
-        break;
-      default:
-        break;
-    }
+  if (typeFilters.length > 1) {
+    entriesE = _.filter(entriesE, x => typeFilters.includes(x.mType));
   }
+  if (searchKeyword.length > 0) {
+    entriesE.forEach(ob => {
+      Object.keys(ob).forEach(x => {
+        if (typeof ob[x] === "string") {
+          if (ob[x].includes(searchKeyword)) {
+            searchResult.push(ob);
+          }
+        } else if (typeof ob[x] === "object") {
+          Object.values(ob[x]).forEach(i => {
+            if (i.includes(searchKeyword)) {
+              searchResult.push(ob);
+            }
+          });
+        }
+      });
+    });
+    entriesE = [...new Set(searchResult)];
+    searchResult = [];
+    /*
+    * small but static solution:
+    * entriesE=_.filter(entriesE,(e)=>{
+
+      return e.mType.includes(searchKeyword)||e.privacy.includes(searchKeyword)||e.category.includes(searchKeyword)||e.status.includes(searchKeyword)||e.fields.Comment&&e.fields.Comment.includes(searchKeyword);
+    });
+    *
+    * */
+  }
+
   return entriesE;
 };
 
@@ -79,7 +102,8 @@ const mapStateToProps = state => ({
     state.visibilityFilter,
     state.privacyFilter,
     state.timeFilter,
-    state.typeFilter
+    state.typeFilter,
+    state.searchKeyword
   )
 });
 

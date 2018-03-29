@@ -16,10 +16,11 @@ describe("CategoryRender", () => {
 
   beforeEach(() => {
     props = {
+      addEntry: () => null,
       category: {
         name: "MyCategory",
         priority: "High",
-        created: new Date(),
+        created: "",
         mType: "myType",
         privacy: "---",
         entries: [

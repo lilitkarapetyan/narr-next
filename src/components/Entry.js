@@ -1,70 +1,105 @@
-import { Card, CardBody, Collapse } from "reactstrap";
+import { Badge } from "reactstrap";
 import { EntryType } from "./Schemas";
-import { withState } from "recompose";
+import { UpdateEntry } from "../actions";
+import { compose, lifecycle, withState } from "recompose";
+import { connect } from "react-redux";
+import EntryEditor from "./EntryEditor";
 import PropTypes from "prop-types";
 import React from "react";
-
-const Collapser = ({ open, children }) => (
-  <Collapse isOpen={open}>
-    <Card>
-      <CardBody>{children}</CardBody>
-    </Card>
-  </Collapse>
-);
-
-Collapser.propTypes = {
-  open: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired
-};
+import moment from "moment";
 
 const Entry = ({
-  open,
-  setOpen,
-  onClick,
   selected,
-  entry: { text, id, created, mType, privacy }
-}) => (
-  <div
-    className="card-filter-data"
-    role="button"
-    onClick={() => {
-      onClick();
-      setOpen(!open);
-    }}
-  >
+  entry,
+  useModalEdit,
+  expandedView,
+  editMode,
+  setEditMode,
+  updateEntry,
+  measure
+}) => {
+  const { id, created, mType, privacy, fields } = entry;
+
+  return (
     <div
       className="inner-filter"
       style={{
-        backgroundColor: selected ? "#FFFFFF" : "transparent"
+        borderWidth: "2px",
+        backgroundColor: selected ? "#FFFFFF" : "transparent",
+        padding: "0px",
+        margin: "5px"
+      }}
+      onDoubleClick={() => {
+        setEditMode(true);
+        measure();
       }}
     >
-      <div className="justify-content-md-center  text-center align-middle">
-        <div className="data-field">{created.toLocaleTimeString()}</div>
-        <div className="data-field">{id}</div>
-        <div className="data-field">
-          <div className="filter-type">{mType}</div>
+      <div style={{ padding: "0rem", fontSize: "12px" }}>
+        <div>
+          {moment.utc(created).format()}
+          <Badge style={{ margin: "2px", width: "90px" }}>{mType}</Badge>
+          <Badge>{privacy}</Badge>
         </div>
-        <div className="data-field">
-          <div className="filter-type">{privacy}</div>
-        </div>
+
+        {!editMode && (
+          <div style={{ paddingLeft: "10px" }}>
+            {Object.keys(fields).map(key => (
+              <span key={key} style={{ paddingLeft: "5px" }}>
+                <b>{key}</b>: {fields[key]}
+              </span>
+            ))}{" "}
+            ({id})
+          </div>
+        )}
+        <EntryEditor
+          inline={!useModalEdit}
+          expanded={expandedView}
+          entry={entry}
+          active={editMode}
+          setActive={ac => {
+            setEditMode(ac);
+            measure();
+          }}
+          onSubmit={updateEntry}
+        />
       </div>
-      <div className="data-comment-text">
-        <b>Comment: </b>
-        <p>{text}</p>
-      </div>
-      <div />
     </div>
-  </div>
-);
+  );
+};
 
 Entry.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
   entry: EntryType.isRequired,
-  onClick: PropTypes.func.isRequired,
   selected: PropTypes.bool.isRequired
 };
 
-const enhanced = withState("open", "setOpen", false);
+Entry.propTypes = {
+  entry: EntryType.isRequired,
+  selected: PropTypes.bool.isRequired,
+  editMode: PropTypes.bool.isRequired,
+  setEditMode: PropTypes.func.isRequired,
+  expandedView: PropTypes.bool.isRequired,
+  useModalEdit: PropTypes.bool.isRequired,
+  updateEntry: PropTypes.func.isRequired,
+  measure: PropTypes.func.isRequired
+};
+
+const enhanced = compose(
+  lifecycle({
+    componentDidMount() {
+      this.props.measure();
+    }
+  }),
+  connect(
+    state => ({
+      expandedView: state.ui.expanded,
+      useModalEdit: state.ui.useModalEdit
+    }),
+    {
+      updateEntry: UpdateEntry
+    }
+  ),
+  withState("editMode", "setEditMode", false),
+  withState("open", "setOpen", false)
+);
 
 export default enhanced(Entry);

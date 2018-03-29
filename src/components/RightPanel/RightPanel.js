@@ -5,6 +5,7 @@ import { branch, renderComponent } from "recompose";
 import CategoryRender from "./CategoryRender";
 import PropTypes from "prop-types";
 import React from "react";
+import SettingsCategory from "./SettingsCategory";
 
 const RightPanel = ({ categories, collapse, addEntry }) => (
   <div className="category-container">
@@ -14,12 +15,13 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
     >
       {categories.map(category => (
         <CategoryRender
+          key={category.name}
           addEntry={addEntry}
-          key={category}
           collapse={collapse}
           category={category}
         />
       ))}
+      <SettingsCategory />
     </Row>
     <div className="category-count text-center">
       Categories Count {categories.length}

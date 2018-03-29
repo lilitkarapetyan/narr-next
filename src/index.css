@@ -17,7 +17,8 @@ html {
 }
 
 /*  */
-.btn-main, .btn-main:hover {
+.btn-main,
+.btn-main:hover {
   background-color: #027bff;
   border-color: #027bff;
   color: #ffffff;
@@ -25,82 +26,27 @@ html {
 .btn-main:focus {
   box-shadow: 0 0 0 0.2rem rgba(2, 123, 255, 0.5);
 }
-.card-header .dropdown-item.active, .card-header .dropdown-item:active {
+.card-header .dropdown-item.active,
+.card-header .dropdown-item:active {
   background-color: transparent;
   outline: 0 none;
 }
 
-/* Filter Type common CSS */
-.filter-type {
-  padding: 5px;
-  border-radius: 4px;
-  background: #6c757c;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: bold;
-  display: inline-block;
-  text-align: center;
-  min-width: 125px;
-  line-height: 18px;
-  vertical-align: middle;
-}
-
-/* Card Body Scroll */
-.card-body-scroll {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-.card-body-scroll ul {
-  padding: 0;
-}
-.card-body-scroll .card-body .card-filter-data {
-  margin-bottom: 5px;
-}
-.card-body-scroll .card-body .card-filter-data .collapse {
-  margin-top: 5px;
-}
-
-.filter-full .inner-filter {
-  display: flex;
+.btn-drop {
+  padding: 8px;
+  display: inline-table;
   width: 100%;
+  cursor: pointer;
 }
-.filter-full .inner-filter .justify-content-md-center {
-  display: flex;
-  width: auto;
-  margin: 0;
-  justify-content: start !important;
+.btn-drop.btn-secondary {
+  background: transparent;
+  color: #6c757d;
 }
-.filter-full .inner-filter .data-comment-text {
-  display: flex;
-  min-width: 70%;
-  margin: 0;
-}
-.inner-filter .justify-content-md-center > div:first-child {
-  text-align: left;
-  width: 80px;
-}
-.inner-filter .justify-content-md-center > div:nth-child(2) {
-  width: 50px;
-}
-.inner-filter .justify-content-md-center .data-field {
+.btn-drop input {
+  margin-right: 5px;
   display: table-cell;
-  width: auto;
-  padding: 0 5px;
-  text-align: left;
-  white-space: nowrap;
 }
-.inner-filter .data-comment-text {
-  display: flex;
-  padding-left: 5px;
-}
-.inner-filter .data-comment-text p {
-display: inline-block;
-  text-indent: -15px;
-  padding-left: 25px;
-  margin-bottom: 0;
+.btn-drop span {
+  display: table-cell;
+  vertical-align: middle;
 }
