@@ -1,4 +1,4 @@
-import { Badge } from "reactstrap";
+import { Badge, Card } from "reactstrap";
 import { EntryType } from "./Schemas";
 import { UpdateEntry } from "../actions";
 import { compose, lifecycle, withState } from "recompose";
@@ -34,7 +34,7 @@ const Entry = ({
         measure();
       }}
     >
-      <div style={{ padding: "0rem", fontSize: "12px" }}>
+      <Card style={{ padding: "0rem", fontSize: "12px" }}>
         <div>
           {moment.utc(created).format()}
           <Badge style={{ margin: "2px", width: "90px" }}>{mType}</Badge>
@@ -62,7 +62,7 @@ const Entry = ({
           }}
           onSubmit={updateEntry}
         />
-      </div>
+      </Card>
     </div>
   );
 };

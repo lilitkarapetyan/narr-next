@@ -18,11 +18,18 @@ const text = {
   }
 };
 
+const octas = {
+  message: "Octas needs a value",
+  rule(val) {
+    return val;
+  }
+};
+
 const angle = {
   message: ":attribute needs to be a Integer  between 0 and 360",
   rule(val) {
     const number = parseFloat(val);
-    return number >= 0 && number < 360 && Number.isInteger(number);
+    return number >= 0 && number < 360 && Number.isInteger(parseFloat(number));
   }
 };
 
@@ -43,14 +50,14 @@ const distance = {
 const windState = {
   message: ":attribute needs to be betwen 1 and 12",
   rule(val) {
-    return val > 0 && val <= 12 && Number.isInteger(val);
+    return val > 0 && val <= 12 && Number.isInteger(parseFloat(val));
   }
 };
 
 const integer = {
   message: ":attribute needs to be a Integer",
   rule(val) {
-    return Number.isInteger(val);
+    return Number.isInteger(parseFloat(val));
   }
 };
 
@@ -72,6 +79,7 @@ export default () =>
   new SimpleReactValidator({
     text,
     angle,
+    octas,
     speed,
     distance,
     "wind-state": windState,
