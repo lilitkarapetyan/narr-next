@@ -134,6 +134,7 @@ const Export = ({ entries }) => {
         >
           Image.pdf
         </Button>
+        {" "}
         <Button
           color="primary"
           size="sm"
