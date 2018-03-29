@@ -61,9 +61,12 @@ describe("EntryRender", () => {
       .find("EntryRender")
       .props()
       .onSubmit();
-    expect(mockEntry.mock.calls[0][0]).toBe(props.values);
-    expect(mockEntry.mock.calls[0][1]).toBe("myEntry");
-    expect(mockEntry.mock.calls[0][2]).toBe("public");
+    expect(mockEntry.mock.calls[0][0].fields.hello).toBe("one");
+    expect(mockEntry.mock.calls[0][0].fields.two).toBe("two");
+    expect(mockEntry.mock.calls[0][0].mType).toBe("myId");
+
+    // expect(mockEntry.mock.calls[0][0]).toBe("myEntry");
+    // expect(mockEntry.mock.calls[0][0]).toBe("public");
   });
 
   it("renders Entry Name on Button", () => {

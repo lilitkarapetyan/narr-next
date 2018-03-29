@@ -6,7 +6,7 @@ export default class Generator {
     this.generators = category.entries.map(entry => {
       const holder = {};
       const interval = () =>
-        (Math.round(Math.random() * 5000) + 1000) / this.rate;
+        (Math.round(Math.random() * 5000 * 60) + 1000 * 60) / this.rate;
       const gen = () => {
         this.callback(this.generate(entry));
         holder.interval = setTimeout(gen, interval());
@@ -18,14 +18,15 @@ export default class Generator {
 
   generate(categoryEntry) {
     const entry = {
-      text: {},
+      fields: {},
       mType: null,
-      privacy: "public"
+      privacy: "public",
+      category: this.category.name
     };
     categoryEntry.fields.forEach(field => {
-      entry.text[field.name] = this.generateField(field.type);
+      entry.fields[field.name] = this.generateField(field.type);
     });
-    entry.mType = categoryEntry.name;
+    entry.mType = categoryEntry.id;
     return entry;
   }
   setRate(rate) {

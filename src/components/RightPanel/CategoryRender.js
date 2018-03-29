@@ -23,7 +23,10 @@ const CategoryRender = ({ category, collapse, addEntry }) => (
         >
           {category.entries.map(entry => (
             <Col key={entry.id} lg={collapse ? 12 : 6}>
-              <EntryRender entry={entry} onSubmit={addEntry} />
+              <EntryRender
+                entry={entry}
+                onSubmit={en => addEntry({ ...en, category: category.name })}
+              />
             </Col>
           ))}
         </Row>

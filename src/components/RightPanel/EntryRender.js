@@ -3,6 +3,7 @@ import { EntryType } from "../Schemas";
 import { compose, mapProps, withState } from "recompose";
 import { set } from "lodash";
 import EntryModal from "./EntryModal";
+import EntryStatus from "../Schemas/EntryStatus";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -43,8 +44,13 @@ const enhancer = compose(
     },
     onSubmit: () => {
       // join to string
-
-      props.onSubmit(props.values, props.entry.name, "public");
+      const entry = {
+        name: props.entry.name,
+        fields: props.values,
+        status: EntryStatus.Completed,
+        mType: props.entry.id
+      };
+      props.onSubmit(entry);
     },
     entry: props.entry,
     modalVisible: props.modalVisible,
