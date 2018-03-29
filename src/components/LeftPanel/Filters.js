@@ -29,7 +29,7 @@ class Filters extends React.Component {
     window.onload = function() {
       const xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
           document.getElementById(
             "txtBuildDateTime"
           ).innerHTML = this.responseText;
