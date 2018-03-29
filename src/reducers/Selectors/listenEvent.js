@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
+import { getEntries } from "./entrySelectors";
 import moment from "moment";
-
-export const getEntries = state => state.entries;
 
 export const listenEvent = type =>
   createSelector([getEntries], entries => {
