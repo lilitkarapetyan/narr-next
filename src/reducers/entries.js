@@ -10,8 +10,23 @@ const initialState = [];
 const reducer = handleActions(
   {
     [UpdateEntry]: (state, { payload }) => {
-      const n = state.filter(ent => payload.id !== ent.id);
-      return [...n, { ...payload, status: EntryStatus.Complete }];
+      const items = state;
+      const updated = payload;
+
+      // find the entry matching the current one
+      const match = items.filter(ent => payload.id === ent.id);
+
+      // what's it's index?
+      const index = items.indexOf(match[0]);
+
+      // set the edit as complete
+      updated.status = EntryStatus.Complete;
+
+      // replace the existing item with this one
+      items[index] = updated;
+
+      // return the updated list
+      return items;
     },
     [ADD_ENTRY]: (state, { payload }) => [
       ...state,
