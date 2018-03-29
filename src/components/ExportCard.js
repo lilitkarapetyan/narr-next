@@ -92,7 +92,7 @@ const Export = ({ entries }) => {
   };
 
   const timeX = 10;
-  const textX = 35;
+  const textX = 65;
 
   const onPdfTextExport = () => {
     const pdf = new jsPDF(); // eslint-disable-line new-cap
@@ -108,9 +108,14 @@ const Export = ({ entries }) => {
       pdf.setFontSize(12);
       pdf.text(`- ${key + 1} -`, 105, 290, {}, 0, "center");
 
-      page.forEach(({ text, mType, privacy, created, linePoint }) => {
+      page.forEach(({ fields, mType, privacy, created, linePoint }) => {
+        let text = "";
+        Object.keys(fields).map(
+          key2 => (text = `${text + key2}, ${fields[key2]}`) // eslint-disable-line no-return-assign
+        );
+
         pdf.setFont("Helvetica", "normal");
-        pdf.text(timeX, lineCord(line), created.toLocaleTimeString());
+        pdf.text(timeX, lineCord(line), created);
 
         pdf.setFont("Helvetica", "bold");
         pdf.text(textX, lineCord(line), `${mType} (${privacy})`);
@@ -143,9 +148,7 @@ const Export = ({ entries }) => {
       {entries.map(({ created, mType, privacy, text }, index) => (
         <div key={index} className={styles.listItem}>
           <div>
-            <span className={css(styles.listTime)}>
-              {created.toLocaleTimeString()}
-            </span>
+            <span className={css(styles.listTime)}>{created}</span>
             <div className={css(styles.listRight)}>
               <b>{mType}</b> <Badge color={colors[privacy]}>{privacy}</Badge>
             </div>
