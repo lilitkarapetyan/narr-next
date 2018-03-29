@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { Card, CardBody } from 'reactstrap';
 import { StyleSheet, css } from 'aphrodite/no-important';
 
-import FilterLink from '../containers/FilterLink'
-import PrivacyLink from '../containers/PrivacyLink'
-import TimeLink from '../containers/TimeLink'
-import { VisibilityFilters, PrivacyFilters, TimeFilters } from '../actions'
+import FilterLink from '../containers/FilterLink';
+import PrivacyLink from '../containers/PrivacyLink';
+import TimeLink from '../containers/TimeLink';
+import { VisibilityFilters, PrivacyFilters, TimeFilters } from '../actions';
+import Export from '../containers/Export';
 
 const Filters = () => (
     <Card>
@@ -49,7 +50,7 @@ const Filters = () => (
             </PrivacyLink>
           </CardBody>
         </Card>
-        <Card>
+        <Card className={css(styles.mb2)}>
           <CardBody>
             Show:
             {' '}
@@ -66,6 +67,7 @@ const Filters = () => (
             </TimeLink>
           </CardBody>
         </Card>
+        <Export/>
       </CardBody>
     </Card>
 );

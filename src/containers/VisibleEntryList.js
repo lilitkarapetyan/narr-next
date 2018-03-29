@@ -3,7 +3,7 @@ import { toggleEntry } from '../actions'
 import EntryList from '../components/EntryList'
 import {VisibilityFilters, PrivacyFilters, TimeFilters} from "../actions";
 
-const getVisibleEntries = (entries, visibilityFilter, privacyFilter, timeFilter) => {
+export const getVisibleEntries = (entries, visibilityFilter, privacyFilter, timeFilter) => {
 
     if(visibilityFilter !== VisibilityFilters.SHOW_ALL) {
         switch (visibilityFilter) {

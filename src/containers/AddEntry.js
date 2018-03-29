@@ -43,11 +43,11 @@ let AddEntry = ({ dispatch }) => {
                   </Button>
                   <Button className={css(styles.btnSpaces)}outline color="info" onClick={e => {
                       e.preventDefault();
-                      for(var i=0;i<100;i++) {
-                          dispatch(addEntry('lorem ipsum ' + i, 'New  contact', 'public'));
+                      for(var i=0;i<50;i++) {
+                          dispatch(addEntry('Lorem ipsum dolor sit amet, usu zril graece at, no elitr indoctum eos. Ne affert pericula qui. Te salutandi definitiones sit. Sed fuisset omnesque iudicabit id. In paulo facilisis iudicabit his ' + i, 'New  contact', 'public'));
                       }
                   }}>
-                      Add Bulk D
+                      Add 50
                   </Button>
                 </ButtonToolbar>
             </form>

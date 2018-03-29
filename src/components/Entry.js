@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ListGroupItem, Badge } from 'reactstrap';
 
-const colors = {
+export const colors = {
   public: 'success',
   sensitive: 'info',
 }

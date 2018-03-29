@@ -31,6 +31,9 @@ export const TimeFilters = {
     SHOW_LAST_5_MIN: 'SHOW_LAST_5_MIN'
 };
 
+export const ExportFilters = {
+    EXPORT_ENTRY_LIST_AS_PDF: 'EXPORT_ENTRY_LIST_AS_PDF'
+}
 
 /*
  * action creators

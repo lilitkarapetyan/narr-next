@@ -29,7 +29,7 @@ const sizes = {
     tablet: 340,
     mobile: '100%'
   },
-  filtersSpace: 300,
+  filtersSpace: 386,
 };
 
 const styles = StyleSheet.create({
