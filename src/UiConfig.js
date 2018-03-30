@@ -3,6 +3,7 @@ export default {
   categories: [
     {
       name: "General",
+      color: "green",
       priority: "High",
       entries: [
         {
@@ -48,31 +49,31 @@ export default {
         },
         {
           id: "weather",
-          name: "weather",
+          name: "Weather",
           priority: "High",
           fields: [
             {
-              name: "wind speed",
+              name: "Wind speed",
               type: "speed"
             },
             {
-              name: "wind direction",
+              name: "Wind direction",
               type: "angle"
             },
             {
-              name: "cloud cover",
+              name: "Cloud cover",
               type: "octas"
             },
             {
-              name: "wind state",
+              name: "Wind state",
               type: "wind-state"
             },
             {
-              name: "wave height",
+              name: "Wave height",
               type: "integer"
             },
             {
-              name: "comment",
+              name: "Synopsis",
               type: "text"
             }
           ]
@@ -92,6 +93,7 @@ export default {
     },
     {
       name: "Air",
+      color: "blue",
       priority: "High",
       entries: [
         {
@@ -143,6 +145,7 @@ export default {
     },
     {
       name: "Surface",
+      color: "cyan",
       priority: "High",
       entries: [
         {
@@ -174,7 +177,7 @@ export default {
               type: "text"
             },
             {
-              name: "Comment",
+              name: "Suspected",
               type: "text"
             }
           ]
@@ -183,6 +186,7 @@ export default {
     },
     {
       name: "Underwater",
+      color: "purple",
       priority: "High",
       entries: [
         {
@@ -241,6 +245,7 @@ export default {
     },
     {
       name: "Engineering",
+      color: "red",
       priority: "High",
       entries: [
         {

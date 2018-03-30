@@ -50,7 +50,9 @@ class EntryList extends React.Component {
               style={{
                 ...style,
                 transform: "translateX(-100px)",
-                opacity: "0"
+                opacity: "0",
+                backgroundColor: "blue",
+                height: "500px"
               }}
               animation={[
                 {

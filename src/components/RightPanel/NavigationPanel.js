@@ -10,7 +10,8 @@ const SettingsCategory = ({ collapse }) => (
 );
 
 SettingsCategory.propTypes = {
-  collapse: PropTypes.bool
+  collapse: PropTypes.bool,
+  speed: PropTypes.any
 };
 
 SettingsCategory.defaultProps = {

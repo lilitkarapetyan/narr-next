@@ -38,8 +38,9 @@ export default class Generator {
     const entry = {
       fields: {},
       mType: null,
-      privacy: "public",
-      category: this.category.name
+      privacy: ["public", "private"][Math.floor(Math.random() * 2)],
+      category: this.category.name,
+      color: this.category.color
     };
     categoryEntry.fields.forEach(field => {
       entry.fields[field.name] = this.generateField(field.type);
