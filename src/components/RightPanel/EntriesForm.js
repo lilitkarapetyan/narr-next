@@ -24,8 +24,8 @@ const EntriesForm = ({ fields, saveValue, values, validator }) => (
 EntriesForm.propTypes = {
   fields: PropTypes.arrayOf(FieldType).isRequired,
   saveValue: PropTypes.func.isRequired,
-  values: PropTypes.objectOf.isRequired,
-  validator: PropTypes.objectOf.isRequired
+  values: PropTypes.object.isRequired,
+  validator: PropTypes.object.isRequired
 };
 
 const mapFields = (fields, entry, config) => {

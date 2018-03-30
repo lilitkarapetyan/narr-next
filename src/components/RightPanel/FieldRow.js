@@ -42,7 +42,7 @@ FieldRow.propTypes = {
   field: FieldType.isRequired,
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
-  validator: PropTypes.objectOf.isRequired
+  validator: PropTypes.object.isRequired
 };
 
 FieldRow.defaultProps = {

@@ -68,7 +68,7 @@ EntryEditor.propTypes = {
   toggle: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  values: PropTypes.objectOf.isRequired,
+  values: PropTypes.object,
   setValues: PropTypes.func.isRequired,
   inline: PropTypes.bool.isRequired
 };

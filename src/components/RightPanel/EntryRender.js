@@ -69,7 +69,7 @@ EntryRender.propTypes = {
   toggleModal: PropTypes.func.isRequired,
   modalVisible: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  values: PropTypes.objectOf.isRequired,
+  values: PropTypes.object,
   setValues: PropTypes.func.isRequired
 };
 

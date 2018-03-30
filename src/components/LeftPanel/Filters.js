@@ -30,10 +30,25 @@ class Filters extends React.Component {
       checkboxValues: {},
       searchKeyword: ""
     };
-    // Bind the methods to the correct "this" context. SO when we access this in the functions we actually access the class instance.
+    // Bind the methods to the correct "this" context. SO when we access this in the functions we actually acess the class instance.
     this.toggle = this.toggle.bind(this);
     //this.checkboxHandler=this.checkboxHandler(this)
     //arrow function didnt have to bind and if we bind them that will cause problem to function logic
+  }
+
+  componentDidMount() {
+    window.onload = function() {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+          document.getElementById(
+            "txtBuildDateTime"
+          ).innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "/static/assets/Last_build", true);
+      xhttp.send();
+    };
   }
 
   toggle(e) {

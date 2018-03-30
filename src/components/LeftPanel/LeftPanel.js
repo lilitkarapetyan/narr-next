@@ -1,10 +1,11 @@
 import { Card, CardHeader } from "reactstrap";
-import Filters from "./Filters";
 import Icon from "react-fontawesome";
 import PropTypes from "prop-types";
 import React from "react";
-import ScrollingView from "./ScrollingView";
 import styled from "styled-components";
+
+import Filters from "./Filters";
+import ScrollingView from "./ScrollingView";
 
 const ExpandStyle = styled.div`
   position: absolute;

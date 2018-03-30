@@ -83,9 +83,9 @@ EntryModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
-  values: PropTypes.objectOf.isRequired,
+  values: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
-  inline: PropTypes.bool.isRequired
+  inline: PropTypes.bool
 };
 
 export default EntryModal;

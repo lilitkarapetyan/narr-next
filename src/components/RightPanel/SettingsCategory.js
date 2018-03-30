@@ -43,7 +43,7 @@ const SettingsCategory = ({ collapse, toggleModalEdit, modalEdit }) => (
 SettingsCategory.propTypes = {
   collapse: PropTypes.bool,
   toggleModalEdit: PropTypes.func.isRequired,
-  modalEdit: PropTypes.bool.isRequired
+  modalEdit: PropTypes.bool
 };
 
 SettingsCategory.defaultProps = {
