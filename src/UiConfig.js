@@ -4,6 +4,11 @@ export default {
     {
       name: "General",
       priority: "High",
+      widgets: [
+        {
+          id: "compass"
+        }
+      ],
       entries: [
         {
           id: "co-comment",
@@ -184,6 +189,12 @@ export default {
     {
       name: "Underwater",
       priority: "High",
+      widgets: [
+        {
+          id: "masts",
+          masts: ["Search", "Radar", "ESM"]
+        }
+      ],
       entries: [
         {
           id: "new-contact-uww",
