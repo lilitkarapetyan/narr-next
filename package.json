@@ -65,6 +65,7 @@
   },
   "scripts": {
     "coverage": "test -- --coverage",
+    "precommit": "lint-staged",
     "format": "prettier --write src/**/*.{js,jsx,css}",
     "linter": "eslint --fix src/**/*.{js,jsx}",
     "lint": " npm run format && npm run linter",
