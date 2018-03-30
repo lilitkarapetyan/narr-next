@@ -1,9 +1,8 @@
-import { Badge, Button, Card, CardBody } from "reactstrap";
+import { Badge, Button } from "reactstrap";
 import { StyleSheet, css } from "aphrodite";
 import { colors } from "./Entry";
 import PropTypes from "prop-types";
 import React from "react";
-import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 const styles = StyleSheet.create({
@@ -74,23 +73,6 @@ const Export = ({ entries }) => {
   const startCord = 40.5;
   const lineSpase = 6.4;
   const lineCord = line => (line - 1) * lineSpase + startCord;
-
-  const onPdfExport = () => {
-    const pdf = new jsPDF(); // eslint-disable-line new-cap
-
-    pages.map((page, index) =>
-      html2canvas(page).then(canvas => {
-        const imgData = canvas.toDataURL("image/png");
-        pdf.addImage(imgData, "PNG", 0, 0);
-        if (index === pages.length - 1) {
-          pdf.save("Image.pdf");
-        } else {
-          pdf.addPage();
-        }
-      })
-    );
-  };
-
   const timeX = 10;
   const textX = 65;
 
@@ -177,30 +159,16 @@ const Export = ({ entries }) => {
   );
 
   return (
-    <Card>
-      <CardBody>
-        Export:{" "}
-        <Button
-          color="success"
-          size="sm"
-          className={css(styles.exportBtn)}
-          onClick={onPdfExport}
-          disabled={!entries.length}
-        >
-          Image.pdf
-        </Button>{" "}
-        <Button
-          color="primary"
-          size="sm"
-          className={css(styles.exportBtn)}
-          onClick={onPdfTextExport}
-          disabled={!entries.length}
-        >
-          Text.pdf
-        </Button>
-        <Pdf />
-      </CardBody>
-    </Card>
+    <Button
+      color="primary"
+      size="sm"
+      className={`${css(styles.exportBtn)}dropdown-toggle btn btn-secondary`}
+      onClick={onPdfTextExport}
+      disabled={!entries.length}
+    >
+      <Pdf />
+      Text.pdf
+    </Button>
   );
 };
 

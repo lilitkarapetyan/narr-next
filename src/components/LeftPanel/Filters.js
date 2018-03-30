@@ -120,8 +120,6 @@ class Filters extends React.Component {
               </DropdownItem>
             </DropdownMenu>
           </ButtonDropdown>
-        </ButtonGroup>
-        <ButtonGroup>
           <Export />
         </ButtonGroup>
       </React.Fragment>

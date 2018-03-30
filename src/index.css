@@ -31,3 +31,11 @@ html {
   background-color: transparent;
   outline: 0 none;
 }
+
+.margin-top-1 {
+  margin-top: 10px;
+}
+.font-small-gray {
+  color: #6c757c;
+  font-size: 14px;
+}
