@@ -10,11 +10,12 @@ import {
   PrivacyFilters,
   TimeFilters,
   filter,
-  unFilter,
-  search
+  search,
+  unFilter
 } from "../../actions";
 import { connect } from "react-redux";
 import PrivacyLink from "../../containers/PrivacyLink";
+import PropTypes from "prop-types";
 import React from "react";
 import TimeLink from "./../../containers/TimeLink";
 
@@ -32,8 +33,8 @@ class Filters extends React.Component {
     };
     // Bind the methods to the correct "this" context. SO when we access this in the functions we actually acess the class instance.
     this.toggle = this.toggle.bind(this);
-    //this.checkboxHandler=this.checkboxHandler(this)
-    //arrow function didnt have to bind and if we bind them that will cause problem to function logic
+    // this.checkboxHandler=this.checkboxHandler(this)
+    // arrow function didnt have to bind and if we bind them that will cause problem to function logic
   }
 
   componentDidMount() {
@@ -61,19 +62,21 @@ class Filters extends React.Component {
     ];
     this.setState({ isExpanded });
   }
-  checkboxHandler = e => {
+  checkboxHandler(e) {
     const { checkboxValues } = this.state;
     checkboxValues[e.target.id] = !this.state.checkboxValues[e.target.id];
     this.setState({ checkboxValues });
-    this.state.checkboxValues[e.target.id]
-      ? this.props.filter(e.target.id)
-      : this.props.unFilter(e.target.id);
-  };
-  searchBarHandler = e => {
+    if (this.state.checkboxValues[e.target.id]) {
+      this.props.filter(e.target.id);
+    } else {
+      this.props.unFilter(e.target.id);
+    }
+  }
+  searchBarHandler(e) {
     this.setState({ searchKeyword: e.target.value }, () => {
       this.props.search(this.state.searchKeyword);
     });
-  };
+  }
 
   render() {
     return (
@@ -132,41 +135,48 @@ class Filters extends React.Component {
             <DropdownToggle caret>Type</DropdownToggle>
             <DropdownMenu>
               {this.props.uniqueTypes &&
-                this.props.uniqueTypes.map(x => {
-                  return (
-                    <div
-                      className={
-                        this.state.checkboxValues[x]
-                          ? "btn-drop btn-primary"
-                          : "btn-drop btn-secondary"
-                      }
-                    >
-                      <input
-                        type="checkbox"
-                        id={x}
-                        checked={this.state.checkboxValues[x]}
-                        onClick={this.checkboxHandler}
-                        value={this.state.checkboxValues[x]}
-                      />
-                      <span>{x}</span>
-                    </div>
-                  );
-                })}
+                this.props.uniqueTypes.map(x => (
+                  <div
+                    className={
+                      this.state.checkboxValues[x]
+                        ? "btn-drop btn-primary"
+                        : "btn-drop btn-secondary"
+                    }
+                  >
+                    <input
+                      type="checkbox"
+                      id={x}
+                      checked={this.state.checkboxValues[x]}
+                      onClick={e => {
+                        this.checkboxHandler(e);
+                      }}
+                      value={this.state.checkboxValues[x]}
+                    />
+                    <span>{x}</span>
+                  </div>
+                ))}
             </DropdownMenu>
           </ButtonDropdown>
         </ButtonGroup>
         <Input
-          placeholder={"search"}
+          placeholder="search"
           value={this.state.searchKeyword}
-          onChange={this.searchBarHandler}
+          onChange={e => {
+            this.searchBarHandler(e);
+          }}
         />
       </React.Fragment>
     );
   }
 }
 
-// we can directly bind dispatch to a action by using the second parameters
-const mapStateToProps = state => {
-  return { uniqueTypes: state.uniqueTypes };
+Filters.propTypes = {
+  filter: PropTypes.func.isRequired,
+  unFilter: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
+  uniqueTypes: PropTypes.func.isRequired
 };
+
+// we can directly bind dispatch to a action by using the second parameters
+const mapStateToProps = state => ({ uniqueTypes: state.uniqueTypes });
 export default connect(mapStateToProps, { filter, unFilter, search })(Filters);

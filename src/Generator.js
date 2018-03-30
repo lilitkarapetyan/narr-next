@@ -21,7 +21,8 @@ export default class Generator {
       fields: {},
       mType: null,
       privacy: ["public", "private"][Math.floor(Math.random() * 2)],
-      category: this.category.name
+      category: this.category.name,
+      color: this.category.color
     };
     categoryEntry.fields.forEach(field => {
       entry.fields[field.name] = this.generateField(field.type);

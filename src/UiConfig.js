@@ -3,6 +3,7 @@ export default {
   categories: [
     {
       name: "General",
+      color: "green",
       priority: "High",
       entries: [
         {
@@ -92,6 +93,7 @@ export default {
     },
     {
       name: "Air",
+      color: "blue",
       priority: "High",
       entries: [
         {
@@ -143,6 +145,7 @@ export default {
     },
     {
       name: "Surface",
+      color: "cyan",
       priority: "High",
       entries: [
         {
@@ -183,6 +186,7 @@ export default {
     },
     {
       name: "Underwater",
+      color: "purple",
       priority: "High",
       entries: [
         {
@@ -241,6 +245,7 @@ export default {
     },
     {
       name: "Engineering",
+      color: "red",
       priority: "High",
       entries: [
         {
