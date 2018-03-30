@@ -6,6 +6,7 @@ import {
   DropdownToggle
 } from "reactstrap";
 import { PrivacyFilters, TimeFilters, TypeFilters } from "../../actions";
+import Export from "../../containers/Export";
 import PrivacyLink from "../../containers/PrivacyLink";
 import React from "react";
 import TimeLink from "./../../containers/TimeLink";
@@ -35,7 +36,7 @@ class Filters extends React.Component {
           ).innerHTML = this.responseText;
         }
       };
-      xhttp.open("GET", "/static/assets/Last_build", true);
+      xhttp.open("GET", "/narr-next/static/assets/Last_build", true);
       xhttp.send();
     };
   }
@@ -119,6 +120,7 @@ class Filters extends React.Component {
               </DropdownItem>
             </DropdownMenu>
           </ButtonDropdown>
+          <Export />
         </ButtonGroup>
       </React.Fragment>
     );
