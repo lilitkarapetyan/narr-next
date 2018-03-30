@@ -147,8 +147,6 @@ const Result = styled(Col)`
 class SearchModal extends React.Component {
   componentDidUpdate() {
     if (this.search) {
-      console.warn("FOCUS", this.search.focus());
-
       debounce(() => this.search.focus(), 500);
     }
   }

@@ -6,9 +6,8 @@ import {
 } from "../actions";
 import { connect } from "react-redux";
 import EntryList from "../components/EntryList";
+import Fuse from "fuse-js-latest";
 import _ from "lodash";
-
-let searchResult = [];
 
 export const getVisibleEntries = (
   entries,
@@ -68,25 +67,43 @@ export const getVisibleEntries = (
     entriesE = _.filter(entriesE, x => typeFilters.includes(x.mType));
   }
   if (searchKeyword && searchKeyword.length > 0) {
-    entriesE.forEach(ob => {
-      Object.keys(ob).forEach(x => {
-        if (typeof ob[x] === "string") {
-          if (ob[x].toLowerCase().includes(searchKeyword.toLowerCase())) {
-            searchResult.push(ob);
-          }
-        } else if (typeof ob[x] === "object") {
-          Object.values(ob[x]).forEach(i => {
-            alert(i);
-            if (i.toLowerCase().includes(searchKeyword.toLowerCase())) {
-              searchResult.push(ob);
-            }
-          });
-        }
-      });
-    });
-    entriesE = [...new Set(searchResult)];
-    searchResult = [];
-    /*
+    const options = {
+      shouldSort: true,
+      tokenize: true,
+      matchAllTokens: true,
+      threshold: 0.6,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: ["name", "mType", "category", "privacy", "fields.Comment"]
+    };
+
+    const fuse = new Fuse(entriesE || [], options);
+    const result = fuse.search(searchKeyword || "");
+    return result;
+  }
+
+  // if (searchKeyword && searchKeyword.length > 0) {
+  //   entriesE.forEach(ob => {
+  //     Object.keys(ob).forEach(x => {
+  //       if (typeof ob[x] === "string") {
+  //         if (ob[x].toLowerCase().includes(searchKeyword.toLowerCase())) {
+  //           searchResult.push(ob);
+  //         }
+  //       } else if (typeof ob[x] === "object") {
+  //         Object.values(ob[x]).forEach(i => {
+  //           alert(i);
+  //           if (i.toLowerCase().includes(searchKeyword.toLowerCase())) {
+  //             searchResult.push(ob);
+  //           }
+  //         });
+  //       }
+  //     });
+  //   });
+  //   entriesE = [...new Set(searchResult)];
+  //   searchResult = [];
+  /*
     * small but static solution:
     * entriesE=_.filter(entriesE,(e)=>{
 
@@ -94,7 +111,6 @@ export const getVisibleEntries = (
     });
     *
     * */
-  }
 
   return entriesE;
 };
