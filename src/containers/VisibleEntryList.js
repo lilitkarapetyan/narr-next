@@ -69,12 +69,12 @@ const getVisibleEntries = (
     entriesE.forEach(ob => {
       Object.keys(ob).forEach(x => {
         if (typeof ob[x] === "string") {
-          if (ob[x].includes(searchKeyword)) {
+          if (ob[x].toLowerCase().includes(searchKeyword.toLowerCase())) {
             searchResult.push(ob);
           }
         } else if (typeof ob[x] === "object") {
           Object.values(ob[x]).forEach(i => {
-            if (i.includes(searchKeyword)) {
+            if (i.toLowerCase().includes(searchKeyword.toLowerCase())) {
               searchResult.push(ob);
             }
           });
