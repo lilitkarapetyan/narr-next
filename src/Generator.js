@@ -62,22 +62,15 @@ export default class Generator {
       case "text":
         return "Lorem Ip";
       case "octas":
-        return [
-          "1/8",
-          "2/8",
-          "3/8",
-          "4/8",
-          "5/8",
-          "6/8",
-          "7/8",
-          "8/8"
-        ][Math.random() * 7];
+        return ["1/8", "2/8", "3/8", "4/8", "5/8", "6/8", "7/8", "8/8"][
+          Math.random() * 7
+        ];
       case "angle":
-        return Math.ceil(Math.random() * 360);
+        return Math.round(Math.ceil(Math.random() * 360 * 10)) / 10;
       case "speed":
-        return Math.random() * 100;
+        return Math.round(Math.random() * 100 * 10) / 10;
       case "distance":
-        return Math.random() * 100;
+        return Math.round(Math.random() * 100 * 10) / 10;
       case "wind-state":
         return Math.ceil(Math.random() * 12);
       case "integer":
@@ -85,7 +78,7 @@ export default class Generator {
       case "day-night":
         return ["Day", "Night"][Math.random() * 2];
       case "frequency":
-        return Math.random() * 500;
+        return Math.round(Math.random() * 500 * 10) / 10;
       default:
         return "No value generator";
     }
