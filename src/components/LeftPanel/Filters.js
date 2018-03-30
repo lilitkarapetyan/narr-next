@@ -129,6 +129,7 @@ class Filters extends React.Component {
                       <input
                         type="checkbox"
                         id={x}
+                        checked={this.state.checkboxValues[x]}
                         onClick={this.checkboxHandler}
                         value={this.state.checkboxValues[x]}
                       />
