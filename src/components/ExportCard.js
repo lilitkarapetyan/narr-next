@@ -1,5 +1,5 @@
 import { Badge, Button, Card, CardBody } from "reactstrap";
-import { StyleSheet, css } from "aphrodite/no-important";
+import { StyleSheet, css } from "aphrodite";
 import { colors } from "./Entry";
 import PropTypes from "prop-types";
 import React from "react";

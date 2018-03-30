@@ -5,7 +5,9 @@ import EntryModal from "./EntryModal";
 import React from "react";
 
 describe("EntryModal", () => {
-  let props;
+  let props = {
+    entry: { id: "mockid" }
+  };
   let mounted;
   const render = () => {
     if (!mounted) {
