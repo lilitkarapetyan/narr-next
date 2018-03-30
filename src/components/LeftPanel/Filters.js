@@ -154,4 +154,4 @@ class Filters extends React.Component {
 const mapStateToProps = state => {
   return { uniqueTypes: state.uniqueTypes };
 };
-export default connect(mapStateToProps,{ filter, unFilter, search })(Filters);
+export default connect(mapStateToProps, { filter, unFilter, search })(Filters);
