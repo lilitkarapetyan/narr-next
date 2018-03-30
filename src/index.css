@@ -31,3 +31,32 @@ html {
   background-color: transparent;
   outline: 0 none;
 }
+/* Inline Modal Comment editing */
+.inner-filter input.form-control {
+  font-size: 0.8rem;
+  padding: .32rem .75rem;
+}
+.inner-filter .modal-body .form-group {
+  margin-bottom: 5px;
+}
+.inner-filter .modal-footer .btn {
+  line-height: 1;
+}
+.filter-comment-edit {
+  display: inline-table;
+}
+.filter-comment-edit .comment-edit-col {
+  display: table-cell;
+  vertical-align: baseline;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+/**/
+.card-header span {
+  vertical-align: middle;
+}
+
+.number-field {
+  width:15%
+}
