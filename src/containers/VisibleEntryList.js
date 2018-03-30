@@ -8,7 +8,7 @@ import {
 import { connect } from "react-redux";
 import EntryList from "../components/EntryList";
 
-const getVisibleEntries = (
+export const getVisibleEntries = (
   entries,
   visibilityFilter,
   privacyFilter,
