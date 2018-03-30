@@ -6,6 +6,14 @@ import React from "react";
 
 const FieldRow = ({ field, value, onChange, validator, autoFocus }) => {
   let message = "";
+  const numberFields = [
+    "angle",
+    "speed",
+    "distance",
+    "integer",
+    "frequency",
+    "wind-state"
+  ];
   try {
     message = validator.message(field.name, value, `required|${field.type}`);
   } catch (ex) {
@@ -14,9 +22,15 @@ const FieldRow = ({ field, value, onChange, validator, autoFocus }) => {
   const isValid = validator.fieldValid(field.name);
 
   return (
-    <FormGroup row>
-      <Label sm={4}>{field.name}</Label>
-      <Col sm={8}>
+    <FormGroup
+      className={
+        numberFields.includes(field.type)
+          ? "filter-comment-edit number-field"
+          : "filter-comment-edit"
+      }
+    >
+      <Label className="comment-edit-col">{field.name}</Label>
+      <Col className="comment-edit-col">
         <Input
           innerRef={c => {
             if (c && autoFocus) c.focus();

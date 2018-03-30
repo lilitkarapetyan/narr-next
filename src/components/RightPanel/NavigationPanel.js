@@ -1,10 +1,10 @@
-import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
+import { Card, CardBody, CardHeader, Col } from "reactstrap";
 import { Compass } from "../Widgets";
 import Icon from "react-fontawesome";
 import PropTypes from "prop-types";
 import React from "react";
 
-const SettingsCategory = ({ collapse }) => (
+const SettingsCategory = ({ collapse, speed }) => (
   <Col lg={collapse ? 12 : 6} style={{ padding: "5px" }}>
     <Card
       style={{ height: "100%", backgroundColor: "#333", borderColor: "#333" }}
@@ -17,22 +17,27 @@ const SettingsCategory = ({ collapse }) => (
           fontWeight: "bolder"
         }}
       >
-        <Icon name="cog" size="2x" /> Widgets Demo
+        <Icon name="cog" size="2x" /> <span>Widgets Demo</span>
       </CardHeader>
       <CardBody>
-        <Row
+        <div
           className="justify-content-md-center "
           style={{ padding: "10px", width: "100%" }}
         >
-          <Compass speed={50} direction={45} />
-        </Row>
+          <Compass speed={speed} direction={45} />
+        </div>
+        <span>
+          <b>speed:</b>
+          {speed}
+        </span>
       </CardBody>
     </Card>
   </Col>
 );
 
 SettingsCategory.propTypes = {
-  collapse: PropTypes.bool
+  collapse: PropTypes.bool,
+  speed: PropTypes.any
 };
 
 SettingsCategory.defaultProps = {
