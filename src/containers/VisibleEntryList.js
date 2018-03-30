@@ -50,10 +50,12 @@ const getVisibleEntries = (
       case TimeFilters.SHOW_ALL:
         break;
       case TimeFilters.SHOW_LAST_MIN:
-        entriesE = entriesE.filter(t => new Date() - t.created < 60 * 1000);
+        entriesE = entriesE.filter(t => Date.now(true) - t.created < 60 * 1000);
         break;
       case TimeFilters.SHOW_LAST_5_MIN:
-        entriesE = entriesE.filter(t => new Date() - t.created < 5 * 60 * 1000);
+        entriesE = entriesE.filter(
+          t => Date.now(true) - t.created < 5 * 60 * 1000
+        );
         break;
       default:
         break;

@@ -1,6 +1,5 @@
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import { Compass } from "../Widgets";
-import Icon from "react-fontawesome";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -17,7 +16,7 @@ const SettingsCategory = ({ collapse }) => (
           fontWeight: "bolder"
         }}
       >
-        <Icon name="cog" size="2x" /> Widgets Demo
+        Widgets
       </CardHeader>
       <CardBody>
         <Row

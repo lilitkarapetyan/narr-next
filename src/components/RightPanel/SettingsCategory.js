@@ -18,7 +18,7 @@ const SettingsCategory = ({ collapse, toggleModalEdit, modalEdit }) => (
           fontWeight: "bolder"
         }}
       >
-        <Icon name="cog" size="2x" /> Settings Demo
+        <Icon name="cog" /> Settings Demo
       </CardHeader>
       <CardBody>
         <Row

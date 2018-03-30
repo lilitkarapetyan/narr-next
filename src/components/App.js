@@ -34,7 +34,8 @@ const enhancer = compose(
   connect(
     state => ({
       config: state.ui.config,
-      expanded: state.ui.expanded
+      expanded: state.ui.expanded,
+      running: state.simulation.running
     }),
     {
       addEntry,
@@ -49,6 +50,9 @@ const enhancer = compose(
             this.props.addEntry(entry, EntryStatus.Empty)
           )
       );
+    },
+    componentWillUpdate(nextProps) {
+      this.generators.forEach(gen => gen.Active(nextProps.running));
     },
     componentWillUnmount() {
       this.generators.forEach(gen => gen.Clear());

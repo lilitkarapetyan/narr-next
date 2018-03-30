@@ -3,6 +3,7 @@ import { CategoryType } from "../Schemas";
 import { Row } from "reactstrap";
 import { branch, renderComponent } from "recompose";
 import CategoryRender from "./CategoryRender";
+import GeneratorConfig from "./GeneratorConfig";
 import NavigationPanel from "./NavigationPanel";
 import PropTypes from "prop-types";
 import React from "react";
@@ -14,6 +15,9 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
       className="justify-content-md-center "
       style={{ padding: "10px", width: "100%" }}
     >
+      <NavigationPanel collapse={collapse} />
+      <GeneratorConfig collapse={collapse} />
+      <SettingsCategory collapse={collapse} />
       {categories.map(category => (
         <CategoryRender
           key={category.name}
@@ -22,13 +26,14 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
           category={category}
         />
       ))}
-      <SettingsCategory />
-      <NavigationPanel speed={100} angle={80} />
     </Row>
     <div className="category-count text-center">
       Categories Count {categories.length}
-      <p id="txtBuildDateTime" />
     </div>
+    <div
+      id="txtBuildDateTime"
+      style={{ position: "absolute", bottom: "10px" }}
+    />
   </div>
 );
 
