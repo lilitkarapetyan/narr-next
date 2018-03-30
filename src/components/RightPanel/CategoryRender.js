@@ -8,10 +8,11 @@ const CategoryRender = ({ category, collapse, addEntry }) => (
   <Col lg={collapse ? 12 : 6} style={{ padding: "5px" }}>
     <Card style={{ height: "100%" }}>
       <CardHeader
-        className="bg-primary text-center text-white"
+        className="text-center text-white"
         style={{
           textTransform: "uppercase",
-          fontWeight: "bolder"
+          fontWeight: "bolder",
+          backgroundColor: `${category.color}`
         }}
       >
         {category.name}
@@ -23,7 +24,10 @@ const CategoryRender = ({ category, collapse, addEntry }) => (
         >
           {category.entries.map(entry => (
             <Col key={entry.id} lg={collapse ? 12 : 6}>
-              <EntryRender entry={entry} onSubmit={addEntry} />
+              <EntryRender
+                entry={entry}
+                onSubmit={en => addEntry({ ...en, category: category.name })}
+              />
             </Col>
           ))}
         </Row>

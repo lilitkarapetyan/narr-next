@@ -2,13 +2,12 @@
  * action types
  */
 
-export const ADD_ENTRY = "ADD_ENTRY";
-export const TOGGLE_SELECTED = "TOGGLE_SELECTED";
 export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 export const SET_PRIVACY_FILTER = "SET_PRIVACY_FILTER";
 export const SET_TIME_FILTER = "SET_TIME_FILTER";
 export const SET_TYPE_FILTER = "SET_TYPE_FILTER";
-
+export const REMOVE_TYPE_FILTER = "REMOVE_TYPE_FILTER";
+export const SEARCH_VALUE = "SEARCH_VALUE";
 /*
  * other constants
  */
@@ -41,15 +40,8 @@ export const TypeFilters = {
  * action creators
  */
 
-let nextEntryId = 0;
-
-export function addEntry(text, mType, privacy) {
-  return { type: ADD_ENTRY, id: nextEntryId++, mType, privacy, text };
-}
-
-export function toggleEntry(id) {
-  return { type: TOGGLE_SELECTED, id };
-}
+export * from "./ui";
+export * from "./entries";
 
 export function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter };

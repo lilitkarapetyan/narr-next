@@ -1,15 +1,74 @@
-import Animation from "rc-queue-anim";
+import {
+  AutoSizer,
+  CellMeasurer,
+  CellMeasurerCache,
+  List
+} from "react-virtualized";
 import Entry from "./Entry";
 import PropTypes from "prop-types";
 import React from "react";
 
-const EntryList = ({ entries, onEntryClick }) => (
-  <Animation type={["left", "right"]}>
-    {entries.map((entry, index) => (
-      <Entry key={entry.id} entry={entry} onClick={() => onEntryClick(index)} />
-    ))}
-  </Animation>
-);
+class EntryList extends React.Component {
+  constructor(s) {
+    super(s);
+    this.cache = new CellMeasurerCache({
+      fixedWidth: true,
+      minHeight: 50
+    });
+  }
+  render() {
+    const { entries, onEntryClick } = this.props;
+    const rowRenderer = ({
+      index, // Index of row
+      // isScrolling, // The List is currently being scrolled
+      // isVisible, // This row is visible within the List (eg it is not an overscanned row)
+      key, // Unique key within array of rendered rows
+      parent, // Reference to the parent List (instance)
+      style // Style object to be applied to row (to position it);
+      // This must be passed through to the rendered row element.})
+    }) => {
+      const entry = entries[index];
+      return (
+        <CellMeasurer
+          cache={this.cache}
+          columnIndex={0}
+          key={key}
+          rowIndex={index}
+          parent={parent}
+        >
+          {({ measure }) => (
+            <div style={style}>
+              <Entry
+                entry={entry}
+                onClick={() => onEntryClick(index)}
+                measure={() => {
+                  measure();
+                  this.cache.clear(index);
+                }}
+              />
+            </div>
+          )}
+        </CellMeasurer>
+      );
+    };
+
+    return (
+      <AutoSizer>
+        {({ width, height }) => (
+          <List
+            deferredMeasurementCache={this.cache}
+            rowHeight={this.cache.rowHeight}
+            width={width}
+            height={height}
+            rowCount={entries.length}
+            rowRenderer={rowRenderer}
+            overScan={10}
+          />
+        )}
+      </AutoSizer>
+    );
+  }
+}
 
 EntryList.propTypes = {
   entries: PropTypes.arrayOf(
