@@ -4,9 +4,11 @@ import {
   CellMeasurerCache,
   List
 } from "react-virtualized";
+import { debounce } from "lodash";
 import Entry from "./Entry";
 import PropTypes from "prop-types";
 import React from "react";
+import TweenOne from "rc-tween-one";
 
 class EntryList extends React.Component {
   constructor(s) {
@@ -15,6 +17,13 @@ class EntryList extends React.Component {
       fixedWidth: true,
       minHeight: 50
     });
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.entries.length !== this.props.entries.length) {
+      debounce(() => {
+        this.list.scrollToRow(nextProps.entries.length - 1);
+      }, 100)();
+    }
   }
   render() {
     const { entries, onEntryClick } = this.props;
@@ -37,16 +46,36 @@ class EntryList extends React.Component {
           parent={parent}
         >
           {({ measure }) => (
-            <div style={style}>
-              <Entry
-                entry={entry}
-                onClick={() => onEntryClick(index)}
-                measure={() => {
-                  measure();
-                  this.cache.clear(index);
-                }}
-              />
-            </div>
+            <TweenOne
+              style={{
+                ...style,
+                transform: "translateX(-100px)",
+                opacity: "0",
+                backgroundColor: "blue",
+                height: "500px"
+              }}
+              animation={[
+                {
+                  x: 10,
+                  opacity: "1",
+                  backgroundColor: "rgba(128,223,225,0.3)"
+                },
+                {
+                  backgroundColor: "transparent"
+                }
+              ]}
+            >
+              <div>
+                <Entry
+                  entry={entry}
+                  onClick={() => onEntryClick(index)}
+                  measure={() => {
+                    measure();
+                    this.cache.clear(index);
+                  }}
+                />
+              </div>
+            </TweenOne>
           )}
         </CellMeasurer>
       );
@@ -56,6 +85,9 @@ class EntryList extends React.Component {
       <AutoSizer>
         {({ width, height }) => (
           <List
+            ref={list => {
+              this.list = list;
+            }}
             deferredMeasurementCache={this.cache}
             rowHeight={this.cache.rowHeight}
             width={width}

@@ -10,7 +10,7 @@ import _ from "lodash";
 
 let searchResult = [];
 
-const getVisibleEntries = (
+export const getVisibleEntries = (
   entries,
   visibilityFilter,
   privacyFilter,

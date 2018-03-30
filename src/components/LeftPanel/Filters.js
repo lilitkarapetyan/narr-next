@@ -14,6 +14,7 @@ import {
   unFilter
 } from "../../actions";
 import { connect } from "react-redux";
+import Export from "../../containers/Export";
 import PrivacyLink from "../../containers/PrivacyLink";
 import PropTypes from "prop-types";
 import React from "react";
@@ -47,7 +48,7 @@ class Filters extends React.Component {
           ).innerHTML = this.responseText;
         }
       };
-      xhttp.open("GET", "/static/assets/Last_build", true);
+      xhttp.open("GET", "/narr-next/static/assets/Last_build", true);
       xhttp.send();
     };
   }
@@ -157,6 +158,7 @@ class Filters extends React.Component {
                 ))}
             </DropdownMenu>
           </ButtonDropdown>
+          <Export />
         </ButtonGroup>
         <Input
           placeholder="search"
