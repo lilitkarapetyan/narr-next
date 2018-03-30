@@ -135,7 +135,7 @@ class Filters extends React.Component {
             <DropdownToggle caret>Type</DropdownToggle>
             <DropdownMenu>
               {this.props.uniqueTypes &&
-                this.props.uniqueTypes.map(x => (
+                this.props.uniqueTypes.sort().map(x => (
                   <div
                     className={
                       this.state.checkboxValues[x]
