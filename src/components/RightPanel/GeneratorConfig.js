@@ -1,9 +1,6 @@
 import {
   Button,
   ButtonGroup,
-  Card,
-  CardBody,
-  CardHeader,
   Col,
   DropdownItem,
   DropdownMenu,
@@ -24,6 +21,7 @@ import {
 import { compose, lifecycle, withState } from "recompose";
 import { connect } from "react-redux";
 import Icon from "react-fontawesome";
+import Panel from "./Panel";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -37,148 +35,64 @@ const GeneratorConfig = ({
   rate,
   clearEntries
 }) => (
-  <Col lg={collapse ? 12 : 6} style={{ padding: "5px" }}>
-    <Card
-      style={{ height: "100%", backgroundColor: "#333", borderColor: "#333" }}
-      inverse
-    >
-      <CardHeader
-        className=" text-center text-white"
-        style={{
-          textTransform: "uppercase",
-          fontWeight: "bolder"
-        }}
-      >
+  <Panel
+    open={collapse}
+    title={
+      <React.Fragment>
         <Icon name="cog" /> Simulation
-      </CardHeader>
-      <CardBody>
-        <Form style={{ padding: "10px", width: "100%" }}>
+      </React.Fragment>
+    }
+    inverse
+    lg={collapse ? 12 : 6}
+    style={{ backgroundColor: "#333", borderColor: "#333" }}
+  >
+    <Form style={{ padding: "10px", width: "100%" }}>
+      <FormGroup row>
+        <Label lg={collapse ? 12 : 2}>Time</Label>
+        <Col lg={collapse ? 12 : 4}>
+          <Input readonly type="text" name="select" value={currentTime} />
+        </Col>
+      </FormGroup>
+      <Row>
+        <Col lg={collapse ? 6 : 4}>
           <FormGroup row>
-            <Label lg={collapse ? 12 : 2}>Time</Label>
-            <Col lg={collapse ? 12 : 4}>
-              <Input readonly type="text" name="select" value={currentTime} />
+            <Label lg={collapse ? 12 : 6}>Running</Label>
+            <Col lg={collapse ? 12 : 6}>
+              <Button onClick={toggleSim}>
+                <Icon name={running ? "pause" : "play"} size="3x" />
+              </Button>
             </Col>
           </FormGroup>
-          <Row>
-            <Col lg={collapse ? 6 : 4}>
-              <FormGroup row>
-                <Label lg={collapse ? 12 : 6}>Running</Label>
-                <Col lg={collapse ? 12 : 6}>
-                  <Button onClick={toggleSim}>
-                    <Icon name={running ? "pause" : "play"} size="3x" />
-                  </Button>
-                </Col>
-              </FormGroup>
-            </Col>
-            <Col lg={collapse ? 6 : 6}>
-              <FormGroup row>
-                <Label lg={collapse ? 12 : 4}>Rate</Label>
-                {!collapse && (
-                  <Col lg={collapse ? 12 : 8}>
-                    <ButtonGroup>
-                      <Button
-                        outline
-                        color="primary"
-                        onClick={() => setRate(1)}
-                      >
-                        1x
-                      </Button>
-                      <Button
-                        outline
-                        color="primary"
-                        onClick={() => setRate(2)}
-                      >
-                        2x
-                      </Button>
-                      <Button
-                        outline
-                        color="primary"
-                        onClick={() => setRate(5)}
-                      >
-                        5x
-                      </Button>
-                      <Button
-                        outline
-                        color="primary"
-                        onClick={() => setRate(10)}
-                      >
-                        10x
-                      </Button>
-                      <Button
-                        outline
-                        color="primary"
-                        onClick={() => setRate(20)}
-                      >
-                        20x
-                      </Button>
-                      <Button
-                        outline
-                        color="primary"
-                        onClick={() => setRate(50)}
-                      >
-                        50x
-                      </Button>
-                    </ButtonGroup>
-                  </Col>
-                )}
-                {collapse && (
-                  <Col lg={8}>
-                    <UncontrolledDropdown>
-                      <DropdownToggle
-                        caret
-                        outline
-                        color="primary"
-                        style={{ width: "63px", height: "62px" }}
-                      >
-                        {rate} x
-                      </DropdownToggle>
-                      <DropdownMenu>
-                        <DropdownItem onClick={() => setRate(1)}>
-                          1x
-                        </DropdownItem>
-                        <DropdownItem onClick={() => setRate(2)}>
-                          2x
-                        </DropdownItem>
-                        <DropdownItem onClick={() => setRate(5)}>
-                          5x
-                        </DropdownItem>
-                        <DropdownItem onClick={() => setRate(10)}>
-                          10x
-                        </DropdownItem>
-                        <DropdownItem onClick={() => setRate(20)}>
-                          20x
-                        </DropdownItem>
-                        <DropdownItem onClick={() => setRate(50)}>
-                          50x
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </UncontrolledDropdown>
-                  </Col>
-                )}
-              </FormGroup>
-            </Col>
-          </Row>
+        </Col>
+        <Col lg={collapse ? 6 : 6}>
           <FormGroup row>
+            <Label lg={collapse ? 12 : 4}>Rate</Label>
             {!collapse && (
-              <React.Fragment>
-                <Label lg={collapse ? 12 : 2}>Bulk</Label>
-                <Col lg={collapse ? 6 : 6}>
-                  <ButtonGroup>
-                    <Button outline color="primary" onClick={toggleModalEdit}>
-                      50
-                    </Button>
-                    <Button outline color="primary" onClick={toggleModalEdit}>
-                      500
-                    </Button>
-                    <Button outline color="primary" onClick={toggleModalEdit}>
-                      5000
-                    </Button>
-                  </ButtonGroup>
-                </Col>
-              </React.Fragment>
+              <Col lg={collapse ? 12 : 8}>
+                <ButtonGroup>
+                  <Button outline color="primary" onClick={() => setRate(1)}>
+                    1x
+                  </Button>
+                  <Button outline color="primary" onClick={() => setRate(2)}>
+                    2x
+                  </Button>
+                  <Button outline color="primary" onClick={() => setRate(5)}>
+                    5x
+                  </Button>
+                  <Button outline color="primary" onClick={() => setRate(10)}>
+                    10x
+                  </Button>
+                  <Button outline color="primary" onClick={() => setRate(20)}>
+                    20x
+                  </Button>
+                  <Button outline color="primary" onClick={() => setRate(50)}>
+                    50x
+                  </Button>
+                </ButtonGroup>
+              </Col>
             )}
             {collapse && (
-              <Col lg={6}>
+              <Col lg={8}>
                 <UncontrolledDropdown>
                   <DropdownToggle
                     caret
@@ -186,35 +100,77 @@ const GeneratorConfig = ({
                     color="primary"
                     style={{ width: "63px", height: "62px" }}
                   >
-                    Bulk
+                    {rate} x
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem>50</DropdownItem>
-                    <DropdownItem>500</DropdownItem>
-                    <DropdownItem>5000</DropdownItem>
+                    <DropdownItem onClick={() => setRate(1)}>1x</DropdownItem>
+                    <DropdownItem onClick={() => setRate(2)}>2x</DropdownItem>
+                    <DropdownItem onClick={() => setRate(5)}>5x</DropdownItem>
+                    <DropdownItem onClick={() => setRate(10)}>10x</DropdownItem>
+                    <DropdownItem onClick={() => setRate(20)}>20x</DropdownItem>
+                    <DropdownItem onClick={() => setRate(50)}>50x</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Col>
             )}
-
-            <Col lg={collapse ? 6 : 4}>
-              <Button
-                style={{
-                  width: collapse ? "63px" : "",
-                  height: collapse ? "62px" : ""
-                }}
-                outline
-                color="warning"
-                onClick={clearEntries}
-              >
-                Clear
-              </Button>
-            </Col>
           </FormGroup>
-        </Form>
-      </CardBody>
-    </Card>
-  </Col>
+        </Col>
+      </Row>
+      <FormGroup row>
+        {!collapse && (
+          <React.Fragment>
+            <Label lg={collapse ? 12 : 2}>Bulk</Label>
+            <Col lg={collapse ? 6 : 6}>
+              <ButtonGroup>
+                <Button outline color="primary" onClick={toggleModalEdit}>
+                  50
+                </Button>
+                <Button outline color="primary" onClick={toggleModalEdit}>
+                  500
+                </Button>
+                <Button outline color="primary" onClick={toggleModalEdit}>
+                  5000
+                </Button>
+              </ButtonGroup>
+            </Col>
+          </React.Fragment>
+        )}
+        {collapse && (
+          <Col lg={6}>
+            <UncontrolledDropdown>
+              <DropdownToggle
+                caret
+                outline
+                color="primary"
+                style={{ width: "63px", height: "62px" }}
+              >
+                Bulk
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>50</DropdownItem>
+                <DropdownItem>500</DropdownItem>
+                <DropdownItem>5000</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Col>
+        )}
+
+        <Col lg={collapse ? 6 : 4}>
+          <Button
+            style={{
+              width: collapse ? "63px" : "",
+              height: collapse ? "62px" : ""
+            }}
+            outline
+            color="warning"
+            onClick={clearEntries}
+          >
+            Clear
+          </Button>
+        </Col>
+      </FormGroup>
+    </Form>
+  </Panel>
 );
 
 GeneratorConfig.propTypes = {

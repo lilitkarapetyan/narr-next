@@ -10,10 +10,13 @@ import React from "react";
 import SettingsCategory from "./SettingsCategory";
 
 const RightPanel = ({ categories, collapse, addEntry }) => (
-  <div className="category-container">
+  <React.Fragment>
     <Row
       className="justify-content-md-center "
-      style={{ padding: "10px", width: "100%" }}
+      style={{
+        padding: "10px",
+        width: "100%"
+      }}
     >
       <NavigationPanel collapse={collapse} />
       <GeneratorConfig collapse={collapse} />
@@ -34,7 +37,7 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
       id="txtBuildDateTime"
       style={{ position: "absolute", bottom: "10px" }}
     />
-  </div>
+  </React.Fragment>
 );
 
 RightPanel.propTypes = {
