@@ -167,7 +167,7 @@ const Export = ({ entries }) => {
       disabled={!entries.length}
     >
       <Pdf />
-      Text.pdf
+      PDF
     </Button>
   );
 };
