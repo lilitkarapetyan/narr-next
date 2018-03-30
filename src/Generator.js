@@ -40,8 +40,38 @@ export default class Generator {
   /* eslint-disable-next-line */
   generateField(type) {
     switch (type) {
+      case "text":
+        return "Lorem Ip";
+      case "octas":
+        return [
+          "1/2",
+          "1/3",
+          "1/4",
+          "1/5",
+          "1/6",
+          "1/7",
+          "1/8",
+          "1/9",
+          "1/10",
+          "1/11",
+          "1/12"
+        ][Math.random() * 11];
+      case "angle":
+        return Math.random() * 360;
+      case "speed":
+        return Math.random() * 100;
+      case "distance":
+        return Math.random() * 100;
+      case "wind-state":
+        return Math.random() * 12;
+      case "integer":
+        return Math.random() * 1000;
+      case "day-nigh":
+        return ["Day", "Night"][Math.random() * 2];
+      case "frequency":
+        return Math.random() * 500;
       default:
-        return "dummy";
+        return "No value generator";
     }
   }
 }
