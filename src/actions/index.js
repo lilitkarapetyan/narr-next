@@ -35,6 +35,10 @@ export const TypeFilters = {
   SHOW_WEATHER: "SHOW_WEATHER"
 };
 
+export const ExportFilters = {
+  EXPORT_ENTRY_LIST_AS_PDF: "EXPORT_ENTRY_LIST_AS_PDF"
+};
+
 /*
  * action creators
  */
