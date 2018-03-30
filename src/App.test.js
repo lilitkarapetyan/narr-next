@@ -1,8 +1,6 @@
 import App from "./components/App";
 import React from "react";
-import ReactDOM from "react-dom";
-
-import { Provider } from "react-redux";
+import enzyme from 'enzyme';
 import { createStore } from "redux";
 import entryApp from "./reducers/reducers";
 
@@ -11,12 +9,6 @@ const store = createStore(entryApp);
 
 beforeAll(() => {});
 it("renders without crashing", () => {
-  const div = document.createElement("div");
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    div
-  );
-  ReactDOM.unmountComponentAtNode(div);
+  const component=enzyme.shallow(<App store={store} />);
+  expect(component.length).toBe(1);
 });
