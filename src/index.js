@@ -28,3 +28,4 @@ render(
 );
 
 registerServiceWorker();
+console.log(Simulation);
