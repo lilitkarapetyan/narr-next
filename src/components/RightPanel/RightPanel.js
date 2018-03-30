@@ -7,10 +7,12 @@ import GeneratorConfig from "./GeneratorConfig";
 import NavigationPanel from "./NavigationPanel";
 import PropTypes from "prop-types";
 import React from "react";
+import SearchModal from "./SearchModal";
 import SettingsCategory from "./SettingsCategory";
 
 const RightPanel = ({ categories, collapse, addEntry }) => (
   <React.Fragment>
+    <SearchModal addEntry={addEntry} />
     <Row
       className="justify-content-md-center "
       style={{
