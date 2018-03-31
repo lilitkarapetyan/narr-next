@@ -23,13 +23,13 @@ const Entry = ({
   updateEntry,
   measure
 }) => {
-  const { id, created, mType, privacy, fields } = entry;
+  const { id, created, mType, privacy, fields, color } = entry;
 
   return (
     <div
       className="inner-filter"
       style={{
-        borderWidth: "2px",
+        border: `2px solid ${color}`,
         backgroundColor: selected ? "#FFFFFF" : "transparent",
         padding: "0px",
         margin: "5px"

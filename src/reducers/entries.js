@@ -1,4 +1,9 @@
-import { ADD_ENTRY, TOGGLE_SELECTED, UpdateEntry } from "../actions";
+import {
+  ADD_ENTRY,
+  ClearEntries,
+  TOGGLE_SELECTED,
+  UpdateEntry
+} from "../actions";
 import { handleActions } from "redux-actions";
 import EntryStatus from "../components/Schemas/EntryStatus";
 import moment from "moment";
@@ -28,13 +33,14 @@ const reducer = handleActions(
       // return the updated list
       return items;
     },
+    [ClearEntries]: () => [],
     [ADD_ENTRY]: (state, { payload }) => [
       ...state,
       {
         ...payload,
         id: nextEntryId++,
         status: payload.status || EntryStatus.Empty,
-        created: moment()
+        created: moment(Date.now(true))
           .utc()
           .format()
       }

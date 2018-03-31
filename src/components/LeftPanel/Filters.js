@@ -3,14 +3,22 @@ import {
   ButtonGroup,
   DropdownItem,
   DropdownMenu,
-  DropdownToggle
+  DropdownToggle,
+  Input
 } from "reactstrap";
-import { PrivacyFilters, TimeFilters, TypeFilters } from "../../actions";
+import {
+  PrivacyFilters,
+  TimeFilters,
+  filter,
+  search,
+  unFilter
+} from "../../actions";
+import { connect } from "react-redux";
 import Export from "../../containers/Export";
 import PrivacyLink from "../../containers/PrivacyLink";
+import PropTypes from "prop-types";
 import React from "react";
 import TimeLink from "./../../containers/TimeLink";
-import TypeFilterLink from "../../containers/TypeLink";
 
 class Filters extends React.Component {
   constructor(props) {
@@ -20,10 +28,14 @@ class Filters extends React.Component {
         Time: false,
         Privacy: false,
         Type: false
-      }
+      },
+      checkboxValues: {},
+      searchKeyword: ""
     };
     // Bind the methods to the correct "this" context. SO when we access this in the functions we actually acess the class instance.
     this.toggle = this.toggle.bind(this);
+    // this.checkboxHandler=this.checkboxHandler(this)
+    // arrow function didnt have to bind and if we bind them that will cause problem to function logic
   }
 
   componentDidMount() {
@@ -50,6 +62,21 @@ class Filters extends React.Component {
       e.target.parentElement.id
     ];
     this.setState({ isExpanded });
+  }
+  checkboxHandler(e) {
+    const { checkboxValues } = this.state;
+    checkboxValues[e.target.id] = !this.state.checkboxValues[e.target.id];
+    this.setState({ checkboxValues });
+    if (this.state.checkboxValues[e.target.id]) {
+      this.props.filter(e.target.id);
+    } else {
+      this.props.unFilter(e.target.id);
+    }
+  }
+  searchBarHandler(e) {
+    this.setState({ searchKeyword: e.target.value }, () => {
+      this.props.search(this.state.searchKeyword);
+    });
   }
 
   render() {
@@ -108,25 +135,50 @@ class Filters extends React.Component {
           >
             <DropdownToggle caret>Type</DropdownToggle>
             <DropdownMenu>
-              <DropdownItem>
-                <TypeFilterLink filter={TypeFilters.SHOW_WEATHER}>
-                  Only weather entries
-                </TypeFilterLink>
-              </DropdownItem>
-              <DropdownItem>
-                <TypeFilterLink filter={TypeFilters.SHOW_ALL}>
-                  Show All
-                </TypeFilterLink>
-              </DropdownItem>
+              {this.props.uniqueTypes &&
+                this.props.uniqueTypes.sort().map(x => (
+                  <div
+                    className={
+                      this.state.checkboxValues[x]
+                        ? "btn-drop btn-primary"
+                        : "btn-drop btn-secondary"
+                    }
+                  >
+                    <input
+                      type="checkbox"
+                      id={x}
+                      checked={this.state.checkboxValues[x]}
+                      onClick={e => {
+                        this.checkboxHandler(e);
+                      }}
+                      value={this.state.checkboxValues[x]}
+                    />
+                    <span>{x}</span>
+                  </div>
+                ))}
             </DropdownMenu>
           </ButtonDropdown>
           <Export />
         </ButtonGroup>
+        <Input
+          placeholder="search"
+          value={this.state.searchKeyword}
+          onChange={e => {
+            this.searchBarHandler(e);
+          }}
+        />
       </React.Fragment>
     );
   }
 }
 
-// we can directly bind dispatch to a action by using the second parameters
+Filters.propTypes = {
+  filter: PropTypes.func.isRequired,
+  unFilter: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
+  uniqueTypes: PropTypes.func.isRequired
+};
 
-export default Filters;
+// we can directly bind dispatch to a action by using the second parameters
+const mapStateToProps = state => ({ uniqueTypes: state.uniqueTypes });
+export default connect(mapStateToProps, { filter, unFilter, search })(Filters);
