@@ -2,7 +2,6 @@ import { Col, Modal, Row } from "reactstrap";
 import { compose, withState } from "recompose";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
-import { debounce } from "lodash";
 import Fuse from "fuse-js-latest";
 import Hotkeys from "react-hot-keys";
 import PropTypes from "prop-types";
@@ -146,9 +145,7 @@ const Result = styled(Col)`
 
 class SearchModal extends React.Component {
   componentDidUpdate() {
-    if (this.search) {
-      debounce(() => this.search.focus(), 500);
-    }
+    document.getElementById("fast-search").focus();
   }
   render() {
     const { open, setOpen, setSearch, results, addEntry } = this.props;
@@ -158,17 +155,18 @@ class SearchModal extends React.Component {
           keyName="ctrl+g"
           onKeyDown={(_, e) => {
             e.preventDefault();
+
             setOpen(true);
           }}
         />
         <StyledModal isOpen={open} toggle={() => setOpen(!open)}>
           <SearchBox
-            autoFocus
+            id="fast-search"
             results={results}
-            innerRef={s => {
+            ref={s => {
               this.search = s;
             }}
-            placeholder="Search for types, values, categories"
+            placeholder="Start typing to search for entries"
             onChange={evt => setSearch(evt.target.value)}
           />
 
