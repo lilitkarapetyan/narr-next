@@ -9,12 +9,6 @@ const Pointer = styled.path`
   transition: all 0.3s ease-out;
 `;
 
-const Line = styled.line`
-  transition: all 0.4s ease-out;
-  stroke-dasharray: 100;
-  stroke-dashoffset: 0;
-`;
-
 const Compass = ({ info }) => (
   <AutoSizer style={{ width: "100%", height: "100%" }}>
     {({ width, height }) => {
@@ -48,42 +42,21 @@ const Compass = ({ info }) => (
                 transform: ` rotate(${direction}deg) scale(${scale}) scaleX(0.5)`
               }}
             />
-            <Line
-              stroke="red"
-              strokeWidth="5"
-              fill="red"
-              x1="90%"
-              y2="10%"
-              x2="90%"
-              y1={height - 45}
+            <text
+              fontFamily="Verdana"
+              fontSize={9 * scale}
+              fill="black"
+              stroke="black"
+              textAnchor="middle"
               style={{
-                strokeDashoffset: 100 - velocity
+                transformOrigin: "50% 50%",
+                transform: `translate(0,${radius + 15}px)`,
+                color: "white"
               }}
-            />
+            >
+              Course {parseInt(direction, 10)} º {parseInt(velocity, 10)} Kts
+            </text>
           </g>
-          <text
-            fontFamily="Verdana"
-            fontSize="20"
-            textAnchor="middle"
-            style={{
-              transformOrigin: "50% 50%",
-              transform: `rotate(${direction}deg) translate(50%,10px)`
-            }}
-          >
-            {parseInt(Course, 10)}º
-          </text>
-          <text
-            fontFamily="Verdana"
-            fontSize="20"
-            textAnchor="middle"
-            style={{
-              transformOrigin: "50% 50%",
-              transform: ` translate(90%,95%)`
-            }}
-          >
-            {parseInt(Speed, 10)}kt
-          </text>
-          <g stroke="red" strokeWidth="3" strokeLinecap="round" fill="red" />
         </svg>
       );
     }}
