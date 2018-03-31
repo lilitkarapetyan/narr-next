@@ -4,6 +4,7 @@ import { UpdateEntry } from "../actions";
 import { compose, lifecycle, withState } from "recompose";
 import { connect } from "react-redux";
 import EntryEditor from "./EntryEditor";
+import EntryStatus from "./Schemas/EntryStatus";
 import PropTypes from "prop-types";
 import React from "react";
 import moment from "moment";
@@ -59,17 +60,7 @@ const Entry = ({
           inline={!useModalEdit}
           expanded={expandedView}
           entry={entry}
-          active={
-            fields.Comment === "" ||
-            fields.Type === "" ||
-            fields.System === "" ||
-            fields.Synopsis === "" ||
-            fields.State === "" ||
-            fields.Frequency === "" ||
-            fields.Range === ""
-              ? true
-              : editMode
-          }
+          active={editMode || entry.status === EntryStatus.Empty}
           setActive={ac => {
             setEditMode(ac);
             measure();
