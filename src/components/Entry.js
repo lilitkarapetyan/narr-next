@@ -24,7 +24,6 @@ const Entry = ({
   measure
 }) => {
   const { id, created, mType, privacy, fields, color } = entry;
-
   return (
     <div
       className="inner-filter"
@@ -56,11 +55,22 @@ const Entry = ({
             ({id})
           </div>
         )}
+        {console.log("gg:", fields)}
         <EntryEditor
           inline={!useModalEdit}
           expanded={expandedView}
           entry={entry}
-          active={editMode}
+          active={
+            fields.Comment === "" ||
+            fields.Type === "" ||
+            fields.System === "" ||
+            fields.Synopsis === "" ||
+            fields.State === "" ||
+            fields.Frequency === "" ||
+            fields.Range === ""
+              ? true
+              : editMode
+          }
           setActive={ac => {
             setEditMode(ac);
             measure();
