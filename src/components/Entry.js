@@ -55,7 +55,6 @@ const Entry = ({
             ({id})
           </div>
         )}
-        {console.log("gg:", fields)}
         <EntryEditor
           inline={!useModalEdit}
           expanded={expandedView}
