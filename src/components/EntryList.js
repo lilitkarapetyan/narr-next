@@ -19,7 +19,7 @@ class EntryList extends React.Component {
     });
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.entries.length !== this.props.entries.length) {
+    if (nextProps.entries.length > this.props.entries.length) {
       debounce(() => {
         this.list.scrollToRow(nextProps.entries.length - 1);
       }, 100)();
