@@ -29,7 +29,6 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
           category={category}
         />
       ))}
-      <SettingsCategory />
     </Row>
     <div className="category-count text-center">
       Categories Count {categories.length}
