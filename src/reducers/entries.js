@@ -31,7 +31,7 @@ const reducer = handleActions(
       items[index] = updated;
 
       // return the updated list
-      return items;
+      return [...items];
     },
     [ClearEntries]: () => [],
     [ADD_ENTRY]: (state, { payload }) => [
