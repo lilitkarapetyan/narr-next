@@ -103,10 +103,10 @@ const Export = ({ entries }) => {
         pdf.text(textX, lineCord(line), `${mType} (${privacy})`);
 
         pdf.setFont("Helvetica", "normal");
-        const splitText = pdf.splitTextToSize(text, 165);
+        const splitText = pdf.splitTextToSize(text, 140);
         pdf.text(textX, lineCord(line + 1), splitText);
 
-        line += linePoint;
+        line += linePoint + Math.ceil(text.length / 100);
       });
     });
 
