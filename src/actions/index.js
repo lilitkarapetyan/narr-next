@@ -6,7 +6,8 @@ export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 export const SET_PRIVACY_FILTER = "SET_PRIVACY_FILTER";
 export const SET_TIME_FILTER = "SET_TIME_FILTER";
 export const SET_TYPE_FILTER = "SET_TYPE_FILTER";
-
+export const REMOVE_TYPE_FILTER = "REMOVE_TYPE_FILTER";
+export const SEARCH_VALUE = "SEARCH_VALUE";
 /*
  * other constants
  */

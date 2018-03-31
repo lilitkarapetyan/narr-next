@@ -38,8 +38,9 @@ export default class Generator {
     const entry = {
       fields: {},
       mType: null,
-      privacy: "public",
-      category: this.category.name
+      privacy: ["public", "private"][Math.floor(Math.random() * 2)],
+      category: this.category.name,
+      color: this.category.color
     };
     categoryEntry.fields.forEach(field => {
       entry.fields[field.name] = this.generateField(field.type);
@@ -61,33 +62,23 @@ export default class Generator {
       case "text":
         return "Lorem Ip";
       case "octas":
-        return [
-          "1/2",
-          "1/3",
-          "1/4",
-          "1/5",
-          "1/6",
-          "1/7",
-          "1/8",
-          "1/9",
-          "1/10",
-          "1/11",
-          "1/12"
-        ][Math.random() * 11];
+        return ["1/8", "2/8", "3/8", "4/8", "5/8", "6/8", "7/8", "8/8"][
+          Math.random() * 7
+        ];
       case "angle":
-        return Math.random() * 360;
+        return Math.round(Math.ceil(Math.random() * 360 * 10)) / 10;
       case "speed":
-        return Math.random() * 100;
+        return Math.round(Math.random() * 100 * 10) / 10;
       case "distance":
-        return Math.random() * 100;
+        return Math.round(Math.random() * 100 * 10) / 10;
       case "wind-state":
-        return Math.random() * 12;
+        return Math.ceil(Math.random() * 12);
       case "integer":
-        return Math.random() * 1000;
-      case "day-nigh":
+        return Math.ceil(Math.random() * 30);
+      case "day-night":
         return ["Day", "Night"][Math.random() * 2];
       case "frequency":
-        return Math.random() * 500;
+        return Math.round(Math.random() * 500 * 10) / 10;
       default:
         return "No value generator";
     }

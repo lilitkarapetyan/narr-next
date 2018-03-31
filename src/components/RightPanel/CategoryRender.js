@@ -7,7 +7,12 @@ import React from "react";
 import WidgetRender from "./WidgetRender";
 
 const CategoryRender = ({ category, collapse, addEntry }) => (
-  <Panel title={category.name} open={collapse} lg={collapse ? 12 : 6}>
+  <Panel
+    style={{ borderWidth: "3px", borderColor: `${category.color}` }}
+    title={category.name}
+    open={collapse}
+    lg={collapse ? 12 : 6}
+  >
     {category.widgets &&
       category.widgets.map(entry => (
         <Col key={entry.id} lg={collapse ? 12 : 6}>
