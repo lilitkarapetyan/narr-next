@@ -1,6 +1,6 @@
 import { Badge, Card } from "reactstrap";
+import { DeleteEntry, UpdateEntry } from "../actions";
 import { EntryType } from "./Schemas";
-import { UpdateEntry } from "../actions";
 import { compose, lifecycle, mapProps, withState } from "recompose";
 import { connect } from "react-redux";
 import EntryEditor from "./EntryEditor";
@@ -22,7 +22,8 @@ const Entry = ({
   editMode,
   setEditMode,
   updateEntry,
-  measure
+  measure,
+  deleteEntry
 }) => {
   const { id, created, mType, privacy, fields, color } = entry;
   return (
@@ -68,6 +69,9 @@ const Entry = ({
             setEditMode(ac);
             measure();
           }}
+          onCancel={() => {
+            if (entry.status === "empty") deleteEntry(entry.id);
+          }}
           onSubmit={updateEntry}
         />
       </Card>
@@ -88,7 +92,8 @@ Entry.propTypes = {
   expandedView: PropTypes.bool.isRequired,
   useModalEdit: PropTypes.bool.isRequired,
   updateEntry: PropTypes.func.isRequired,
-  measure: PropTypes.func.isRequired
+  measure: PropTypes.func.isRequired,
+  deleteEntry: PropTypes.func.isRequired
 };
 
 const enhanced = compose(
@@ -103,7 +108,8 @@ const enhanced = compose(
       useModalEdit: state.ui.useModalEdit
     }),
     {
-      updateEntry: UpdateEntry
+      updateEntry: UpdateEntry,
+      deleteEntry: DeleteEntry
     }
   ),
   withState("editMode", "setEditMode", false),

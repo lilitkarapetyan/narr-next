@@ -28,7 +28,8 @@ class EntryModal extends React.PureComponent {
       setValue,
       values,
       onSubmit,
-      inline
+      inline,
+      onCancel
     } = this.props;
 
     const valid =
@@ -59,7 +60,7 @@ class EntryModal extends React.PureComponent {
           >
             Accept
           </Button>
-          <Button color="secondary" onClick={toggle}>
+          <Button color="secondary" onClick={onCancel}>
             Cancel
           </Button>
         </ModalFooter>
@@ -85,7 +86,8 @@ EntryModal.propTypes = {
   setValue: PropTypes.func.isRequired,
   values: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
-  inline: PropTypes.bool
+  inline: PropTypes.bool,
+  onCancel: PropTypes.func.isRequired
 };
 
 export default EntryModal;

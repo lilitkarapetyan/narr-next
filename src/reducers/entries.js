@@ -1,6 +1,7 @@
 import {
   ADD_ENTRY,
   ClearEntries,
+  DeleteEntry,
   TOGGLE_SELECTED,
   UpdateEntry,
   addEntries
@@ -34,6 +35,7 @@ const reducer = handleActions(
           .format()
       }))
     ],
+    [DeleteEntry]: (state, { payload }) => [...state.filter(x => x.id !== payload)],
     [UpdateEntry]: (state, { payload }) => {
       const items = [...state];
       const updated = payload;
