@@ -4,6 +4,7 @@ import { UpdateEntry } from "../actions";
 import { compose, lifecycle, withState } from "recompose";
 import { connect } from "react-redux";
 import EntryEditor from "./EntryEditor";
+import EntryStatus from "./Schemas/EntryStatus";
 import PropTypes from "prop-types";
 import React from "react";
 import moment from "moment";
@@ -24,7 +25,6 @@ const Entry = ({
   measure
 }) => {
   const { id, created, mType, privacy, fields, color } = entry;
-
   return (
     <div
       className="inner-filter"
@@ -60,7 +60,7 @@ const Entry = ({
           inline={!useModalEdit}
           expanded={expandedView}
           entry={entry}
-          active={editMode}
+          active={editMode || entry.status === EntryStatus.Empty}
           setActive={ac => {
             setEditMode(ac);
             measure();

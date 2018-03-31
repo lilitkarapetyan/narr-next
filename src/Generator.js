@@ -1,3 +1,5 @@
+import EntryStatus from "./components/Schemas/EntryStatus";
+
 export default class Generator {
   constructor(category, callback) {
     this.category = category;
@@ -13,9 +15,10 @@ export default class Generator {
         if (this.active) this.callback(this.generate(entry));
         holder.interval = setTimeout(gen, interval());
       };
-      gen();
+      // gen();
       return holder;
     });
+
     this.Active = this.Active.bind(this);
   }
   Active(isActive) {
@@ -40,7 +43,8 @@ export default class Generator {
       mType: null,
       privacy: ["public", "private"][Math.floor(Math.random() * 2)],
       category: this.category.name,
-      color: this.category.color
+      color: this.category.color,
+      status: EntryStatus.Completed
     };
     categoryEntry.fields.forEach(field => {
       entry.fields[field.name] = this.generateField(field.type);
@@ -60,7 +64,7 @@ export default class Generator {
   generateField(type) {
     switch (type) {
       case "text":
-        return "Lorem Ip";
+        return "Lorem";
       case "octas":
         return ["1/8", "2/8", "3/8", "4/8", "5/8", "6/8", "7/8", "8/8"][
           Math.random() * 7
