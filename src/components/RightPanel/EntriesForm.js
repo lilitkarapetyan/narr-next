@@ -39,8 +39,20 @@ const mapFields = (fields, entry, config) => {
     const cat = config.categories.find(
       category => category.name === entry.category
     );
+    if (!cat) throw new Error(`No category found  ${entry.category}`);
     const entries = cat.entries.find(et => et.id === entry.mType);
+    if (!entries)
+      throw new Error(
+        `No entries found for type ${entry.mType} in category ${cat.name}`
+      );
+
     const fld = entries.fields.find(f => f.name === field);
+    if (!fld)
+      throw new Error(
+        `No field found with name ${field} in  Entry :${
+          entry.mType
+        } in Category: ${cat.name}`
+      );
     return fld.type;
   };
 

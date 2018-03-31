@@ -220,6 +220,38 @@ export default {
           ]
         },
         {
+          id: "mast-up",
+          name: "Mast up",
+          priority: "High",
+          hidden: "true",
+          fields: [
+            {
+              name: "Reason",
+              type: "text"
+            },
+            {
+              name: "Type",
+              type: "text"
+            }
+          ]
+        },
+        {
+          id: "mast-down",
+          name: "Mast down",
+          priority: "High",
+          hidden: "true",
+          fields: [
+            {
+              name: "Reason",
+              type: "text"
+            },
+            {
+              name: "Type",
+              type: "text"
+            }
+          ]
+        },
+        {
           id: "deploy-array",
           name: "Deploy array",
           priority: "High",
