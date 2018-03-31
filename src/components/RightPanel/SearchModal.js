@@ -145,7 +145,8 @@ const Result = styled(Col)`
 
 class SearchModal extends React.Component {
   componentDidUpdate() {
-    document.getElementById("fast-search").focus();
+    if (document.getElementById("fast-search"))
+      document.getElementById("fast-search").focus();
   }
   render() {
     const { open, setOpen, setSearch, results, addEntry } = this.props;
