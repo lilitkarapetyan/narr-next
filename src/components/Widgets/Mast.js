@@ -23,9 +23,9 @@ const Mast = ({ masts, addEntry }) => (
               mType: mast.status.mType === "mast-up" ? "mast-down" : "mast-up",
               fields: {
                 Type: mast.name,
-                Reason: "Widget Trigger"
+                Reason: ""
               },
-              status: "completed",
+              status: "empty",
               category: "Underwater"
             })
           }
