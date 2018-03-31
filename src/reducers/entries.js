@@ -26,7 +26,15 @@ const reducer = handleActions(
 
       // set the edit as complete
       updated.status = EntryStatus.Complete;
-
+      updated.revisions = [
+        ...match[0].revisions,
+        {
+          ...match[0],
+          editAt: moment(Date.now())
+            .utc()
+            .format()
+        }
+      ];
       // replace the existing item with this one
       items[index] = updated;
 
@@ -40,6 +48,7 @@ const reducer = handleActions(
         ...payload,
         id: nextEntryId++,
         status: payload.status || EntryStatus.Empty,
+        revisions: [],
         created: moment(Date.now(true))
           .utc()
           .format()
