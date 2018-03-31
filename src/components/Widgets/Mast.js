@@ -11,68 +11,45 @@ const MastButton = styled(Button)`
   width: 100%;
 `;
 
-class Mast extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mast: {
-        Search: false,
-        Radar: false,
-        ESM: false
-      }
-    };
-    this.toggleMast = this.toggleMast.bind(this);
-  }
-
-  toggleMast(e) {
-    const { mast } = this.state;
-    mast[e.target.id] = !mast[e.target.id];
-    this.setState({ mast });
-  }
-  render() {
-    return (
-      <Row className="no-gutters" style={{ width: "100%", height: "100%" }}>
-        {this.props.masts.map(mast => (
-          <Col lg={4}>
-            <MastButton
-              id={mast.name}
-              outline
-              color="primary"
-              onClick={e => {
-                this.toggleMast(e);
-                this.props.addEntry({
-                  mType: this.state.mast[mast.name] ? "mast-up" : "mast-down",
-                  fields: {
-                    type: mast.name,
-                    reason: "Manual Trigger"
-                  },
-                  category: "Underwater"
-                });
-              }}
-            >
-              <Icon
-                id={mast.name}
-                name={this.state.mast[mast.name] ? "arrow-up" : "arrow-down"}
-                size="3x"
-              />
-              <br />
-              {mast.name}
-            </MastButton>
-          </Col>
-        ))}
-      </Row>
-    );
-  }
-}
+const Mast = ({ masts, addEntry }) => (
+  <Row className="no-gutters" style={{ width: "100%", height: "100%" }}>
+    {masts.map(mast => (
+      <Col lg={4}>
+        <MastButton
+          outline
+          color="primary"
+          onClick={() =>
+            addEntry({
+              mType: mast.status.mType === "mast-up" ? "mast-down" : "mast-up",
+              fields: {
+                Type: mast.name,
+                Reason: "Widget Trigger"
+              },
+              status: "completed",
+              category: "Underwater"
+            })
+          }
+        >
+          <Icon
+            name={mast.status.mType === "mast-up" ? "arrow-up" : "arrow-down"}
+            size="3x"
+          />
+          <br />
+          {mast.name}
+        </MastButton>
+      </Col>
+    ))}
+  </Row>
+);
 
 Mast.propTypes = {
-  masts: PropTypes.arrayOf.isRequired,
+  masts: PropTypes.array.isRequired,
   addEntry: PropTypes.func.isRequired
 };
 
 export default connect((state, ownProps) => ({
   masts: ownProps.config.masts.map(mast => ({
     name: mast,
-    status: listenEvent(entry => entry.fields.type === mast)(state) || {}
+    status: listenEvent(entry => entry.fields.Type === mast)(state) || {}
   }))
 }))(Mast);

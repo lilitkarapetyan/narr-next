@@ -228,6 +228,10 @@ export default {
             {
               name: "Reason",
               type: "text"
+            },
+            {
+              name: "Type",
+              type: "text"
             }
           ]
         },
@@ -239,6 +243,10 @@ export default {
           fields: [
             {
               name: "Reason",
+              type: "text"
+            },
+            {
+              name: "Type",
               type: "text"
             }
           ]
