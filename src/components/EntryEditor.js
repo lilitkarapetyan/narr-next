@@ -13,7 +13,8 @@ const EntryEditor = ({
   onSubmit,
   values,
   setValues,
-  inline
+  inline,
+  onCancel
 }) => (
   <EntryModal
     inline={inline}
@@ -23,6 +24,7 @@ const EntryEditor = ({
     entry={entry}
     toggle={toggle}
     onSubmit={onSubmit}
+    onCancel={onCancel}
   />
 );
 const enhancer = compose(
@@ -53,6 +55,12 @@ const enhancer = compose(
       };
       props.onSubmit(entry);
     },
+    onCancel: () => {
+      props.onCancel();
+      props.setValues({});
+      props.setActive(!props.active);
+      props.setValues(props.entry.fields);
+    },
     entry: props.entry,
     active: props.active,
     toggle: (clear = true) => {
@@ -70,7 +78,8 @@ EntryEditor.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   values: PropTypes.object,
   setValues: PropTypes.func.isRequired,
-  inline: PropTypes.bool.isRequired
+  inline: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired
 };
 
 export const EntryEditorUnControlled = enhancer(EntryEditor);
