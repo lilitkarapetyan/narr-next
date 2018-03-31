@@ -6,7 +6,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Pointer = styled.path`
-  transform: translate(50%, 50%);
   transition: all 0.3s ease-out;
 `;
 
@@ -35,13 +34,18 @@ const Compass = ({ info }) => (
             fill="rgba(80,60,138,0.3)"
             stroke="rgba(80,60,138,0.8)"
           />
-          <g strokeLinecap="round">
+          <g
+            strokeLinecap="round"
+            style={{
+              transform: `translate(${width / 2}px, ${height / 2}px)`
+            }}
+          >
             <Pointer
               stroke="black"
               strokeWidth="3"
               d={path}
               style={{
-                transform: `translate(50%, 50%) rotate(${direction}deg) scale(${scale}) scaleX(0.5)`
+                transform: ` rotate(${direction}deg) scale(${scale}) scaleX(0.5)`
               }}
             />
             <Line
