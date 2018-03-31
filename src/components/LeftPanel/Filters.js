@@ -14,6 +14,7 @@ import {
   unFilter
 } from "../../actions";
 import { connect } from "react-redux";
+import { entryTypes } from "../../reducers/Selectors";
 import Export from "../../containers/Export";
 import Hotkeys from "react-hot-keys";
 import PrivacyLink from "../../containers/PrivacyLink";
@@ -191,5 +192,5 @@ Filters.propTypes = {
 };
 
 // we can directly bind dispatch to a action by using the second parameters
-const mapStateToProps = state => ({ uniqueTypes: state.uniqueTypes });
+const mapStateToProps = state => ({ uniqueTypes: entryTypes(state) });
 export default connect(mapStateToProps, { filter, unFilter, search })(Filters);

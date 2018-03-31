@@ -43,7 +43,7 @@ const Entry = ({
         <div>
           {moment(created).format("DDHHmm")}
           <span className="font-small">
-            {`:${  moment(created).format("SS")}`}
+            {`:${moment(created).format("SS")}`}
           </span>
           <Badge style={{ margin: "2px", width: "90px" }}>{mType}</Badge>
           <Badge>{privacy}</Badge>
