@@ -2,7 +2,8 @@ import {
   ADD_ENTRY,
   ClearEntries,
   TOGGLE_SELECTED,
-  UpdateEntry
+  UpdateEntry,
+  addEntries
 } from "../actions";
 import { handleActions } from "redux-actions";
 import EntryStatus from "../components/Schemas/EntryStatus";
@@ -14,6 +15,19 @@ let nextEntryId = 0;
 const initialState = [];
 const reducer = handleActions(
   {
+    [addEntries]: (state, { payload }) => [
+      ...state,
+      ...payload.map(entry => ({
+        fields: entry.fields || {},
+        ...entry,
+        id: nextEntryId++,
+        status: entry.status || EntryStatus.Empty,
+        revisions: [],
+        created: moment(Date.now(true))
+          .utc()
+          .format()
+      }))
+    ],
     [UpdateEntry]: (state, { payload }) => {
       const items = state;
       const updated = payload;
@@ -67,4 +81,4 @@ const reducer = handleActions(
   initialState
 );
 
-export default persist(reducer);
+export default persist(reducer, "entries");

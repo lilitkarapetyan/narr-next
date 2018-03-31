@@ -20,4 +20,4 @@ const reducer = handleActions(
   initialState
 );
 
-export default persist(reducer);
+export default persist(reducer, "ui");

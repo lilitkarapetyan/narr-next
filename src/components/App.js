@@ -1,10 +1,8 @@
 import { CategoryType } from "./Schemas";
 import { Col, Row } from "reactstrap";
 import { ToggleUiExpand, addEntry } from "../actions";
-import { compose, lifecycle } from "recompose";
+import { compose } from "recompose";
 import { connect } from "react-redux";
-import EntryStatus from "./Schemas/EntryStatus";
-import Generator from "../Generator";
 import LeftPanel from "./LeftPanel";
 import PropTypes from "prop-types";
 import React from "react";
@@ -57,23 +55,7 @@ const enhancer = compose(
       addEntry,
       toggleExpand: ToggleUiExpand
     }
-  ),
-  lifecycle({
-    componentDidMount() {
-      this.generators = this.props.config.categories.map(
-        x =>
-          new Generator(x, entry =>
-            this.props.addEntry(entry, EntryStatus.Empty)
-          )
-      );
-    },
-    componentWillUpdate(nextProps) {
-      this.generators.forEach(gen => gen.Active(nextProps.running));
-    },
-    componentWillUnmount() {
-      this.generators.forEach(gen => gen.Clear());
-    }
-  })
+  )
 );
 
 export default enhancer(App);
