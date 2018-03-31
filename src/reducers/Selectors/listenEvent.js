@@ -15,5 +15,5 @@ export const listenEvent = type =>
     );
     if (sorted.length > 0) return sorted[0];
 
-    return null;
+    return filtered;
   });
