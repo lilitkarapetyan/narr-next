@@ -132,13 +132,13 @@ const Category = styled.p`
 `;
 
 const Result = styled(Col)`
-  background-color: transparent;
+  background-color: ${props =>
+    props.selected ? "rgba(255, 255, 255, 0.3)" : "transparent"} !important;
   transition: all 0.3s ease-in;
   border-radius: 10px;
   padding: 15px;
   white-space: nowrap;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.3) !important;
     cursor: pointer;
   }
 `;
@@ -149,7 +149,15 @@ class SearchModal extends React.Component {
       document.getElementById("fast-search").focus();
   }
   render() {
-    const { open, setOpen, setSearch, results, addEntry } = this.props;
+    const {
+      open,
+      setOpen,
+      setSearch,
+      results,
+      addEntry,
+      index,
+      setIndex
+    } = this.props;
     return (
       <div>
         <Hotkeys
@@ -160,7 +168,48 @@ class SearchModal extends React.Component {
             setOpen(true);
           }}
         />
+
         <StyledModal isOpen={open} toggle={() => setOpen(!open)}>
+          <Hotkeys
+            keyName="enter"
+            onKeyDown={(_, e) => {
+              e.preventDefault();
+              let idx = index;
+              if (results.length === 1) {
+                idx = 0;
+              }
+              const res = results[idx];
+              const fields = {};
+              res.fields.forEach(key => {
+                fields[key.name] = "";
+              });
+              const entry = {
+                name: res.name,
+                mType: res.id,
+                category: res.category,
+                fields
+              };
+              addEntry(entry);
+              setOpen(false);
+            }}
+          />
+          <Hotkeys
+            keyName="left"
+            onKeyDown={(_, e) => {
+              e.preventDefault();
+              let idx = index - 1;
+              if (idx < 0) idx = results.length - 1;
+              setIndex(idx);
+            }}
+          />
+          <Hotkeys
+            keyName="right"
+            onKeyDown={(_, e) => {
+              e.preventDefault();
+
+              setIndex((index + 1) % results.length);
+            }}
+          />
           <SearchBox
             id="fast-search"
             results={results}
@@ -168,7 +217,10 @@ class SearchModal extends React.Component {
               this.search = s;
             }}
             placeholder="Start typing to search for entries"
-            onChange={evt => setSearch(evt.target.value)}
+            onChange={evt => {
+              setSearch(evt.target.value);
+              setIndex(0);
+            }}
           />
 
           <SearchResultsContainer>
@@ -178,8 +230,10 @@ class SearchModal extends React.Component {
                 : `Found ${results.length} matching your search`}
             </ResultsLabel>
 
-            {results.map(res => (
+            {results.map((res, idx) => (
               <Result
+                selected={index === idx}
+                onMouseEnter={() => setIndex(idx)}
                 onClick={() => {
                   const fields = {};
                   res.fields.forEach(key => {
@@ -218,10 +272,13 @@ SearchModal.propTypes = {
   setOpen: PropTypes.func.isRequired,
   setSearch: PropTypes.func.isRequired,
   results: PropTypes.array,
-  addEntry: PropTypes.func.isRequired
+  addEntry: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  setIndex: PropTypes.func.isRequired
 };
 
 const enhancer = compose(
+  withState("index", "setIndex", -1),
   withState("search", "setSearch", null),
   connect((state, ownProps) => ({
     results: SearchSelector(ownProps.search)(state)
