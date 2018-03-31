@@ -174,7 +174,11 @@ class SearchModal extends React.Component {
             keyName="enter"
             onKeyDown={(_, e) => {
               e.preventDefault();
-              const res = results[index];
+              let idx = index;
+              if (results.length === 1) {
+                idx = 0;
+              }
+              const res = results[idx];
               const fields = {};
               res.fields.forEach(key => {
                 fields[key.name] = "";
