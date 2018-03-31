@@ -1,9 +1,9 @@
 import { createSelector } from "reselect";
-import { getEntries } from "./entrySelectors";
+import { validEntries } from "./entrySelectors";
 import moment from "moment";
 
 export const listenEvent = type =>
-  createSelector([getEntries], entries => {
+  createSelector([validEntries], entries => {
     let filtered = [];
     if (typeof type === "string") {
       filtered = entries.filter(enty => enty.mType === type);

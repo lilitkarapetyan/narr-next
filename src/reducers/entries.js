@@ -25,7 +25,7 @@ const reducer = handleActions(
       const index = items.indexOf(match[0]);
 
       // set the edit as complete
-      updated.status = EntryStatus.Complete;
+      updated.status = EntryStatus.Completed;
 
       // replace the existing item with this one
       items[index] = updated;
