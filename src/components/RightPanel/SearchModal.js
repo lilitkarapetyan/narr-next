@@ -197,7 +197,7 @@ class SearchModal extends React.Component {
             keyName="left"
             onKeyDown={(_, e) => {
               e.preventDefault();
-              let idx = (index - 1) % results.length - 1;
+              let idx = index - 1;
               if (idx < 0) idx = results.length - 1;
               setIndex(idx);
             }}
