@@ -25,7 +25,13 @@ const CategoryRender = ({ category, collapse, addEntry }) => (
         <Card key={entry.id}>
           <EntryRender
             entry={entry}
-            onSubmit={en => addEntry({ ...en, category: category.name })}
+            onSubmit={en =>
+              addEntry({
+                ...en,
+                category: category.name,
+                color: category.color
+              })
+            }
           />
         </Card>
       ))}
