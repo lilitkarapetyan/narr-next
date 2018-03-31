@@ -4,6 +4,7 @@ import EntryRender from "./EntryRender";
 import Panel from "./Panel";
 import PropTypes from "prop-types";
 import React from "react";
+import WidgetRender from "./WidgetRender";
 
 const CategoryRender = ({ category, collapse, addEntry }) => (
   <Panel
@@ -12,6 +13,12 @@ const CategoryRender = ({ category, collapse, addEntry }) => (
     open={collapse}
     lg={collapse ? 12 : 6}
   >
+    {category.widgets &&
+      category.widgets.map(entry => (
+        <Col key={entry.id} lg={collapse ? 12 : 6}>
+          <WidgetRender config={entry} />
+        </Col>
+      ))}
     {category.entries.map(entry => (
       <Col key={entry.id} lg={collapse ? 12 : 6}>
         <EntryRender

@@ -26,6 +26,8 @@ const reducer = handleActions(
 
       // set the edit as complete
       updated.status = EntryStatus.Complete;
+
+      // store previous version
       updated.revisions = [
         ...match[0].revisions,
         {
@@ -39,7 +41,7 @@ const reducer = handleActions(
       items[index] = updated;
 
       // return the updated list
-      return items;
+      return [...items];
     },
     [ClearEntries]: () => [],
     [ADD_ENTRY]: (state, { payload }) => [

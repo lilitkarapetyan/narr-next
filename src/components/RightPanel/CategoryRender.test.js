@@ -1,4 +1,5 @@
 import { Col } from "reactstrap";
+import { WrapStore } from "../../TestUtils";
 import { mount } from "enzyme";
 import CategoryRender from "./CategoryRender";
 import EntryRender from "./EntryRender";
@@ -9,7 +10,11 @@ describe("CategoryRender", () => {
   let mounted;
   const render = () => {
     if (!mounted) {
-      mounted = mount(<CategoryRender {...props} />);
+      mounted = mount(
+        <WrapStore>
+          <CategoryRender {...props} />
+        </WrapStore>
+      );
     }
     return mounted;
   };

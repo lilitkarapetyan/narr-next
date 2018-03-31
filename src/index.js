@@ -4,7 +4,6 @@ import "font-awesome/css/font-awesome.min.css";
 import "react-virtualized/styles.css";
 import React from "react";
 /* eslint-disable-next-line */
-import Simulation from "./Simulation";
 
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
@@ -28,4 +27,4 @@ render(
 );
 
 registerServiceWorker();
-console.log(Simulation);
+// console.log(Simulation);

@@ -1,6 +1,7 @@
 import { Button } from "reactstrap";
 import { EntryType } from "../Schemas";
 import { compose, mapProps, withState } from "recompose";
+import { connect } from "react-redux";
 import { set } from "lodash";
 import EntryModal from "./EntryModal";
 import EntryStatus from "../Schemas/EntryStatus";
@@ -55,6 +56,22 @@ const enhancer = compose(
     entry: props.entry,
     modalVisible: props.modalVisible,
     toggleModal: (clear = true) => {
+      if (!props.useModal) {
+        const res = props.entry;
+        const fields = {};
+        res.fields.forEach(key => {
+          fields[key.name] = "";
+        });
+        const entry = {
+          name: res.name,
+          mType: res.id,
+          category: res.category,
+          fields
+        };
+        props.onSubmit(entry);
+        return;
+      }
+
       props.setModalVisible(!props.modalVisible);
       if (clear) props.setValues({});
     },
@@ -74,6 +91,9 @@ EntryRender.propTypes = {
 };
 
 const enhancer2 = compose(
+  connect(state => ({
+    useModal: state.ui.useModalEdit
+  })),
   withState("values", "setValues", {}),
   withState("modalVisible", "setModalVisible", false),
   enhancer

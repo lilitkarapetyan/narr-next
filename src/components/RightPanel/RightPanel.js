@@ -4,7 +4,6 @@ import { Row } from "reactstrap";
 import { branch, renderComponent } from "recompose";
 import CategoryRender from "./CategoryRender";
 import GeneratorConfig from "./GeneratorConfig";
-import NavigationPanel from "./NavigationPanel";
 import PropTypes from "prop-types";
 import React from "react";
 import SearchModal from "./SearchModal";
@@ -20,7 +19,6 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
         width: "100%"
       }}
     >
-      <NavigationPanel collapse={collapse} />
       <GeneratorConfig collapse={collapse} />
       <SettingsCategory collapse={collapse} />
       {categories.map(category => (

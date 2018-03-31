@@ -8,43 +8,78 @@ import styled from "styled-components";
 const Pointer = styled.path`
   transform: translate(50%, 50%);
   transition: all 0.3s ease-out;
-  translate(50%, 50%) 
-  rotate(0deg)
-  scale(1)
+`;
+
+const Line = styled.line`
+  transition: all 0.4s ease-out;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
 `;
 
 const Compass = ({ info }) => (
   <AutoSizer style={{ width: "100%", height: "100%" }}>
     {({ width, height }) => {
       const { Speed, Course } = info.fields || { Speed: "0", Course: "0" };
-      const velocity = parseFloat(Speed) || 0;
-      const direction = parseFloat(Course) || 0;
+      const velocity = parseFloat(Speed) || Speed;
+      const direction = parseFloat(Course) || Course;
       const dimension = Math.min(width, height);
-      const radius = (dimension - 8) / 2;
-      const scale = 2.0 * (dimension / 156.0);
-      const pointerSize = velocity / 100 * scale;
+      const radius = (dimension - 30) / 2;
+      const scale = 1.9 * (dimension / 156.0);
       const path = "M0 22 L4 26 L4 -22 L0 -28 L-4 -22 L-4 26 Z";
-      console.warn(velocity);
       return (
         <svg style={{ width: "100%", height: "100%" }}>
-          <circle cx="50%" cy="50%" r={radius} fill="gray" />
-          <g stroke="black" strokeWidth="3" strokeLinecap="round">
+          <circle
+            cx="50%"
+            cy="50%"
+            r={radius}
+            fill="rgba(80,60,138,0.3)"
+            stroke="rgba(80,60,138,0.8)"
+          />
+          <g strokeLinecap="round">
             <Pointer
+              stroke="black"
+              strokeWidth="3"
               d={path}
               style={{
-                transform: `translate(50%, 50%) rotate(${direction}deg) scale(${scale})`
+                transform: `translate(50%, 50%) rotate(${direction}deg) scale(${scale}) scaleX(0.5)`
+              }}
+            />
+            <Line
+              stroke="red"
+              strokeWidth="5"
+              fill="red"
+              x1="90%"
+              y2="10%"
+              x2="90%"
+              y1={height - 45}
+              style={{
+                strokeDashoffset: 100 - velocity
               }}
             />
           </g>
-          <g stroke="red" strokeWidth="3" strokeLinecap="round" fill="red">
-            <Pointer
-              d={path}
-              style={{
-                transform: ` translate(50%, 50%) rotate(${direction}deg)  scaleX(0.3) scaleY(${pointerSize})`,
-                transformOrigin: "50% -50%"
-              }}
-            />
-          </g>
+          <text
+            fontFamily="Verdana"
+            fontSize="20"
+            textAnchor="middle"
+            style={{
+              transformOrigin: "50% 50%",
+              transform: `rotate(${direction}deg) translate(50%,10px)`
+            }}
+          >
+            {parseInt(Course, 10)}º
+          </text>
+          <text
+            fontFamily="Verdana"
+            fontSize="20"
+            textAnchor="middle"
+            style={{
+              transformOrigin: "50% 50%",
+              transform: ` translate(90%,95%)`
+            }}
+          >
+            {parseInt(Speed, 10)}kt
+          </text>
+          <g stroke="red" strokeWidth="3" strokeLinecap="round" fill="red" />
         </svg>
       );
     }}
