@@ -53,6 +53,33 @@ describe("CategoryRender", () => {
     expect(rendered.find(EntryRender)).toHaveLength(2);
   });
 
+  it("skips hidden fields", () => {
+    props.category = {
+      name: "MyCategory",
+      priority: "High",
+      created: "",
+      mType: "myType",
+      privacy: "---",
+      entries: [
+        {
+          id: "firstEntry",
+          name: "firstEntryName",
+          priority: "High",
+          fields: []
+        },
+        {
+          id: "secondEntry",
+          name: "secondEntryName",
+          priority: "Low",
+          fields: [],
+          hidden: true
+        }
+      ]
+    };
+    const rendered = render();
+    expect(rendered.find(EntryRender)).toHaveLength(1);
+  });
+
   describe("Collapse Logic", () => {
     it("renders collapsed when extend collapse is true", () => {
       props.collapse = true;

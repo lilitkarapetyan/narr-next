@@ -14,12 +14,12 @@ const CategoryRender = ({ category, collapse, addEntry }) => (
     lg={collapse ? 12 : 6}
   >
     {category.widgets &&
-      category.widgets.map(entry => (
+      category.widgets.filter(x => !x.hidden).map(entry => (
         <Col key={entry.id} lg={collapse ? 12 : 6}>
           <WidgetRender config={entry} />
         </Col>
       ))}
-    {category.entries.map(entry => (
+    {category.entries.filter(x => !x.hidden).map(entry => (
       <Col key={entry.id} lg={collapse ? 12 : 6}>
         <EntryRender
           entry={entry}

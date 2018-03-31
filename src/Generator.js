@@ -15,7 +15,7 @@ export default class Generator {
         if (this.active) this.callback(this.generate(entry));
         holder.interval = setTimeout(gen, interval());
       };
-      gen();
+      // gen();
       return holder;
     });
 
