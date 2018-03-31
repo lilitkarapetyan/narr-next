@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 const Pointer = styled.path`
   transform: translate(50%, 50%);
+  transform-origin : 50% 50%
   transition: all 0.3s ease-out;
 `;
 
@@ -28,20 +29,20 @@ const Compass = ({ info }) => (
       const path = "M0 22 L4 26 L4 -22 L0 -28 L-4 -22 L-4 26 Z";
       return (
         <svg style={{ width: "100%", height: "100%" }}>
-          <circle
-            cx="50%"
-            cy="50%"
-            r={radius}
-            fill="rgba(80,60,138,0.3)"
-            stroke="rgba(80,60,138,0.8)"
-          />
-          <g strokeLinecap="round">
+          <g style={{ width: "100%", height: "100%" }} strokeLinecap="round">
+            <circle
+              cx="50%"
+              cy="50%"
+              r={radius}
+              fill="rgba(80,60,138,0.3)"
+              stroke="rgba(80,60,138,0.8)"
+            />
             <Pointer
               stroke="black"
               strokeWidth="3"
               d={path}
               style={{
-                transform: `translate(50%, 50%) rotate(${direction}deg) scale(${scale}) scaleX(0.5)`
+                transform: `scale(${scale}) scaleX(0.5) translate(50%, 50%) rotate(${direction}deg) `
               }}
             />
             <Line

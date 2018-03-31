@@ -10,6 +10,7 @@ const CategoryRender = ({ category, collapse, addEntry }) => (
   <Panel
     style={{ borderWidth: "3px", borderColor: `${category.color}` }}
     title={category.name}
+    color={category.color}
     open={collapse}
     lg={collapse ? 12 : 6}
   >
