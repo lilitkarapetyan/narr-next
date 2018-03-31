@@ -1,6 +1,7 @@
 import { Button, Col, Row } from "reactstrap";
 import { connect } from "react-redux";
 import { listenEvent } from "../../reducers/Selectors";
+import EntryStatus from "../Schemas/EntryStatus";
 import Icon from "react-fontawesome";
 import PropTypes from "prop-types";
 import React from "react";
@@ -25,7 +26,7 @@ const Mast = ({ masts, addEntry }) => (
                 Type: mast.name,
                 Reason: ""
               },
-              status: "empty",
+              status: EntryStatus.Empty,
               category: "Underwater"
             })
           }
