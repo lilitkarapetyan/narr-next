@@ -26,6 +26,7 @@ import Icon from "react-fontawesome";
 import Panel from "./Panel";
 import PropTypes from "prop-types";
 import React from "react";
+import moment from "moment";
 
 let generators = null;
 const GeneratorConfig = ({
@@ -52,8 +53,15 @@ const GeneratorConfig = ({
     <Form style={{ padding: "10px", width: "100%" }}>
       <FormGroup row>
         <Label lg={collapse ? 12 : 2}>Time</Label>
-        <Col lg={collapse ? 12 : 4}>
-          <Input readonly type="text" name="select" value={currentTime} />
+        <Col lg={collapse ? 12 : 10}>
+          <Input
+            readonly
+            type="text"
+            name="select"
+            value={`${moment(currentTime).format("DDHHmm")}:${moment(
+              currentTime
+            ).format("ss")}`}
+          />
         </Col>
       </FormGroup>
       <Row>
@@ -72,7 +80,7 @@ const GeneratorConfig = ({
             <Label lg={collapse ? 12 : 4}>Rate</Label>
             {!collapse && (
               <Col lg={collapse ? 12 : 8}>
-                <ButtonGroup>
+                <ButtonGroup size="sm">
                   <Button outline color="primary" onClick={() => setRate(1)}>
                     1x
                   </Button>
@@ -82,6 +90,7 @@ const GeneratorConfig = ({
                   <Button outline color="primary" onClick={() => setRate(5)}>
                     5x
                   </Button>
+
                   <Button outline color="primary" onClick={() => setRate(10)}>
                     10x
                   </Button>

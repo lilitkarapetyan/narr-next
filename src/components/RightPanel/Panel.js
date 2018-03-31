@@ -1,7 +1,16 @@
-import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
+import { Card, CardBody, CardHeader } from "reactstrap";
 import { compose, mapProps, withState } from "recompose";
 import PropTypes from "prop-types";
 import React from "react";
+import styled from "styled-components";
+
+const Color = styled.div`
+  padding: 10px;
+  background-color: ${props => props.color};
+  border-radius: 50%
+  display:inline-block;
+  margin-right : 5px;
+`;
 
 const Panel = ({
   color,
@@ -13,33 +22,22 @@ const Panel = ({
   setOpen,
   ...rest
 }) => (
-  <Col {...rest} style={{ padding: "5px" }}>
-    <Card inverse={inverse} style={style}>
-      <CardHeader
-        color={color}
-        onDoubleClick={() => {
-          setOpen(!open);
-        }}
-        className="bg-primary text-center text-white"
-        style={{
-          textTransform: "uppercase",
-          fontWeight: "bolder"
-        }}
-      >
-        {title}
-      </CardHeader>
-      {open && (
-        <CardBody>
-          <Row
-            className="justify-content-md-center "
-            style={{ padding: "10px", width: "100%" }}
-          >
-            {children}
-          </Row>
-        </CardBody>
-      )}
-    </Card>
-  </Col>
+  <Card {...rest} inverse={inverse} style={style}>
+    <CardHeader
+      onDoubleClick={() => {
+        setOpen(!open);
+      }}
+      className="bg-primary text-center text-white"
+      style={{
+        textTransform: "uppercase",
+        fontWeight: "bolder"
+      }}
+    >
+      <Color color={color} />
+      {title}
+    </CardHeader>
+    {open && <CardBody>{children}</CardBody>}
+  </Card>
 );
 
 Panel.propTypes = {
