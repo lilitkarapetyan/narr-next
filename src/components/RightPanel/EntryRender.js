@@ -21,7 +21,7 @@ const EntryRender = ({
       outline
       color="secondary"
       onClick={toggleModal}
-      style={{ width: "100%", height: "100%", margin: "5px" }}
+      style={{ width: "100%", height: "100%" }}
     >
       {entry.name}
     </Button>
