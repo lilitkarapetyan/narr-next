@@ -1,5 +1,6 @@
 import { Button, ButtonGroup } from "reactstrap";
 import React from "react";
+import Export from "../../containers/Export";
 
 const Filters = () => (
   <React.Fragment>
@@ -8,6 +9,7 @@ const Filters = () => (
       <Button>Recent </Button>
       <Button>Private</Button>
     </ButtonGroup>
+    <Export/>
   </React.Fragment>
 );
 
