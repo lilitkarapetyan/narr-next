@@ -40,7 +40,10 @@ const Entry = ({
     >
       <Card style={{ padding: "0rem", fontSize: "12px" }}>
         <div>
-          {moment.utc(created).format()}
+          {moment(created).format("DDHHmm")}
+          <span className="font-small">
+            {`:${  moment(created).format("SS")}`}
+          </span>
           <Badge style={{ margin: "2px", width: "90px" }}>{mType}</Badge>
           <Badge>{privacy}</Badge>
         </div>
@@ -55,7 +58,6 @@ const Entry = ({
             ({id})
           </div>
         )}
-        {console.log("gg:", fields)}
         <EntryEditor
           inline={!useModalEdit}
           expanded={expandedView}

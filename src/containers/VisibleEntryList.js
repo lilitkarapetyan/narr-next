@@ -80,8 +80,7 @@ export const getVisibleEntries = (
     };
 
     const fuse = new Fuse(entriesE || [], options);
-    const result = fuse.search(searchKeyword || "");
-    return result;
+    return fuse.search(searchKeyword || "");
   }
 
   // if (searchKeyword && searchKeyword.length > 0) {
