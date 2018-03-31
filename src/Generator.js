@@ -1,4 +1,6 @@
 import EntryStatus from "./components/Schemas/EntryStatus";
+import dicionary from "lorem-ipsum/lib/dictionary";
+import loremIpsum from "lorem-ipsum";
 
 export default class Generator {
   constructor(category, callback) {
@@ -70,7 +72,23 @@ export default class Generator {
   generateField(type) {
     switch (type) {
       case "text":
-        return "Lorem";
+        return loremIpsum({
+          count: 1, // Number of words, sentences, or paragraphs to generate.
+          units: "sentences", // Generate words, sentences, or paragraphs.
+          sentenceLowerBound: 5, // Minimum words per sentence.
+          sentenceUpperBound: 10, // Maximum words per sentence.
+          paragraphLowerBound: 1, // Minimum sentences per paragraph.
+          paragraphUpperBound: 1, // Maximum sentences per paragraph.
+          format: "plain", // Plain text or html
+          words: [
+            "target",
+            "command",
+            "decision",
+            "deploy",
+            ...dicionary.words.slice(0, 30)
+          ], // Custom word dictionary. Uses dictionary.words (in lib/dictionary.js) by default.
+          random: Math.random // A PRNG function. Uses Math.random by default
+        });
       case "octas":
         return ["1/8", "2/8", "3/8", "4/8", "5/8", "6/8", "7/8", "8/8"][
           Math.random() * 7
