@@ -3,16 +3,24 @@ import { CategoryType } from "../Schemas";
 import { Row } from "reactstrap";
 import { branch, renderComponent } from "recompose";
 import CategoryRender from "./CategoryRender";
+import GeneratorConfig from "./GeneratorConfig";
 import PropTypes from "prop-types";
 import React from "react";
+import SearchModal from "./SearchModal";
 import SettingsCategory from "./SettingsCategory";
 
 const RightPanel = ({ categories, collapse, addEntry }) => (
-  <div className="category-container">
+  <React.Fragment>
+    <SearchModal addEntry={addEntry} />
     <Row
       className="justify-content-md-center "
-      style={{ padding: "10px", width: "100%" }}
+      style={{
+        padding: "10px",
+        width: "100%"
+      }}
     >
+      <GeneratorConfig collapse={collapse} />
+      <SettingsCategory collapse={collapse} />
       {categories.map(category => (
         <CategoryRender
           key={category.name}
@@ -21,13 +29,15 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
           category={category}
         />
       ))}
-      <SettingsCategory />
     </Row>
     <div className="category-count text-center">
       Categories Count {categories.length}
-      <p id="txtBuildDateTime" />
     </div>
-  </div>
+    <div
+      id="txtBuildDateTime"
+      style={{ position: "absolute", bottom: "10px" }}
+    />
+  </React.Fragment>
 );
 
 RightPanel.propTypes = {

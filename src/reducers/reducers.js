@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import Simulation from "./Simulation";
 import UserInterface from "./UserInterface";
 import entries from "./entries";
 import privacyFilter from "./privacyFilter";
@@ -12,7 +13,8 @@ const entryApp = combineReducers({
   privacyFilter,
   timeFilter,
   typeFilter,
-  entries
+  entries,
+  simulation: Simulation
 });
 
 export default entryApp;

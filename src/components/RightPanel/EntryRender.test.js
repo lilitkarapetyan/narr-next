@@ -73,13 +73,4 @@ describe("EntryRender", () => {
     const rendered = render();
     expect(rendered.find(Button).text()).toEqual(props.entry.name);
   });
-
-  it("to call Toggle Dialog on Click", () => {
-    const modalToggleMock = jest.fn();
-    props.toggleModal = modalToggleMock;
-    props.setModalVisible = jest.fn();
-    const rendered = render();
-    rendered.find(Button).prop("onClick")();
-    expect(props.setModalVisible.mock.calls.length).toBe(1);
-  });
 });

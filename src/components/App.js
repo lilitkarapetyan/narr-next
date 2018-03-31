@@ -11,11 +11,27 @@ import React from "react";
 import RightPanel from "../containers/RightPanel";
 
 const App = ({ expanded, toggleExpand, config }) => (
-  <Row style={{ width: "100%", minHeight: "100%" }}>
+  <Row
+    style={{
+      width: "100%",
+      height: "100%",
+      paddingRight: "0",
+      paddingLeft: "0px",
+      margin: "0px"
+    }}
+  >
     <Col lg={expanded ? 10 : 3}>
       <LeftPanel toggleExpand={toggleExpand} expanded={expanded} />
     </Col>
-    <Col lg={expanded ? 2 : 9}>
+    <Col
+      style={{
+        overflowY: "auto",
+        overflowX: "none",
+        maxHeight: "100%",
+        padding: "0px"
+      }}
+      lg={expanded ? 2 : 9}
+    >
       <RightPanel collapse={expanded} categories={config.categories} />
     </Col>
   </Row>
@@ -34,7 +50,8 @@ const enhancer = compose(
   connect(
     state => ({
       config: state.ui.config,
-      expanded: state.ui.expanded
+      expanded: state.ui.expanded,
+      running: state.simulation.running
     }),
     {
       addEntry,
@@ -49,6 +66,9 @@ const enhancer = compose(
             this.props.addEntry(entry, EntryStatus.Empty)
           )
       );
+    },
+    componentWillUpdate(nextProps) {
+      this.generators.forEach(gen => gen.Active(nextProps.running));
     },
     componentWillUnmount() {
       this.generators.forEach(gen => gen.Clear());

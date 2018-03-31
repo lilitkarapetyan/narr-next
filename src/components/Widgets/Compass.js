@@ -8,9 +8,6 @@ import styled from "styled-components";
 const Pointer = styled.path`
   transform: translate(50%, 50%);
   transition: all 0.3s ease-out;
-  translate(50%, 50%) 
-  rotate(0deg)
-  scale(1)
 `;
 
 const Compass = ({ info }) => (
@@ -24,7 +21,6 @@ const Compass = ({ info }) => (
       const scale = 2.0 * (dimension / 156.0);
       const pointerSize = velocity / 100 * scale;
       const path = "M0 22 L4 26 L4 -22 L0 -28 L-4 -22 L-4 26 Z";
-      console.warn(velocity);
       return (
         <svg style={{ width: "100%", height: "100%" }}>
           <circle cx="50%" cy="50%" r={radius} fill="gray" />
