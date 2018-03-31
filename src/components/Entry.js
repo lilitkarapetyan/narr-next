@@ -1,7 +1,7 @@
 import { Badge, Card } from "reactstrap";
 import { EntryType } from "./Schemas";
 import { UpdateEntry } from "../actions";
-import { compose, lifecycle, withState } from "recompose";
+import { compose, lifecycle, mapProps, withState } from "recompose";
 import { connect } from "react-redux";
 import EntryEditor from "./EntryEditor";
 import EntryStatus from "./Schemas/EntryStatus";
@@ -60,7 +60,7 @@ const Entry = ({
           inline={!useModalEdit}
           expanded={expandedView}
           entry={entry}
-          active={editMode || entry.status === EntryStatus.Empty}
+          active={editMode}
           setActive={ac => {
             setEditMode(ac);
             measure();
@@ -104,7 +104,11 @@ const enhanced = compose(
     }
   ),
   withState("editMode", "setEditMode", false),
-  withState("open", "setOpen", false)
+  withState("open", "setOpen", false),
+  mapProps(props => ({
+    ...props,
+    editMode: props.editMode || props.entry.status === EntryStatus.Empty
+  }))
 );
 
 export default enhanced(Entry);
