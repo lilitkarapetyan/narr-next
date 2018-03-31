@@ -7,7 +7,6 @@ import GeneratorConfig from "./GeneratorConfig";
 import PropTypes from "prop-types";
 import React from "react";
 import SearchModal from "./SearchModal";
-import SettingsCategory from "./SettingsCategory";
 
 const RightPanel = ({ categories, collapse, addEntry }) => (
   <React.Fragment>
@@ -20,7 +19,6 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
       }}
     >
       <GeneratorConfig collapse={collapse} />
-      <SettingsCategory collapse={collapse} />
       {categories.map(category => (
         <CategoryRender
           key={category.name}
