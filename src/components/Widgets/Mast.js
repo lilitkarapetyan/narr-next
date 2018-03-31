@@ -25,7 +25,6 @@ class Mast extends React.Component {
   }
 
   toggleMast(e) {
-    
     const { mast } = this.state;
     mast[e.target.id] = !mast[e.target.id];
     this.setState({ mast });

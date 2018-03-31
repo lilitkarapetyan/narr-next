@@ -44,17 +44,17 @@ const Compass = ({ info }) => (
             />
             <text
               fontFamily="Verdana"
-              fontSize={9 * scale}
+              fontSize={6 * scale}
               fill="black"
               stroke="black"
               textAnchor="middle"
               style={{
                 transformOrigin: "50% 50%",
-                transform: `translate(0,${radius + 15}px)`,
+                transform: `translate(0,${radius + 6}px)`,
                 color: "white"
               }}
             >
-              Course {parseInt(direction, 10)} º {parseInt(velocity, 10)} Kts
+              {parseInt(direction, 10)}º {parseInt(velocity, 10)} Kts
             </text>
           </g>
         </svg>

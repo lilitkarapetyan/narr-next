@@ -6,17 +6,22 @@ import React from "react";
 /* eslint-disable-next-line */
 
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import { render } from "react-dom";
 import App from "./components/App";
 import ReduxThunk from "redux-thunk";
 import entryApp from "./reducers/reducers";
 import registerServiceWorker from "./registerServiceWorker";
 /* eslint-disable no-underscore-dangle */
+import { persistentStore } from "redux-pouchdb-plus";
+import PouchDB from "pouchdb";
+
+const db = new PouchDB("naar_next");
+
 const store = createStore(
   entryApp,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(ReduxThunk)
+  compose(applyMiddleware(ReduxThunk), persistentStore({ db }))
 );
 /* eslint-enable */
 render(

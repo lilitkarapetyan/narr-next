@@ -1,26 +1,24 @@
 import "./RightPanel.css";
+import { CardColumns } from "reactstrap";
 import { CategoryType } from "../Schemas";
-import { Row } from "reactstrap";
 import { branch, renderComponent } from "recompose";
 import CategoryRender from "./CategoryRender";
 import GeneratorConfig from "./GeneratorConfig";
 import PropTypes from "prop-types";
 import React from "react";
 import SearchModal from "./SearchModal";
-import SettingsCategory from "./SettingsCategory";
 
 const RightPanel = ({ categories, collapse, addEntry }) => (
   <React.Fragment>
     <SearchModal addEntry={addEntry} />
-    <Row
-      className="justify-content-md-center "
+    <CardColumns
       style={{
         padding: "10px",
-        width: "100%"
+        width: "100%",
+        columnCount: collapse ? 1 : 2
       }}
     >
       <GeneratorConfig collapse={collapse} />
-      <SettingsCategory collapse={collapse} />
       {categories.map(category => (
         <CategoryRender
           key={category.name}
@@ -29,8 +27,7 @@ const RightPanel = ({ categories, collapse, addEntry }) => (
           category={category}
         />
       ))}
-      <SettingsCategory />
-    </Row>
+    </CardColumns>
     <div className="category-count text-center">
       Categories Count {categories.length}
     </div>

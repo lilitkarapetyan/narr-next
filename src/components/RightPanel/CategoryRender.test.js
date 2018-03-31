@@ -1,4 +1,4 @@
-import { Col } from "reactstrap";
+import { Card } from "reactstrap";
 import { WrapStore } from "../../TestUtils";
 import { mount } from "enzyme";
 import CategoryRender from "./CategoryRender";
@@ -86,7 +86,7 @@ describe("CategoryRender", () => {
       const rendered = render();
       expect(
         rendered
-          .find(Col)
+          .find(Card)
           .first()
           .prop("lg")
       ).toBe(12);
@@ -97,7 +97,7 @@ describe("CategoryRender", () => {
       const rendered = render();
       expect(
         rendered
-          .find(Col)
+          .find(Card)
           .first()
           .prop("lg")
       ).toBe(6);

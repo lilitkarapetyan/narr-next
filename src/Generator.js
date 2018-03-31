@@ -52,6 +52,12 @@ export default class Generator {
     entry.mType = categoryEntry.id;
     return entry;
   }
+
+  generateOne() {
+    const index = parseInt(Math.random() * this.category.entries.length, 10);
+    const it = this.category.entries[index];
+    return this.generate(it);
+  }
   setRate(rate) {
     if (rate < 0) return;
     if (rate > 50) return;

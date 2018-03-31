@@ -15,6 +15,7 @@ import {
 } from "../../actions";
 import { connect } from "react-redux";
 import Export from "../../containers/Export";
+import Hotkeys from "react-hot-keys";
 import PrivacyLink from "../../containers/PrivacyLink";
 import PropTypes from "prop-types";
 import React from "react";
@@ -83,6 +84,13 @@ class Filters extends React.Component {
     return (
       <React.Fragment>
         <h4>Filters</h4>
+        <Hotkeys
+          keyName="ctrl+f"
+          onKeyDown={(_, e) => {
+            e.preventDefault();
+            this.search.focus();
+          }}
+        />
         <ButtonGroup>
           <ButtonDropdown
             id="Time"
@@ -161,7 +169,10 @@ class Filters extends React.Component {
           <Export />
         </ButtonGroup>
         <Input
-          placeholder="search"
+          innerRef={s => {
+            this.search = s;
+          }}
+          placeholder="Click or Press CTRL+F to search"
           value={this.state.searchKeyword}
           onChange={e => {
             this.searchBarHandler(e);

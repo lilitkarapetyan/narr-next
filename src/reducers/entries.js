@@ -2,20 +2,40 @@ import {
   ADD_ENTRY,
   ClearEntries,
   TOGGLE_SELECTED,
-  UpdateEntry
+  UpdateEntry,
+  addEntries
 } from "../actions";
 import { handleActions } from "redux-actions";
 import EntryStatus from "../components/Schemas/EntryStatus";
 import moment from "moment";
 import persist from "./PersistentUtils";
 
-let nextEntryId = 0;
-
+let nextEntryId = -1;
+const generateId = events => {
+  if (events.length === 0) return 0;
+  if (nextEntryId !== -1) return ++nextEntryId;
+  /* eslint-disable-next-line */
+  nextEntryId = (Math.max.apply(Math, events.map(x => x.id)) || 0) + 1;
+  return nextEntryId;
+};
 const initialState = [];
 const reducer = handleActions(
   {
+    [addEntries]: (state, { payload }) => [
+      ...state,
+      ...payload.map(entry => ({
+        fields: entry.fields || {},
+        ...entry,
+        id: nextEntryId++,
+        status: entry.status || EntryStatus.Empty,
+        revisions: [],
+        created: moment(Date.now(true))
+          .utc()
+          .format()
+      }))
+    ],
     [UpdateEntry]: (state, { payload }) => {
-      const items = state;
+      const items = [...state];
       const updated = payload;
 
       // find the entry matching the current one
@@ -25,8 +45,7 @@ const reducer = handleActions(
       const index = items.indexOf(match[0]);
 
       // set the edit as complete
-      updated.status = EntryStatus.Complete;
-
+      updated.status = EntryStatus.Completed;
       // store previous version
       updated.revisions = [
         ...match[0].revisions,
@@ -48,7 +67,7 @@ const reducer = handleActions(
       ...state,
       {
         ...payload,
-        id: nextEntryId++,
+        id: generateId(state),
         status: payload.status || EntryStatus.Empty,
         revisions: [],
         created: moment(Date.now(true))
@@ -67,4 +86,4 @@ const reducer = handleActions(
   initialState
 );
 
-export default persist(reducer);
+export default persist(reducer, "entries");

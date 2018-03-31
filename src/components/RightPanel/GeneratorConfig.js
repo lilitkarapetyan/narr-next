@@ -16,24 +16,28 @@ import {
   ClearEntries,
   SetSimulationRate,
   ToggleModalEdit,
-  ToggleSimulation
+  ToggleSimulation,
+  addEntries as addEntryAction
 } from "../../actions";
-import { compose, lifecycle, withState } from "recompose";
+import { compose, lifecycle, withHandlers, withState } from "recompose";
 import { connect } from "react-redux";
+import Generator from "../../Generator";
 import Icon from "react-fontawesome";
 import Panel from "./Panel";
 import PropTypes from "prop-types";
 import React from "react";
+import moment from "moment";
 
+let generators = null;
 const GeneratorConfig = ({
   collapse,
-  toggleModalEdit,
   currentTime,
   setRate,
   running,
   toggleSim,
   rate,
-  clearEntries
+  clearEntries,
+  bulkInsert
 }) => (
   <Panel
     open={collapse}
@@ -49,8 +53,15 @@ const GeneratorConfig = ({
     <Form style={{ padding: "10px", width: "100%" }}>
       <FormGroup row>
         <Label lg={collapse ? 12 : 2}>Time</Label>
-        <Col lg={collapse ? 12 : 4}>
-          <Input readonly type="text" name="select" value={currentTime} />
+        <Col lg={collapse ? 12 : 10}>
+          <Input
+            readonly
+            type="text"
+            name="select"
+            value={`${moment(currentTime).format("DDHHmm")}:${moment(
+              currentTime
+            ).format("ss")}`}
+          />
         </Col>
       </FormGroup>
       <Row>
@@ -69,7 +80,7 @@ const GeneratorConfig = ({
             <Label lg={collapse ? 12 : 4}>Rate</Label>
             {!collapse && (
               <Col lg={collapse ? 12 : 8}>
-                <ButtonGroup>
+                <ButtonGroup size="sm">
                   <Button outline color="primary" onClick={() => setRate(1)}>
                     1x
                   </Button>
@@ -79,6 +90,7 @@ const GeneratorConfig = ({
                   <Button outline color="primary" onClick={() => setRate(5)}>
                     5x
                   </Button>
+
                   <Button outline color="primary" onClick={() => setRate(10)}>
                     10x
                   </Button>
@@ -122,13 +134,17 @@ const GeneratorConfig = ({
             <Label lg={collapse ? 12 : 2}>Bulk</Label>
             <Col lg={collapse ? 6 : 6}>
               <ButtonGroup>
-                <Button outline color="primary" onClick={toggleModalEdit}>
+                <Button outline color="primary" onClick={() => bulkInsert(50)}>
                   50
                 </Button>
-                <Button outline color="primary" onClick={toggleModalEdit}>
+                <Button outline color="primary" onClick={() => bulkInsert(500)}>
                   500
                 </Button>
-                <Button outline color="primary" onClick={toggleModalEdit}>
+                <Button
+                  outline
+                  color="primary"
+                  onClick={() => bulkInsert(5000)}
+                >
                   5000
                 </Button>
               </ButtonGroup>
@@ -147,9 +163,11 @@ const GeneratorConfig = ({
                 Bulk
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem>50</DropdownItem>
-                <DropdownItem>500</DropdownItem>
-                <DropdownItem>5000</DropdownItem>
+                <DropdownItem onClick={() => bulkInsert(50)}>50</DropdownItem>
+                <DropdownItem onClick={() => bulkInsert(500)}>500</DropdownItem>
+                <DropdownItem onClick={() => bulkInsert(5000)}>
+                  5000
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Col>
@@ -175,7 +193,7 @@ const GeneratorConfig = ({
 
 GeneratorConfig.propTypes = {
   collapse: PropTypes.bool,
-  toggleModalEdit: PropTypes.func.isRequired,
+  bulkInsert: PropTypes.func.isRequired,
   currentTime: PropTypes.func.isRequired,
   setRate: PropTypes.func.isRequired,
   running: PropTypes.bool,
@@ -209,18 +227,48 @@ const enhancer = compose(
       window.clearTimeout(this.interval);
     }
   }),
+
   connect(
     state => ({
       modalEdit: state.ui.useModalEdit,
       running: state.simulation.running,
-      rate: state.simulation.rate
+      rate: state.simulation.rate,
+      categories: state.ui.config.categories
     }),
     {
       toggleModalEdit: ToggleModalEdit,
       setRate: SetSimulationRate,
       toggleSim: ToggleSimulation,
-      clearEntries: ClearEntries
+      clearEntries: ClearEntries,
+      addEntries: addEntryAction
     }
-  )
+  ),
+  lifecycle({
+    componentDidMount() {
+      generators = this.props.categories.map(
+        x => new Generator(x, entry => this.props.addEntry(entry))
+      );
+    },
+    componentWillUpdate(nextProps) {
+      generators.forEach(gen => {
+        gen.Active(nextProps.running);
+      });
+    },
+    componentWillUnmount() {
+      generators.forEach(gen => gen.Clear());
+    }
+  }),
+  withHandlers({
+    bulkInsert: props => number => {
+      let b = number;
+      const entries = [];
+      while (b > 0) {
+        const index = parseInt(Math.random() * generators.length, 10);
+        entries.push(generators[index].generateOne());
+        b--;
+      }
+      props.addEntries(entries);
+    }
+  })
 );
 export default enhancer(GeneratorConfig);
