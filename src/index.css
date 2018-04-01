@@ -15,3 +15,69 @@ html {
   right: 0;
   bottom: 0;
 }
+
+/*  */
+.btn-main,
+.btn-main:hover {
+  background-color: #027bff;
+  border-color: #027bff;
+  color: #ffffff;
+}
+.btn-main:focus {
+  box-shadow: 0 0 0 0.2rem rgba(2, 123, 255, 0.5);
+}
+.card-header .dropdown-item.active,
+.card-header .dropdown-item:active {
+  background-color: transparent;
+  outline: 0 none;
+}
+.btn-drop {
+  padding: 8px;
+  display: inline-table;
+  width: 100%;
+  cursor: pointer;
+}
+.btn-drop.btn-secondary {
+  background: transparent;
+  color: #6c757d;
+}
+.btn-drop input {
+  margin-right: 5px;
+  display: table-cell;
+}
+.btn-drop span {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* Inline Modal Comment editing */
+.inner-filter input.form-control {
+  font-size: 0.8rem;
+  padding: 0.32rem 0.75rem;
+}
+.inner-filter .modal-body .form-group {
+  margin-bottom: 5px;
+}
+.inner-filter .modal-footer .btn {
+  line-height: 1;
+}
+.filter-comment-edit {
+  display: inline-table;
+}
+.filter-comment-edit .comment-edit-col {
+  display: table-cell;
+  vertical-align: baseline;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+/**/
+.card-header span {
+  vertical-align: middle;
+}
+
+.number-field {
+  width: 50%;
+}
+.font-small{
+  font-size: x-small;
+}

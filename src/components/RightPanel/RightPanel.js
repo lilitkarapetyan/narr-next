@@ -1,30 +1,41 @@
 import "./RightPanel.css";
+import { CardColumns } from "reactstrap";
 import { CategoryType } from "../Schemas";
-import { Row } from "reactstrap";
 import { branch, renderComponent } from "recompose";
 import CategoryRender from "./CategoryRender";
+import GeneratorConfig from "./GeneratorConfig";
 import PropTypes from "prop-types";
 import React from "react";
+import SearchModal from "./SearchModal";
 
 const RightPanel = ({ categories, collapse, addEntry }) => (
-  <div className="category-container">
-    <Row
-      className="justify-content-md-center "
-      style={{ padding: "10px", width: "100%" }}
+  <React.Fragment>
+    <SearchModal addEntry={addEntry} />
+    <CardColumns
+      style={{
+        padding: "10px",
+        width: "100%",
+        columnCount: collapse ? 1 : 2
+      }}
     >
+      <GeneratorConfig collapse={collapse} />
       {categories.map(category => (
         <CategoryRender
+          key={category.name}
           addEntry={addEntry}
-          key={category}
           collapse={collapse}
           category={category}
         />
       ))}
-    </Row>
+    </CardColumns>
     <div className="category-count text-center">
       Categories Count {categories.length}
     </div>
-  </div>
+    <div
+      id="txtBuildDateTime"
+      style={{ position: "absolute", bottom: "10px" }}
+    />
+  </React.Fragment>
 );
 
 RightPanel.propTypes = {

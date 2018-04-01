@@ -3,19 +3,20 @@ import React from "react";
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
-    return <span>{children}</span>;
+    return <div className="btn btn-main">{children}</div>;
   }
 
   return (
-    <button
-      href=""
+    <div
+      role="button"
+      className="btn btn-secondary"
       onClick={e => {
         e.preventDefault();
         onClick();
       }}
     >
       {children}
-    </button>
+    </div>
   );
 };
 

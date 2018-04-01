@@ -1,35 +1,42 @@
-import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
+import { Card, CardColumns } from "reactstrap";
 import { CategoryType } from "../Schemas";
 import EntryRender from "./EntryRender";
+import Panel from "./Panel";
 import PropTypes from "prop-types";
 import React from "react";
+import WidgetRender from "./WidgetRender";
 
 const CategoryRender = ({ category, collapse, addEntry }) => (
-  <Col lg={collapse ? 12 : 6} style={{ padding: "5px" }}>
-    <Card style={{ height: "100%" }}>
-      <CardHeader
-        className="bg-primary text-center text-white"
-        style={{
-          textTransform: "uppercase",
-          fontWeight: "bolder"
-        }}
-      >
-        {category.name}
-      </CardHeader>
-      <CardBody>
-        <Row
-          className="justify-content-md-center "
-          style={{ padding: "10px", width: "100%" }}
-        >
-          {category.entries.map(entry => (
-            <Col key={entry.id} lg={collapse ? 12 : 6}>
-              <EntryRender entry={entry} onSubmit={addEntry} />
-            </Col>
-          ))}
-        </Row>
-      </CardBody>
-    </Card>
-  </Col>
+  <Panel
+    style={{ borderWidth: "3px", borderColor: `${category.color}` }}
+    title={category.name}
+    color={category.color}
+    open={collapse}
+    lg={collapse ? 12 : 6}
+  >
+    <CardColumns style={{ columnCount: collapse ? 1 : 2 }}>
+      {category.widgets &&
+        category.widgets.filter(x => !x.hidden).map(entry => (
+          <Card key={entry.id}>
+            <WidgetRender config={entry} />
+          </Card>
+        ))}
+      {category.entries.filter(x => !x.hidden).map(entry => (
+        <Card key={entry.id}>
+          <EntryRender
+            entry={entry}
+            onSubmit={en =>
+              addEntry({
+                ...en,
+                category: category.name,
+                color: category.color
+              })
+            }
+          />
+        </Card>
+      ))}
+    </CardColumns>
+  </Panel>
 );
 
 CategoryRender.propTypes = {

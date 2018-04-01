@@ -1,8 +1,10 @@
 import { Button } from "reactstrap";
 import { EntryType } from "../Schemas";
 import { compose, mapProps, withState } from "recompose";
+import { connect } from "react-redux";
 import { set } from "lodash";
 import EntryModal from "./EntryModal";
+import EntryStatus from "../Schemas/EntryStatus";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -19,7 +21,7 @@ const EntryRender = ({
       outline
       color="secondary"
       onClick={toggleModal}
-      style={{ width: "100%", height: "100%", margin: "5px" }}
+      style={{ width: "100%", height: "100%" }}
     >
       {entry.name}
     </Button>
@@ -43,12 +45,36 @@ const enhancer = compose(
     },
     onSubmit: () => {
       // join to string
-
-      props.onSubmit(props.values, props.entry.name, "public");
+      const entry = {
+        name: props.entry.name,
+        fields: props.values,
+        status: EntryStatus.Completed,
+        mType: props.entry.id
+      };
+      props.onSubmit(entry);
     },
     entry: props.entry,
     modalVisible: props.modalVisible,
-    toggleModal: () => props.setModalVisible(!props.modalVisible),
+    toggleModal: (clear = true) => {
+      if (!props.useModal) {
+        const res = props.entry;
+        const fields = {};
+        res.fields.forEach(key => {
+          fields[key.name] = "";
+        });
+        const entry = {
+          name: res.name,
+          mType: res.id,
+          category: res.category,
+          fields
+        };
+        props.onSubmit(entry);
+        return;
+      }
+
+      props.setModalVisible(!props.modalVisible);
+      if (clear) props.setValues({});
+    },
     setModalVisible: props.setModalVisible
   }))
 );
@@ -65,6 +91,9 @@ EntryRender.propTypes = {
 };
 
 const enhancer2 = compose(
+  connect(state => ({
+    useModal: state.ui.useModalEdit
+  })),
   withState("values", "setValues", {}),
   withState("modalVisible", "setModalVisible", false),
   enhancer

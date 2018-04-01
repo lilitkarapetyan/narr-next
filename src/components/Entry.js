@@ -1,78 +1,123 @@
-import { Card, CardBody, Col, Collapse, Row } from "reactstrap";
+import { Badge, Card } from "reactstrap";
+import { DeleteEntry, UpdateEntry } from "../actions";
 import { EntryType } from "./Schemas";
-import { withState } from "recompose";
+import { compose, lifecycle, mapProps, withState } from "recompose";
+import { connect } from "react-redux";
+import EntryEditor from "./EntryEditor";
+import EntryStatus from "./Schemas/EntryStatus";
 import PropTypes from "prop-types";
 import React from "react";
+import moment from "moment";
 
-const Collapser = ({ open, children }) => (
-  <Collapse isOpen={open}>
-    <Card>
-      <CardBody>{children}</CardBody>
-    </Card>
-  </Collapse>
-);
-
-Collapser.propTypes = {
-  open: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired
+export const colors = {
+  public: "success",
+  sensitive: "info"
 };
 
 const Entry = ({
-  open,
-  setOpen,
-  onClick,
   selected,
-  entry: { text, id, created, m_type, privacy }
-}) => (
-  <div
-    role="button"
-    onClick={() => {
-      onClick();
-      setOpen(!open);
-    }}
-  >
+  entry,
+  useModalEdit,
+  expandedView,
+  editMode,
+  setEditMode,
+  updateEntry,
+  measure,
+  deleteEntry
+}) => {
+  const { id, created, mType, privacy, fields, color } = entry;
+  return (
     <div
+      className="inner-filter"
       style={{
-        backgroundColor: selected ? "#FFFFFF" : "transparent"
+        border: `2px solid ${color}`,
+        backgroundColor: selected ? "#FFFFFF" : "transparent",
+        padding: "0px",
+        margin: "5px"
+      }}
+      onDoubleClick={() => {
+        setEditMode(true);
+        measure();
       }}
     >
-      <Row className="justify-content-md-center  text-center align-middle">
-        <Col lg={1}>{id}</Col>
-        <Col lg={8}>
-          <div style={{ fontSize: "18px", fontWeight: "bolder" }}>{m_type}</div>
-        </Col>
-        <Col lg={3} style={{ textTransform: "uppercase" }}>
-          {privacy}
-        </Col>
-      </Row>
-
-      <Collapser open={open}>
-        {Object.keys(text).map(key => (
-          <div>
-            {key} : {text[key]}
-          </div>
-        ))}
-      </Collapser>
-      <Row style={{ textAlign: "right" }}>
-        <div
-          style={{ color: "rgba(0,0,0,0.6)", fontSize: "13px", width: "100%" }}
-        >
-          created : {created.toLocaleTimeString()}
+      <Card style={{ padding: "0rem", fontSize: "12px" }}>
+        <div>
+          {moment(created).format("DDHHmm")}
+          <span className="font-small">
+            {`:${moment(created).format("SS")}`}
+          </span>
+          <Badge style={{ margin: "2px", width: "90px" }}>{mType}</Badge>
+          <Badge>{privacy}</Badge>
         </div>
-      </Row>
-      <div />
+
+        {!editMode && (
+          <div style={{ paddingLeft: "10px" }}>
+            {Object.keys(fields).map(key => (
+              <span key={key} style={{ paddingLeft: "5px" }}>
+                <b>{key}</b>: {fields[key]}
+              </span>
+            ))}{" "}
+            ({id})
+          </div>
+        )}
+        <EntryEditor
+          inline={!useModalEdit}
+          expanded={expandedView}
+          entry={entry}
+          active={editMode}
+          setActive={ac => {
+            setEditMode(ac);
+            measure();
+          }}
+          onCancel={() => {
+            if (entry.status === "empty") deleteEntry(entry.id);
+          }}
+          onSubmit={updateEntry}
+        />
+      </Card>
     </div>
-  </div>
-);
+  );
+};
 
 Entry.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
   entry: EntryType.isRequired,
-  onClick: PropTypes.func.isRequired,
   selected: PropTypes.bool.isRequired
 };
 
-const enhanced = withState("open", "setOpen", false);
+Entry.propTypes = {
+  entry: EntryType.isRequired,
+  selected: PropTypes.bool,
+  editMode: PropTypes.bool.isRequired,
+  setEditMode: PropTypes.func.isRequired,
+  expandedView: PropTypes.bool.isRequired,
+  useModalEdit: PropTypes.bool.isRequired,
+  updateEntry: PropTypes.func.isRequired,
+  measure: PropTypes.func.isRequired,
+  deleteEntry: PropTypes.func.isRequired
+};
+
+const enhanced = compose(
+  lifecycle({
+    componentDidMount() {
+      this.props.measure();
+    }
+  }),
+  connect(
+    state => ({
+      expandedView: state.ui.expanded,
+      useModalEdit: state.ui.useModalEdit
+    }),
+    {
+      updateEntry: UpdateEntry,
+      deleteEntry: DeleteEntry
+    }
+  ),
+  withState("editMode", "setEditMode", false),
+  withState("open", "setOpen", false),
+  mapProps(props => ({
+    ...props,
+    editMode: props.editMode || props.entry.status === EntryStatus.Empty
+  }))
+);
 
 export default enhanced(Entry);

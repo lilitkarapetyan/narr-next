@@ -1,4 +1,5 @@
-import { Col } from "reactstrap";
+import { Card } from "reactstrap";
+import { WrapStore } from "../../TestUtils";
 import { mount } from "enzyme";
 import CategoryRender from "./CategoryRender";
 import EntryRender from "./EntryRender";
@@ -9,18 +10,23 @@ describe("CategoryRender", () => {
   let mounted;
   const render = () => {
     if (!mounted) {
-      mounted = mount(<CategoryRender {...props} />);
+      mounted = mount(
+        <WrapStore>
+          <CategoryRender {...props} />
+        </WrapStore>
+      );
     }
     return mounted;
   };
 
   beforeEach(() => {
     props = {
+      addEntry: () => null,
       category: {
         name: "MyCategory",
         priority: "High",
-        created: new Date(),
-        m_type: "myType",
+        created: "",
+        mType: "myType",
         privacy: "---",
         entries: [
           {
@@ -47,13 +53,40 @@ describe("CategoryRender", () => {
     expect(rendered.find(EntryRender)).toHaveLength(2);
   });
 
+  it("skips hidden fields", () => {
+    props.category = {
+      name: "MyCategory",
+      priority: "High",
+      created: "",
+      mType: "myType",
+      privacy: "---",
+      entries: [
+        {
+          id: "firstEntry",
+          name: "firstEntryName",
+          priority: "High",
+          fields: []
+        },
+        {
+          id: "secondEntry",
+          name: "secondEntryName",
+          priority: "Low",
+          fields: [],
+          hidden: true
+        }
+      ]
+    };
+    const rendered = render();
+    expect(rendered.find(EntryRender)).toHaveLength(1);
+  });
+
   describe("Collapse Logic", () => {
     it("renders collapsed when extend collapse is true", () => {
       props.collapse = true;
       const rendered = render();
       expect(
         rendered
-          .find(Col)
+          .find(Card)
           .first()
           .prop("lg")
       ).toBe(12);
@@ -64,7 +97,7 @@ describe("CategoryRender", () => {
       const rendered = render();
       expect(
         rendered
-          .find(Col)
+          .find(Card)
           .first()
           .prop("lg")
       ).toBe(6);

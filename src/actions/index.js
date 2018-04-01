@@ -2,12 +2,12 @@
  * action types
  */
 
-export const ADD_ENTRY = "ADD_ENTRY";
-export const TOGGLE_SELECTED = "TOGGLE_SELECTED";
 export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 export const SET_PRIVACY_FILTER = "SET_PRIVACY_FILTER";
 export const SET_TIME_FILTER = "SET_TIME_FILTER";
-
+export const SET_TYPE_FILTER = "SET_TYPE_FILTER";
+export const REMOVE_TYPE_FILTER = "REMOVE_TYPE_FILTER";
+export const SEARCH_VALUE = "SEARCH_VALUE";
 /*
  * other constants
  */
@@ -31,19 +31,21 @@ export const TimeFilters = {
   SHOW_LAST_5_MIN: "SHOW_LAST_5_MIN"
 };
 
+export const TypeFilters = {
+  SHOW_ALL: "SHOW_ALL",
+  SHOW_WEATHER: "SHOW_WEATHER"
+};
+
+export const ExportFilters = {
+  EXPORT_ENTRY_LIST_AS_PDF: "EXPORT_ENTRY_LIST_AS_PDF"
+};
+
 /*
  * action creators
  */
-
-let nextEntryId = 0;
-
-export function addEntry(text, mType, privacy) {
-  return { type: ADD_ENTRY, id: nextEntryId++, m_type: mType, privacy, text };
-}
-
-export function toggleEntry(id) {
-  return { type: TOGGLE_SELECTED, id };
-}
+export * from "./simulation";
+export * from "./ui";
+export * from "./entries";
 
 export function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter };
@@ -51,6 +53,10 @@ export function setVisibilityFilter(filter) {
 
 export function setPrivacyFilter(filter) {
   return { type: SET_PRIVACY_FILTER, filter };
+}
+
+export function setTypeFilter(filter) {
+  return { type: SET_TYPE_FILTER, filter };
 }
 
 export function setTimeFilter(filter) {
