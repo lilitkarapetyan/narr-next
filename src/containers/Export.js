@@ -7,11 +7,19 @@ const lineWidth = 195;
 const maxLines = 36;
 
 const groupEntries = (state) => {
-  let entries = getVisibleEntries(state.entries, state.visibilityFilter, state.privacyFilter, state.timeFilter);
-  const pdf = new jsPDF("p", "mm", "a4");
+  let entries = getVisibleEntries(
+    state.entries,
+    state.visibilityFilter,
+    state.privacyFilter,
+    state.timeFilter,
+    state.typeFilter,
+    state.searchKeyword
+  );
 
+  const pdf = new jsPDF("p", "mm", "a4");
+  console.log(entries);
   entries = entries.map(entry => {
-    entry.linePoint = 2;
+    entry.linePoint = 1;
 
     let textArray = [];
 
