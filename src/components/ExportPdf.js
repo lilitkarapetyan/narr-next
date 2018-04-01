@@ -24,17 +24,17 @@ const Export = ({ entries }) => {
       pdf.setFontSize(12);
       pdf.text(`- ${key+1} -`, 105, 290, {}, 0, 'center');
 
-      page.forEach(({textFormatted, m_type, privacy, created, linePoint}) => {
+      page.forEach(({fieldsFormatted, mType, privacy, created, linePoint}) => {
 
         pdf.setFont(font, 'normal');
-        pdf.text(timeX, lineCord(line), created.toLocaleTimeString());
+        pdf.text(timeX, lineCord(line), (new Date(created)).toLocaleTimeString());
 
         pdf.setFont(font, 'bold');
-        pdf.text(textX, lineCord(line), `${m_type} (${privacy})`);
+        pdf.text(textX, lineCord(line), `${mType} ${privacy ? `(${privacy})` : ''}`);
 
-        if(textFormatted) {
+        if(fieldsFormatted) {
           pdf.setFont(font, 'normal');
-          pdf.text(textX, lineCord(line+1), textFormatted);
+          pdf.text(textX, lineCord(line+1), fieldsFormatted);
         }
 
         line += linePoint;

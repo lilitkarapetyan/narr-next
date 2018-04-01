@@ -15,15 +15,17 @@ const groupEntries = (state) => {
 
     let textArray = [];
 
-    Object.keys(entry.text).forEach((field, key) => {
-      textArray.push(`${field}: ${entry.text[field]}`)
-    });
+    if(entry.fields)
+      Object.keys(entry.fields).forEach((field, key) => {
+        textArray.push(`${field}: ${entry.fields[field]}`)
+      })
+    ;
 
-    entry.textFormatted = null;
+    entry.fieldsFormatted = null;
 
     if(textArray.length) {
-      entry.textFormatted = pdf.splitTextToSize(textArray.join(', '), lineWidth);
-      entry.linePoint += entry.textFormatted.length;
+      entry.fieldsFormatted = pdf.splitTextToSize(textArray.join(', '), lineWidth);
+      entry.linePoint += entry.fieldsFormatted.length;
     }
 
     return entry;
