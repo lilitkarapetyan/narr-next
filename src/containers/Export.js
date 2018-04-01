@@ -17,7 +17,7 @@ const groupEntries = (state) => {
   );
 
   const pdf = new jsPDF("p", "mm", "a4");
-  console.log(entries);
+
   entries = entries.map(entry => {
     entry.linePoint = 1;
 
